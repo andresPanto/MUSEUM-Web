@@ -13,19 +13,12 @@ export const CONSTANTS = {
       ],
       synchronize: true, // actualiza el esquema de la BD
       dropSchema: true, // vuelve a crear el esquema de la base de datos
+  },
+  Regex : {
+    lettersSpaces: '[a-zA-ZñÑ][a-zA-ZñÑ\\s]*',
+    lettersNumbersSpaces: '[0-9a-zA-ZñÑ][0-9a-zA-ZñÑ\\s]*',
   }
 
 
-  //name: 'default', //nombre de la conexion
-  //   type: 'mysql',  // tipo de BD
-  //   host: 'localhost',
-  //   port: 32779,
-  //   username: 'mysql-web-clases', //usuario
-  //   password: 'laclaveesunfactorimportante12345', //pass
-  //   database: 'mysql-web-clases', // nombre BD
-  //   entities: [ // Poner todas las entidades de la BD
-  //     UsuarioEntity
-  //   ],
-  //   synchronize: true, // actualiza el esquema de la BD
-  //   dropSchema: true, // vuelve a crear el esquema de la base de datos
+
 }
