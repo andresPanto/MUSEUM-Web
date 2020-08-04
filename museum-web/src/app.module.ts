@@ -5,6 +5,7 @@ import { CONSTANTS } from './enviroment/constants';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthorModule } from './author/author.module';
 import { ArtworkModule } from './artwork/artwork.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ArtworkModule } from './artwork/artwork.module';
     }),
     AuthorModule,
     ArtworkModule,
+    RoleModule,
 
   ],
   controllers: [AppController],
