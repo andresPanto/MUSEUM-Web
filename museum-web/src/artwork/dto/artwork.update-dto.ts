@@ -1,8 +1,9 @@
 import {
   IsBoolean,
-  IsBooleanString,
   IsEmpty,
-  IsNotEmpty, IsOptional,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
   IsString,
   Matches,
   MaxLength,
@@ -10,20 +11,23 @@ import {
 } from 'class-validator';
 import { CONSTANTS } from '../../enviroment/constants';
 
-export class AuthorUpdateDto{
+export class ArtworkUpdateDto{
   @IsString()
   @IsOptional()
   @MaxLength(256)
   @MinLength(3)
-  @Matches(new RegExp(CONSTANTS.Regex.lettersSpaces))
-  fullName: string;
+  name: string;
+
+  @IsInt()
+  @IsOptional()
+  year: number;
 
   @IsString()
   @IsOptional()
   @MaxLength(256)
   @MinLength(3)
   @Matches(new RegExp(CONSTANTS.Regex.lettersSpaces))
-  country: string;
+  type: string;
 
   @IsString()
   @IsOptional()
@@ -37,7 +41,7 @@ export class AuthorUpdateDto{
   @MinLength(3)
   imagePath: string;
 
-  @IsBooleanString()
+  @IsBoolean()
   @IsOptional()
   status: boolean
 }

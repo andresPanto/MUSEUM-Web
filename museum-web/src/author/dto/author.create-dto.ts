@@ -1,4 +1,13 @@
-import { IsBoolean, IsBooleanString, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsBooleanString,
+  IsInt,
+  IsNotEmpty, IsPositive,
+  IsString,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { CONSTANTS } from '../../enviroment/constants';
 
 export class AuthorCreateDto{
@@ -28,7 +37,7 @@ export class AuthorCreateDto{
   @MinLength(3)
   imagePath: string;
 
-  @IsBooleanString()
+  @IsBoolean()
   @IsNotEmpty()
   status: boolean
 }

@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CONSTANTS } from './enviroment/constants';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthorModule } from './author/author.module';
+import { ArtworkModule } from './artwork/artwork.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AuthorModule } from './author/author.module';
       dropSchema: CONSTANTS.DB.dropSchema,
     }),
     AuthorModule,
+    ArtworkModule,
 
   ],
   controllers: [AppController],

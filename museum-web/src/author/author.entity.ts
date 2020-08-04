@@ -8,6 +8,7 @@ import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('author')
 export class AuthorEntity {
   @PrimaryGeneratedColumn({
+    name: 'id_author',
     unsigned: true,
   })
   idAuthor: number;

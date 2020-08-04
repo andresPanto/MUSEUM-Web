@@ -1,8 +1,8 @@
 import {
   IsBoolean,
-  IsBooleanString,
-  IsEmpty,
-  IsNotEmpty, IsOptional,
+  IsBooleanString, IsInt,
+  IsNotEmpty,
+  IsNumber, IsPositive,
   IsString,
   Matches,
   MaxLength,
@@ -10,34 +10,37 @@ import {
 } from 'class-validator';
 import { CONSTANTS } from '../../enviroment/constants';
 
-export class AuthorUpdateDto{
+export class ArtworkCreateDto{
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
+  @MaxLength(256)
+  @MinLength(3)
+  name: string;
+
+  @IsInt()
+  @IsNotEmpty()
+  year: number;
+
+  @IsString()
+  @IsNotEmpty()
   @MaxLength(256)
   @MinLength(3)
   @Matches(new RegExp(CONSTANTS.Regex.lettersSpaces))
-  fullName: string;
+  type: string;
 
   @IsString()
-  @IsOptional()
-  @MaxLength(256)
-  @MinLength(3)
-  @Matches(new RegExp(CONSTANTS.Regex.lettersSpaces))
-  country: string;
-
-  @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   @MaxLength(1000)
   @MinLength(3)
   description: string;
 
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   @MaxLength(256)
   @MinLength(3)
   imagePath: string;
 
-  @IsBooleanString()
-  @IsOptional()
+  @IsBoolean()
+  @IsNotEmpty()
   status: boolean
 }

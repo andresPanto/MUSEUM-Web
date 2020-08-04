@@ -4,7 +4,7 @@ import { AuthorInteface } from './author.inteface';
 import { AuthorCreateDto } from './dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
 
-@Controller('author')
+@Controller('authors')
 export class AuthorController {
   constructor(private readonly _AuthorService: AuthorService) {
   }
