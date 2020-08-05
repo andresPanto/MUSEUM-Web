@@ -3,6 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CONSTANTS } from './enviroment/constants';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthorModule } from './author/author.module';
+import { ArtworkModule } from './artwork/artwork.module';
+import { RoleModule } from './role/role.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -18,6 +22,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: CONSTANTS.DB.synchronize,
       dropSchema: CONSTANTS.DB.dropSchema,
     }),
+    AuthorModule,
+    ArtworkModule,
+    RoleModule,
+    UserModule,
 
   ],
   controllers: [AppController],
