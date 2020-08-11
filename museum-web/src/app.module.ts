@@ -7,6 +7,7 @@ import { AuthorModule } from './author/author.module';
 import { ArtworkModule } from './artwork/artwork.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
+import { PurchaseModule } from './purchase/purchase.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UserModule } from './user/user.module';
     ArtworkModule,
     RoleModule,
     UserModule,
+    PurchaseModule,
 
   ],
   controllers: [AppController],
