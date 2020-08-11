@@ -8,6 +8,7 @@ import { ArtworkModule } from './artwork/artwork.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { PurchaseModule } from './purchase/purchase.module';
+import { ScheduleModule } from './schedule/schedule.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { PurchaseModule } from './purchase/purchase.module';
     RoleModule,
     UserModule,
     PurchaseModule,
+    ScheduleModule,
 
   ],
   controllers: [AppController],
