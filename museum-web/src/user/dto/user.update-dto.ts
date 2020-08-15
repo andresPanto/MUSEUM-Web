@@ -5,13 +5,13 @@ export class UserUpdateDto{
 
 
   @IsString()
-  @IsOptional
+  @IsOptional()
   @MaxLength(20)
   @MinLength(3)
   password: string;
 
   @IsEmail()
-  @IsOptional
+  @IsOptional()
   email: string;
 
 
