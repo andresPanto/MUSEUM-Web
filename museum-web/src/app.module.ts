@@ -9,6 +9,7 @@ import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { ScheduleModule } from './schedule/schedule.module';
+import { ActivityModule } from './activity/activity.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { ScheduleModule } from './schedule/schedule.module';
     UserModule,
     PurchaseModule,
     ScheduleModule,
+    ActivityModule,
 
   ],
   controllers: [AppController],
