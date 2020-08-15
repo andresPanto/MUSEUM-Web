@@ -25,9 +25,12 @@ export class PurchaseController {
     @Body() parametrosDeCuerpo,
   ) {
     const newPurchase = new PurchaseCreateDto();
-    newPurchase.attendanceDate = new Date(parametrosDeCuerpo.attendanceDate);
-    newPurchase.attendanceDate.setHours(0,0,0,0,);
-    newPurchase.purchaseTime = new Date(parametrosDeCuerpo.purchaseTime);
+    const attendanceDate = new Date(parametrosDeCuerpo.attendanceDate);
+    const purchaseTime = new Date(parametrosDeCuerpo.purchaseTime);
+    attendanceDate.setDate(attendanceDate.getDate() + 1);
+    purchaseTime.setHours(purchaseTime.getHours() + 5);
+    newPurchase.attendanceDate = attendanceDate;
+    newPurchase.purchaseTime = purchaseTime;
     newPurchase.quantity = parametrosDeCuerpo.quantity;
     newPurchase.total = parametrosDeCuerpo.total;
     newPurchase.status = parametrosDeCuerpo.status;

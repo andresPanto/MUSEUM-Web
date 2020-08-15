@@ -5,6 +5,7 @@ import { UserEntity } from '../user/user.entity';
 import { PurchaseEntity } from '../purchase/purchase.entity';
 import { ScheduleEntity } from '../schedule/schedule.entity';
 import { ActivityEntity } from '../activity/activity.entity';
+import { UserRoleEntity } from '../user-role/user-role.entity';
 
 export const ENTITIES = [
   ActivityEntity,
@@ -14,4 +15,5 @@ export const ENTITIES = [
   RoleEntity,
   ScheduleEntity,
   UserEntity,
+  UserRoleEntity,
 ];
