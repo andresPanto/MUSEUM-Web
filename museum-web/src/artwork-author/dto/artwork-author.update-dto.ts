@@ -1,16 +1,15 @@
 import { IsInt, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
 
-export class UserRoleCreateDto {
+export class ArtworkAuthorUpdateDto {
   @IsNumber()
   @IsPositive()
   @IsNotEmpty()
   @IsInt()
-  user: number;
+  artwork: number;
 
   @IsNumber()
   @IsPositive()
   @IsNotEmpty()
   @IsInt()
-  role: number;
-
+  author: number;
 }

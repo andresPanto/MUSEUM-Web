@@ -1,4 +1,6 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ActivityArtworkEntity } from '../activity-artwork/activity-artwork.entity';
+import { ArtworkAuthorEntity } from '../artwork-author/artwork-author.entity';
 
 @Index([
   'name'
@@ -58,5 +60,19 @@ export class ArtworkEntity {
     default: true
   })
   status: boolean
-  
+
+  @OneToMany(
+    type => ActivityArtworkEntity,
+    activityArtwork => activityArtwork.artwork
+  )
+  activityArtworks: ActivityArtworkEntity[];
+
+  @OneToMany(
+    type => ArtworkAuthorEntity,
+    artworkAuthor => artworkAuthor.artwork
+  )
+  artworkAuthors: ArtworkAuthorEntity[];
+
+
+
 }

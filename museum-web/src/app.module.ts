@@ -11,6 +11,8 @@ import { PurchaseModule } from './purchase/purchase.module';
 import { ScheduleModule } from './schedule/schedule.module';
 import { ActivityModule } from './activity/activity.module';
 import { UserRoleModule } from './user-role/user-role.module';
+import { ActivityArtworkModule } from './activity-artwork/activity-artwork.module';
+import { ArtworkAuthorModule } from './artwork-author/artwork-author.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { UserRoleModule } from './user-role/user-role.module';
     PurchaseModule,
     ScheduleModule,
     ActivityModule,
+    ActivityArtworkModule,
+    ArtworkAuthorModule,
     //UserRoleModule,
 
   ],

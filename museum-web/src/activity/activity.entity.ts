@@ -1,4 +1,6 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ScheduleEntity } from '../schedule/schedule.entity';
+import { ActivityArtworkEntity } from '../activity-artwork/activity-artwork.entity';
 
 @Index([
   'type',
@@ -107,4 +109,19 @@ export class ActivityEntity {
     default: true
   })
   status: boolean = true
+
+  @OneToMany(
+    type => ScheduleEntity,
+    schedule => schedule.activity
+  )
+  schedules: ScheduleEntity[]
+
+  @OneToMany(
+    type => ActivityArtworkEntity,
+    activityArtwork => activityArtwork.activity
+  )
+  activityArtworks: ActivityArtworkEntity[]
+
+
+
 }

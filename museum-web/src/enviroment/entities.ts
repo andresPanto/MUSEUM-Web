@@ -6,11 +6,15 @@ import { PurchaseEntity } from '../purchase/purchase.entity';
 import { ScheduleEntity } from '../schedule/schedule.entity';
 import { ActivityEntity } from '../activity/activity.entity';
 import { UserRoleEntity } from '../user-role/user-role.entity';
+import { ActivityArtworkEntity } from '../activity-artwork/activity-artwork.entity';
+import { ArtworkAuthorEntity } from '../artwork-author/artwork-author.entity';
 
 export const ENTITIES = [
+  ActivityArtworkEntity,
   ActivityEntity,
-  AuthorEntity,
   ArtworkEntity,
+  ArtworkAuthorEntity,
+  AuthorEntity,
   PurchaseEntity,
   RoleEntity,
   ScheduleEntity,
