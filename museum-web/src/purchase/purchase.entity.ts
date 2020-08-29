@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { UserEntity } from '../user/user.entity';
+import { ScheduleEntity } from '../schedule/schedule.entity';
 
 @Entity('purchase')
 export class PurchaseEntity {
@@ -46,6 +48,18 @@ export class PurchaseEntity {
     nullable: false,
   })
   status: boolean;
+
+  @ManyToOne(
+    type => UserEntity,
+    user => user.purchases
+  )
+  user: UserEntity
+
+  @ManyToOne(
+    type => ScheduleEntity,
+    schedule => schedule.purchases
+  )
+  schedule: UserEntity
 
 
 
