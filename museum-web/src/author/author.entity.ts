@@ -1,4 +1,5 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ArtworkAuthorEntity } from '../artwork-author/artwork-author.entity';
 
 @Index([
   'fullName',
@@ -14,42 +15,49 @@ export class AuthorEntity {
   idAuthor: number;
 
   @Column({
-      name: 'full_name',
-      type: 'varchar',
-      length: '256',
-      nullable: false
-    })
-    fullName: string;
+    name: 'full_name',
+    type: 'varchar',
+    length: '256',
+    nullable: false,
+  })
+  fullName: string;
 
   @Column({
-      name: 'country',
-      type: 'varchar',
-      length: '256',
-      nullable: false
-    })
-    country: string;
+    name: 'country',
+    type: 'varchar',
+    length: '256',
+    nullable: false,
+  })
+  country: string;
 
-    @Column({
-        name: 'description',
-        type: 'varchar',
-        length: '1000',
-        nullable: false
-      })
-      description: string;
-    @Column({
-        name: 'img_path',
-        type: 'varchar',
-        length: '256',
-        nullable: false
-      })
-      imagePath: string;
+  @Column({
+    name: 'description',
+    type: 'varchar',
+    length: '1000',
+    nullable: false,
+  })
+  description: string;
+  @Column({
+    name: 'img_path',
+    type: 'varchar',
+    length: '256',
+    nullable: false,
+  })
+  imagePath: string;
 
-    @Column({
-      name: 'status',
-      type: 'boolean',
-      nullable: false,
-      default: true
-    })
-    status: boolean = true
+  @Column({
+    name: 'status',
+    type: 'boolean',
+    nullable: false,
+    default: true,
+  })
+  status: boolean = true;
+
+
+  @OneToMany(
+    type => ArtworkAuthorEntity,
+    artworkAuthor => artworkAuthor.author,
+  )
+  artworkAuthors: ArtworkAuthorEntity[];
 
 }

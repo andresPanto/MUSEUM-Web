@@ -7,6 +7,12 @@ import { AuthorModule } from './author/author.module';
 import { ArtworkModule } from './artwork/artwork.module';
 import { RoleModule } from './role/role.module';
 import { UserModule } from './user/user.module';
+import { PurchaseModule } from './purchase/purchase.module';
+import { ScheduleModule } from './schedule/schedule.module';
+import { ActivityModule } from './activity/activity.module';
+import { UserRoleModule } from './user-role/user-role.module';
+import { ActivityArtworkModule } from './activity-artwork/activity-artwork.module';
+import { ArtworkAuthorModule } from './artwork-author/artwork-author.module';
 
 @Module({
   imports: [
@@ -26,6 +32,12 @@ import { UserModule } from './user/user.module';
     ArtworkModule,
     RoleModule,
     UserModule,
+    PurchaseModule,
+    ScheduleModule,
+    ActivityModule,
+    ActivityArtworkModule,
+    ArtworkAuthorModule,
+    //UserRoleModule,
 
   ],
   controllers: [AppController],
