@@ -1,0 +1,64 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('shared/header.ejs')%>
+<!--Imagen de categoría-->
+<p> <%= category %> </p>
+<div >
+    <img class="d-block w-100" src="/images/categories/<%= category %>.png" alt="First slide">
+</div>
+<hr>
+<!--Búsqueda-->
+<form action="/search" method="get" class="form-inline active-pink-3 active-pink-4 justify-content-center mt-4 ">
+    <!--Falta agregar un label-->
+    <input class="form-control form-control-sm ml-3 w-50 mr-1" type="text" placeholder="What <%= category %> are you looking for?"
+      aria-label="Search" name="q">
+      <span><button type="submit" class="btn btn-primary">Search</button></span>
+  </form>
+
+  <!--Item de categoría--> 
+<div class="container mb-5">
+    <h3 class="mb-2"><strong>Search Results</strong></h3>
+    <div class="row">
+      <div class ="col">
+          <!--Recorrer con un for-->
+          <div class="category-item">
+              <h4>Performance 1</h4>
+              <h5>17 JUN - 20 JUN</h5>
+              <span>
+              <a href="/activitites/1"><img width="260px" src=/images/performances/perf2.png class="float-left"></a>
+              <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
+              </span>  
+          </div>
+          <!--Fin For-->
+          <div class="category-item">
+            <h4>Performance 1</h4>
+            <h5>17 JUN - 20 JUN</h5>
+            <span>
+            <a href="/activitites/1"><img width="260px" src=/images/performances/perf2.png class="float-left"></a>
+            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
+            </span>  
+        </div>
+        <div class="category-item">
+            <h4>Performance 1</h4>
+            <h5>17 JUN - 20 JUN</h5>
+            <span>
+            <a href="/activitites/1"><img width="260px" src=/images/performances/perf2.png class="float-left"></a>
+            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
+            </span>  
+        </div>
+        <div class="category-item">
+            <h4>Performance 1</h4>
+            <h5>17 JUN - 20 JUN</h5>
+            <span>
+            <a href="/activitites/1"><img width="260px" src=/images/performances/perf2.png class="float-left"></a>
+            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
+            </span>  
+        </div>
+      </div> 
+      
+    </div>
+</div>
+
+
+
+
+<%- include ('shared/footer.ejs')%>
