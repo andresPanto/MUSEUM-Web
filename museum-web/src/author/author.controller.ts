@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { AuthorInteface } from './author.inteface';
 import { AuthorCreateDto } from './dto/author.create-dto';
@@ -9,7 +9,12 @@ export class AuthorController {
   constructor(private readonly _AuthorService: AuthorService) {
   }
 
-
+  @Get('artwork')
+  showAuthors(
+    @Res() res
+  ){
+    res.render('module_client/authors.ejs',{logged_in: false})
+  }
   @Get()
   mostrarTodos() {
 

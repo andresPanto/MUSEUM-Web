@@ -1,0 +1,26 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('shared/header.ejs')%>
+<!--Activity info (main)-->
+<div >
+    <h3 class="text-center">Category</h3>
+    <h3 class="text-center"><b>Activity Name</b></h3>
+    <img class="rounded mx-auto d-block mb-2" width="400px" src=/images/performances/perf2.png>
+    <h3 class="text-center">BUY YOUR TICKET</h3>
+</div>
+<!--Date picker-->
+
+<div class="container">
+    <form action="/action_page.php">
+        <label for="date">Choose the date of your visit:</label>
+        <input type="date" id="date" name="date">
+        <input type="submit">
+      </form>
+</div>
+<div class="container">
+    <form action="/action_page.php">
+        <label for="time">Choose your schedule:</label>
+        <input type="time" id="time" name="time">
+        <input type="submit">
+      </form>
+</div>
+

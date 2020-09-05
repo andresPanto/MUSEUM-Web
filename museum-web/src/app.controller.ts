@@ -9,8 +9,12 @@ export class AppController {
     gethome(
         @Res() res
     ) {
-        res.render('module_client/index.ejs',{logged_in: false}) // Nombre de la vista (archivo)
+        res.render('module_client/index.ejs',{logged_in: true}) // Nombre de la vista (archivo)
   }
-
-
+  @Get('/signup')
+  signUp(
+    @Res() res
+  ){
+    res.render('module_client/signup.ejs', {logged_in: false})
+  }
 }

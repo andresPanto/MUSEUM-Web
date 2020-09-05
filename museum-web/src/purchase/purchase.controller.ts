@@ -1,15 +1,27 @@
 import { PurchaseService } from './purchase.service';
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { AuthorCreateDto } from '../author/dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
 import { PurchaseCreateDto } from './dto/purchase.create-dto';
 import moment from 'moment';
+import { resolve } from 'path';
 
 @Controller('purchases')
 export class PurchaseController {
   constructor(private readonly purchasesService: PurchaseService) {
   }
-
+  @Get('/myactivities')
+  userPurchases(
+    @Res() res
+  ){
+    res.render('module_client/myactivities',{logged_in:false})
+  }
+  @Get('/purchase')
+  userPurchase(
+    @Res() res
+  ){
+    res.render('module_client/purchase',{logged_in:true})
+  }
   @Get()
     mostrarTodos(){
 
