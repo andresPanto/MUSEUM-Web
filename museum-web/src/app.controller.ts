@@ -17,4 +17,16 @@ export class AppController {
   ){
     res.render('module_client/signup.ejs', {logged_in: false})
   }
+  @Get('/admin')
+  adminPanel(
+    @Res() res
+  ){
+    res.render('module_admin/login.ejs')
+  }
+  @Get('/admin/dashboard')
+  getDashboard(
+    @Res() res
+  ){
+    res.render('module_admin/dashboard.ejs')
+  }
 }
