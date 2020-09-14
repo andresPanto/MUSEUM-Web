@@ -8,7 +8,7 @@ import { validate, ValidationError } from 'class-validator';
 export class AuthorController {
   constructor(private readonly _AuthorService: AuthorService) {
   }
-
+  //For artwork's authors
   @Get('artwork')
   showAuthors(
     @Res() res
@@ -19,7 +19,19 @@ export class AuthorController {
   mostrarTodos() {
 
   }
-
+  //For dashboard authors
+  @Get('/admin')
+  getauthors(
+    @Res() res
+  ){
+    res.render('module_admin/authors',{logged_in:false})
+  }
+  @Get('/admin/new')
+  newAuthor(
+    @Res() res
+  ){
+    res.render('module_admin/author',{logged_in:false})
+  }
   @Get('/:id')
   mostrarUno(
     @Param() parametrosDeRuta,

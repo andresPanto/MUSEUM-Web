@@ -22,6 +22,12 @@ export class PurchaseController {
   ){
     res.render('module_client/purchase',{logged_in:true})
   }
+  @Get('/admin')
+  adminPurchase(
+    @Res() res
+  ){
+    res.render('module_admin/purchases.ejs')
+  }
   @Get()
     mostrarTodos(){
 
