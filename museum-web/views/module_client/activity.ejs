@@ -1,0 +1,53 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('shared/header.ejs')%>
+<!--Breadcrumbs-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-white">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="#">Category</a></li>
+      <li class="breadcrumb-item active">Activity Name</li>
+    </ol>
+</nav>
+<!--Activity info (main)-->
+<div>
+<h3 class="text-center">Category</h3>
+<h3 class="text-center"><b>Activity Name</b></h3>
+<h4 class="text-center">10 JUN - 10 JUL</h4>
+<img class="rounded mx-auto d-block mb-2" width="400px" src=/images/performances/perf2.png>
+<p class=" mx-5 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde hic iusto, porro non quo natus ipsam odit expedita, earum perspiciatis sequi temporibus atque quibusdam enim minima excepturi velit reprehenderit nesciunt cum soluta. Eos totam facere veniam voluptatibus hic vel magnam sint ullam recusandae iusto explicabo, quo ipsum porro qui harum minima accusantium neque nesciunt dolore ipsam nisi culpa molestias minus alias. Aliquid nulla dicta in. Debitis sunt deserunt distinctio ex molestias non eveniet quod obcaecati repellat voluptatum ducimus minima velit, possimus dolorum consequatur quidem quae cupiditate! Similique autem nostrum, recusandae omnis veniam hic, fugiat porro perspiciatis nulla facilis itaque magnam fugit et unde? Distinctio voluptas voluptatum ex consequatur ratione quidem amet quisquam optio nostrum ab aut est, placeat explicabo sed ad, ipsa esse hic rerum eos officiis fugit fugiat quae aliquam aliquid? Deserunt nostrum odit doloremque sapiente aut rem, ea vel blanditiis culpa esse dolor natus asperiores quia amet libero dolorem! Tempore blanditiis facilis excepturi at quidem nemo? Totam dolor ipsum doloribus quae cumque autem nostrum. Facilis fuga provident necessitatibus error, officiis quae eum velit repellat neque. Explicabo atque voluptate voluptatum ut laborum labore impedit facere ea illum, corporis quia veritatis eaque sapiente similique eligendi ratione porro veniam distinctio maiores?</p>
+</div>
+<!--Activity info (essential)-->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 bg-info card card-body">
+            <h3 class="text-center"><b>Essential Information</b></h3>
+            <h4><b>Location</b></h4>
+            <p>Location of Activity</p>
+            <h4><b>Admission</b></h4>
+            <p>$40.00</p>
+            <h4><b>Duration</b></h4>
+            <p>4H10M</p>
+            <h4><b>Further Information</b></h4>
+            <p>+593 998877654</p>
+            <h4><b>Project Manager</b></h4>
+            <p>Manager Full Name</p>
+        </div>
+        <div class="col-sm-6 text-center border-0 card card-body justify-content-center ">
+            <div>
+            <button class="btn-lg">See the artworks</button>
+            </div>
+            <br>
+            <div>
+            <img width="400px" src=/images/performances/perf2.png>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container text-center">
+<button class="bg-warning mt-3 btn-lg">Buy your ticket</button>
+<br>
+<!-- activities = activity category-->
+<button class="bg-primary mt-3 btn-lg">See other activitites</button>
+</div>
+
+<%- include ('shared/footer.ejs')%>

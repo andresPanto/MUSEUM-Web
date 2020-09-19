@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { AuthorInteface } from './author.inteface';
 import { AuthorCreateDto } from './dto/author.create-dto';
@@ -8,7 +8,6 @@ import { validate, ValidationError } from 'class-validator';
 export class AuthorController {
   constructor(private readonly _AuthorService: AuthorService) {
   }
-
 
   @Get()
   mostrarTodos() {

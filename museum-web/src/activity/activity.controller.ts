@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 
 @Controller('activities')
@@ -6,15 +6,9 @@ export class ActivityController {
   constructor(private readonly _activityService: ActivityService) {
   }
 
+
   @Get()
   mostrarTodos() {
-
-  }
-
-  @Get('/:id')
-  mostrarUno(
-    @Param() parametrosDeRuta,
-  ) {
 
   }
 
@@ -39,5 +33,7 @@ export class ActivityController {
   ) {
 
   }
+ 
+  
 
 }
