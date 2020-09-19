@@ -8,12 +8,7 @@ import { UserCreateDto } from './dto/user.create-dto';
 export class UserController {
   constructor(private readonly usersService: UserService) {
   }
-  @Get('/admin')
-  userRoles(
-    @Res() res
-  ){
-    res.render('module_admin/users',{logged_in:false})
-  }
+
   @Get()
     mostrarTodos(){
 

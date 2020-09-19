@@ -5,13 +5,8 @@ import { ArtworkService } from './artwork.service';
 export class ArtworkController {
   constructor(private readonly artworksService: ArtworkService) {
   }
-  @Get('activity')
-  getActivityArtworks(
-    @Res() res
-  ){
-    res.render('module_client/artworks.ejs',{logged_in: false})
-  }
-  @Get()
+ 
+    @Get()
     mostrarTodos(){
 
     }

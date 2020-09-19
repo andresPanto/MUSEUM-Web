@@ -10,24 +10,7 @@ import { resolve } from 'path';
 export class PurchaseController {
   constructor(private readonly purchasesService: PurchaseService) {
   }
-  @Get('/myactivities')
-  userPurchases(
-    @Res() res
-  ){
-    res.render('module_client/myactivities',{logged_in:false})
-  }
-  @Get('/purchase')
-  userPurchase(
-    @Res() res
-  ){
-    res.render('module_client/purchase',{logged_in:true})
-  }
-  @Get('/admin')
-  adminPurchase(
-    @Res() res
-  ){
-    res.render('module_admin/purchases.ejs')
-  }
+
   @Get()
     mostrarTodos(){
 

@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { ScheduleService } from './schedule.service';
 import { PurchaseCreateDto } from '../purchase/dto/purchase.create-dto';
 import { validate, ValidationError } from 'class-validator';
@@ -8,7 +8,7 @@ import { ScheduleCreateDto } from './dto/schedule.create-dto';
 export class ScheduleController {
   constructor(private readonly schedulesService: ScheduleService) {
   }
-
+ 
   @Get()
     mostrarTodos(){
 
