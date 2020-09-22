@@ -10,7 +10,19 @@ import { resolve } from 'path';
 export class PurchaseController {
   constructor(private readonly purchasesService: PurchaseService) {
   }
-
+  @Get()
+  myPurchases(){ //Valido si es cliente o admin, renderizo client/myactivities ó admin/purchases.ejs
+    //Get current user from cookies
+    //Render myactivities.ejs
+  }
+  @Get('/:idActivity')
+  getPurchase(){
+    //Render purchase.ejs
+  }
+  @Post('/:idActivity')
+  purchase(){
+    //For purchasing
+  }
   @Get()
     mostrarTodos(){
 

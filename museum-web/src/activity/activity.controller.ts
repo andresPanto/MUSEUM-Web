@@ -5,13 +5,30 @@ import { ActivityService } from './activity.service';
 export class ActivityController {
   constructor(private readonly _activityService: ActivityService) {
   }
-
-
+  @Get('/:type')
+  categoryActivities(){
+    //Render template category.ejs
+  }
+  @Get('/:type/:idActivity')
+  getActivity(){
+    //Render activity.ejs
+  }
+  @Get('Queryparam')
+  searchActivity(){
+    //Render activity.ejs with queryparam
+  }
   @Get()
   mostrarTodos() {
-
+      //Render activities.ejs
   }
-
+  @Get('new')
+  crear(){
+    //Render activity.ejs
+  }
+  @Get('/:idActivity')
+  editar(){
+    //Render activity.ejs with loaded data
+  }
   @Post()
   crearUno(
     @Body() parametrosDeCuerpo,

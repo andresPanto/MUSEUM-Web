@@ -5,10 +5,17 @@ import { ArtworkService } from './artwork.service';
 export class ArtworkController {
   constructor(private readonly artworksService: ArtworkService) {
   }
- 
-    @Get()
-    mostrarTodos(){
-
+    @Get(':/idActivity')
+    mostrardeactivity(){
+        //Render artworks.ejs
+    }
+    @Get() //Validar si es admin
+    mostrarTodos() {
+        //Render admin/artworks.ejs
+    }
+    @Get('new')
+    crearArtwork(){
+      //Render artwork.ejs
     }
     @Get('/:id')
     mostrarUno(
