@@ -1,0 +1,60 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('header.ejs') %>
+<h1 class="text-center"><b>Activity Name</b></h1>
+<h2 class="text-center"><b>Artworks</b></h2>
+<!--Artworks-->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 card card-body  border-0">
+            <table class="table table-striped table-bordered">
+                <h3 class="text-center"><b>Assigned Artworks</b></h3>
+                <tr><th>Artwork Name</th></tr>
+                <!--For set artworks-->
+                <tr class="clickable-row">
+                   <td> Artwork1 </td>
+                </tr>
+                <tr class="clickable-row">
+                    <td> Artwork2 </td>
+                 </tr>
+                <!--Fin for-->
+            </table>
+            <button class="btn-lg">Remove Selected Artwork</button>
+        </div>
+        <div class="col-sm-6 text-center border-0 card card-body justify-content-center ">
+            <div class="input-group">
+                <input class="form-control form-control-sm ml-3 w-50 mr-1" type="text" placeholder="What artwork are you looking for?"
+                aria-label="Search" name="q">
+              <button type="submit" class="btn btn-primary input-group-btn">Search</button>
+            </div>
+            <table class="table table-striped table-bordered">    
+                <tr><th>Author Name</th></tr>
+                <!--Set all artworks at first-->
+                <tr class="clickable-row">
+                   <td> Artwork3 </td>
+                </tr>
+                <tr class="clickable-row">
+                    <td> Artwork4 </td>
+                 </tr>
+                <!--Fin for-->
+            </table>
+            <button class="btn-lg">Add to Assigned Artworks</button>
+            <br>
+            <br>Didn't find the one you were looking for?</br>
+            <br>
+            <button class="btn-lg">Add New Artwork</button>
+        </div>
+    </div>
+</div>
+
+<!--JQuery-->
+<script>
+$('.table').on('click', '.clickable-row', function(event) {
+  $(this).addClass('active').siblings().removeClass('active');
+  alert(this.innerHTML)
+  $(this).css({"background-color": "#dfbf9f"});
+  $(this).siblings().css({"background-color":"#FFFFFF"})
+//Call js function here and pass 'this.innerHTML' with author id/name
+//Perhaps we can use ajax directly in that function
+//otrafuncion(this.innerHTML);
+});
+</script>

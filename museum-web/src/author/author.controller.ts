@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { AuthorInteface } from './author.inteface';
 import { AuthorCreateDto } from './dto/author.create-dto';
@@ -8,18 +8,24 @@ import { validate, ValidationError } from 'class-validator';
 export class AuthorController {
   constructor(private readonly _AuthorService: AuthorService) {
   }
-
-
-  @Get()
-  mostrarTodos() {
-
+  @Get('/:idArtwork')
+  getAuthors(){
+    //Render authors.ejs
   }
-
-  @Get('/:id')
+  @Get() //Validar si es admin
+  mostrarTodos() {
+      //Render admin/authors.ejs
+  }
+  
+  @Get('/:id') //Validar si es admin, renderizar admin/author.ejs with loaded data
   mostrarUno(
     @Param() parametrosDeRuta,
   ) {
 
+  }
+  @Get('new') //Validar si es admin
+  createAuthor(){
+      //Render author.ejs
   }
 
   @Post()

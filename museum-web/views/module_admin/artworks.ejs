@@ -1,0 +1,31 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('header.ejs') %>
+<h1 class="text-center"><b>Artworks</b></h1>
+<br>
+<button href="#" class="ml-5 mb-3 btn btn-lg btn-success"><span class="glyphicon glyphicon-pencil"></span>Add Artwork</button>
+<!--Artworks list-->
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Artwork Name</th>
+            <th>Year</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Manage Authors</th>
+            <th>Disable</th>
+        </tr>
+        <!--Iterar con un for-->
+        <tr>
+            <td>Artwork Name 1</td>
+            <td>1980</td>
+            <td>Painting</td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum illo, magnam quod ipsam commodi rerum earum neque quia dignissimos unde nemo animi nisi totam iste id eaque modi quam non consectetur, eligendi quas libero? Assumenda labore accusamus illum numquam culpa.</td>
+            <td><a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
+            <td><a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span> Authors</a></td>
+            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Disable</a></td>
+        </tr>
+        <!--Fin for-->
+    </table>
+    <hr>
+</div>

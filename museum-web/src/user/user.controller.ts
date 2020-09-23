@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthorCreateDto } from '../author/dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
@@ -8,17 +8,39 @@ import { UserCreateDto } from './dto/user.create-dto';
 export class UserController {
   constructor(private readonly usersService: UserService) {
   }
-
+  @Get('signup')
+  index(){
+      //Render sign up template
+  }
+  @Post('signup')
+  signmeup(){
+    //For signing up user
+  }
+  @Get('me') //Valido si es cliente o si es admin (settings.ejs)
+  mySettings(){
+    //Render sign up template with loaded data
+  }
+  @Post('me')
+  changeSettings(){
+    //For saving user info changes
+  }
+  //----------------------------------------------------------ADMIN----------------------
+  @Get('admin')
+  loginadmin(){
+    //Render admin/login.ejs
+  }
   @Get()
-    mostrarTodos(){
-
+  getUsers(){ //Sólo clientes
+    //Render users.ejs
+  }
+  @Get('/:id')
+  editUser(
+    @Param() parametrosDeRuta
+  ){
+      //Render signup.ejs
     }
-    @Get('/:id')
-    mostrarUno(
-      @Param() parametrosDeRuta
-    ){
-
-    }
+  
+  
   @Post()
   async crearUno(
     @Body() parametrosDeCuerpo,
@@ -45,19 +67,7 @@ export class UserController {
       throw new BadRequestException('Errors validating input')
     }
   }
-
-  @Put('/:id')
-    editarUno(
-      @Param() parametrosDeRuta,
-      @Body() parametrosDeCuerpo
-    ){
-
-    }
-    @Delete('/:id')
-    eliminarUno(
-      @Param() parametrosDeRuta
-    ){
-
-    }
-
+  
+  
+  
 }

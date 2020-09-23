@@ -1,23 +1,34 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 
 @Controller('activities')
 export class ActivityController {
   constructor(private readonly _activityService: ActivityService) {
   }
-
+  @Get('/:type')
+  categoryActivities(){
+    //Render template category.ejs
+  }
+  @Get('/:type/:idActivity')
+  getActivity(){
+    //Render activity.ejs
+  }
+  @Get('Queryparam')
+  searchActivity(){
+    //Render activity.ejs with queryparam
+  }
   @Get()
   mostrarTodos() {
-
+      //Render activities.ejs
   }
-
-  @Get('/:id')
-  mostrarUno(
-    @Param() parametrosDeRuta,
-  ) {
-
+  @Get('new')
+  crear(){
+    //Render activity.ejs
   }
-
+  @Get('/:idActivity')
+  editar(){
+    //Render activity.ejs with loaded data
+  }
   @Post()
   crearUno(
     @Body() parametrosDeCuerpo,
@@ -39,5 +50,7 @@ export class ActivityController {
   ) {
 
   }
+ 
+  
 
 }
