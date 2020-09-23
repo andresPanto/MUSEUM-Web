@@ -17,11 +17,11 @@ insert into activity values (0,'Museum Setting', 'Peformance','Entrance 1','2021
 insert into activity values (0,'Guided Tour', 'Tour','Main Entrance','2020-01-01','3000-01-01','Professional art historians are available to provide guided Museum tours of the masterworks of the museum’s collection, the Museum’s architecture, and current exhibitions. Tours can be customized to focus on specific galleries, mediums, or collection areas; tours in foreign languages and tours for families and children are also available.','01:45','John Doe','843975847',15.00,'/images/activities/tours/guided.png',1);
 insert into activity values (0,'Self-guided Tour', 'Tour','Main Entrance','2020-01-01','3000-01-01','Explore exhibition highlights, at your own pace: these self-guided tours are overviews of popular collections at the Museum.We welcome instructors and group leaders to lead their own tours and activities in our galleries. This option has proven particularly popular among university and high school educators. You may use any of the galleries, focusing on just one or visiting all of them, including the special temporary exhibits in the Gallery.','00:00','John Doe','843975847',10.00,'/images/activities/tours/selfguided.jpg',1);
 --Films
-insert into activity values (0,'Tarkovski Collection', 'Films','Film Study Center','2020-10-10','2020-10-15','Revive Andréi greatest hits, from Assassins(1958) to Offret(1986). His last film, The Sacrifice (1986) was shot in Sweden with many of Ingmar Bergmans regular collaborators, and won an almost unprecedented four prizes at the Cannes Film Festival.','08:10','Martin Armstrong','452352345',12.00,'/images/activities/films/tarkovksi1.jpg',1);
-insert into activity values (0,'Noir','Films','Film Video Library','2020-11-05','2020-11-25','The questions of what defines film noir, and what sort of category it is, provoke continuing debate. Film noir encompasses a range of plots: the central figure may be a private investigator, a plainclothes policeman, an aging boxer, a hapless grifter, a law-abiding citizen lured into a life of crime, or simply a victim of circumstance. Enjoy a series of selected movies that helped defined cinema noir just as we perceive it today.','10:30','John Satin','8394849394',13.00,'/images/activities/films/noir1.jpg',1);
-insert into activity values (0,'Great Swedish Collection', 'Films','Film Archive Center','2020-12-15','2020-12-18','Watch a series of films by the most aclaimed swedish filmmakers. Swedish cinema is known for including many acclaimed films; during the 20th century the industry was the most prominent of Scandinavia. This is largely due to the popularity and prominence of directors Victor Sjöström and especially Ingmar Bergman; and more recently Roy Andersson, Lasse Hallström and Lukas Moodysson.','12:00','Robert Burst','3123123323',15.00,'/images/activities/films/swedish1.jpg',1);
-insert into activity values (0,'Lars Von Trier Experience', 'Films','Film Study Center','2020-12-20','2020-12-22','Enjoy Von Triers work which is known for its genre and technical innovation, confrontational examination of existential, social, and political issues, and his treatment of subjects such as mercy, sacrifice, and mental health.','5:20','Angelo Battio','1948459375',8.50,'/images/activities/films/lars1.jpg',1);
-insert into activity values (0,'The colors of Krzysztof Kieslowski', 'Films','Film Archive Center','2020-12-20','2020-12-22',' Kieślowski remains one of Europes most influential directors, his works included in the study of film classes at universities throughout the world. The 1993 book Kieślowski on Kieślowski describes his life and work in his own words, based on interviews by Danusia Stok. Come to revisit his most notorious trilogy of colors.','04:30','Clark DeCoco','048349284',7.25,'/images/activities/films/kieslowski1.jpg',1);
+insert into activity values (0,'Tarkovski Collection', 'Film','Film Study Center','2020-10-10','2020-10-15','Revive Andréi greatest hits, from Assassins(1958) to Offret(1986). His last film, The Sacrifice (1986) was shot in Sweden with many of Ingmar Bergmans regular collaborators, and won an almost unprecedented four prizes at the Cannes Film Festival.','08:10','Martin Armstrong','452352345',12.00,'/images/activities/films/tarkovksi1.jpg',1);
+insert into activity values (0,'Noir','Film','Film Video Library','2020-11-05','2020-11-25','The questions of what defines film noir, and what sort of category it is, provoke continuing debate. Film noir encompasses a range of plots: the central figure may be a private investigator, a plainclothes policeman, an aging boxer, a hapless grifter, a law-abiding citizen lured into a life of crime, or simply a victim of circumstance. Enjoy a series of selected movies that helped defined cinema noir just as we perceive it today.','10:30','John Satin','8394849394',13.00,'/images/activities/films/noir1.jpg',1);
+insert into activity values (0,'Great Swedish Collection', 'Film','Film Archive Center','2020-12-15','2020-12-18','Watch a series of films by the most aclaimed swedish filmmakers. Swedish cinema is known for including many acclaimed films; during the 20th century the industry was the most prominent of Scandinavia. This is largely due to the popularity and prominence of directors Victor Sjöström and especially Ingmar Bergman; and more recently Roy Andersson, Lasse Hallström and Lukas Moodysson.','12:00','Robert Burst','3123123323',15.00,'/images/activities/films/swedish1.jpg',1);
+insert into activity values (0,'Lars Von Trier Experience', 'Film','Film Study Center','2020-12-20','2020-12-22','Enjoy Von Triers work which is known for its genre and technical innovation, confrontational examination of existential, social, and political issues, and his treatment of subjects such as mercy, sacrifice, and mental health.','5:20','Angelo Battio','1948459375',8.50,'/images/activities/films/lars1.jpg',1);
+insert into activity values (0,'The colors of Krzysztof Kieslowski', 'Film','Film Archive Center','2020-12-20','2020-12-22',' Kieślowski remains one of Europes most influential directors, his works included in the study of film classes at universities throughout the world. The 1993 book Kieślowski on Kieślowski describes his life and work in his own words, based on interviews by Danusia Stok. Come to revisit his most notorious trilogy of colors.','04:30','Clark DeCoco','048349284',7.25,'/images/activities/films/kieslowski1.jpg',1);
 --Exhibitions
 insert into activity values (0,'Enlightenment To Revolution', 'Exhibition','Floor 1, Section A','2020-09-24','2021-01-24','Explore the radical force that transformed the religious, cultural and political landscape of India and beyond in this landmark exhibition. A philosophy originating in medieval India, Tantra has been linked to successive waves of revolutionary thought, from its sixth-century transformation of Hinduism and Buddhism, to the Indian fight for independence and the rise of 1960s counterculture.','02:00','Joseph Hotung','183740234',15.00,'/images/activities/exhibitions/tantra.png',1);
 insert into activity values (0,'Culture and Climate ', 'Exhibition','Floor 3, Section C', '2020-10-22','2021-02-21','Home to rich cultures for nearly 30,000 years, the Arctic is far from the inhospitable hinterland its often imagined to be From ancient mammoth ivory sculpture to modern refitted snow mobiles, the objects in this immersive exhibition reveal the creativity and resourcefulness of Indigenous Peoples in the Arctic. Developed in collaboration with Arctic communities, the exhibition celebrates the ingenuity and resilience of Arctic Peoples throughout history. It tells the powerful story of respectful relationships with icy worlds and how Arctic Peoples have harnessed the weather and climate to thrive.','03:30','Martha Snowshoe','128384020',18.00,'/images/activities/exhibitions/climate.png',1);
@@ -29,6 +29,7 @@ insert into activity values (0,'Library of Exile', 'Exhibition','Floor 2, Sectio
 insert into activity values (0,'The Tomb of the Unknown Craftsman', 'Exhibition','Floor 1, Section B','2020-08-27','2021-02-20','Experience Grayson Perrys playful memorial to the unnamed craftsmen and women who made some of the wonders of history.Created and displayed as part of an exhibition at the British Museum in 2011 and now making its return, The Tomb of the Unknown Craftsman is a sculpture of an iron ship, sailing into the afterlife. The ship is hung with hand-made replicas of British Museum objects, representing crafts made through history – by forgotten men and women – which have survived into the present day.','02:00','Grayson Perry','7384829349',14.50,'/images/activities/exhibitions/perry.png',1);
 insert into activity values (0,'Picasso to Celmins', 'Exhibition','Floor 2, Section B','2020-10-17','2022-02-09','Spanning almost one hundred years of modern art, this exhibition will showcase highlights from the wide-ranging collection of Alexander Walker (1930–2003), longstanding film critic for Londons Evening Standard newspaper and prolific collector of modern and contemporary prints and drawings. In life, Walker surrounded himself with works from his collection in all rooms of his Maida Vale flat including his kitchen and bathroom.','01:00','Richard Hockney','843975847',10.00,'/images/activities/exhibitions/celmin.png',1);
 ---------------------------------SCHEDULE--------------------------------
+--(id_table,schedule,capacity,status,id_activity)
 --Performances
 insert into schedule values (0,'18:00',50,1,1);
 insert into schedule values (0,'20:00',60,1,1);
@@ -114,6 +115,7 @@ insert into artwork values (0,'Snow googgles','Before 2879','Googgles','When the
 insert into artwork values (0,'Les Demoiselles dAvignon','1907','Painting','Les Demoiselles dAvignon (The Young Ladies of Avignon, originally titled The Brothel of Avignon) is a large oil painting created in 1907 by the Spanish artist Pablo Picasso. The work, part of the permanent collection of the Museum of Modern Art, portrays five nude female prostitutes in a brothel on Carrer dAvinyó (translated into Spanish: Calle de Aviñón), a street in Barcelona. Each figure is depicted in a disconcerting confrontational manner and none is conventionally feminine.','/images/artworks/avignon.png',1);
 insert into artwork values (0,'Web #3','2002','Painting','Untitled (Web 3) is a one-colour aquatint print, with burnishing, scraping and drypoint, of a spider’s web on Hahnemühle Copperplate paper. It was printed by Jennifer Turner and Carmen Schilaci at Gemini G.E.L. (Graphic Editions Limited) in Los Angeles, where it was published in 2002 in an edition of sixty-five.','/images/artworks/web.png',1);
 -----------------------------ACTIVITY-ARTWORK----------------------------
+--(id_table, id_activity, id_artwork)
 --Perf.1 
 insert into activity_artwork values (0,1,1);
 --Perf.2
@@ -174,3 +176,196 @@ insert into activity_artwork values (0,15,35);
 insert into activity_artwork values (0,16,36);
 insert into activity_artwork values (0,16,37);
 -----------------------------AUTHOR----------------------------
+--Art. 1
+insert into author values (0,'Boris Chatmatz','France','Boris Charmatz is a choreographer, dancer, and director of Musée de la danse (Museum of Dance). With Musée de la danse, Charmatz initiated projects including préfiguration, expo zéro, rebutoh, brouillon (rough draft), 20 Dancers for the XX Century, Fous de danse (Mad about dance) and Petit Musée de la danse. Charmatz served as associate artist of the 2011 Festival dAvignon, and he has collaborated on projects with museums around the world, including MoMA and Tate Modern.','/images/authors/borisc.png',1);
+insert into author values (0,'Simon Dove','United States','Simon Dove is an independent curator and educator, and a co-curator of Crossing the Line, the annual trans-disciplinary fall festival in New York City. Dove was curator and artistic director of Springdance, the international festival of new developments in dance and performance in the Netherlands, from 2000–07. While in that position, he pioneered artist residency exchange programs with other European cities, as well as New York. Prior to that he ran the Yorkshire Dance Centre in Leeds, one of the first National Dance Agencies in the UK, and was the founder and artistic director of Vivarta, the first contemporary South Asian performance festival in the UK.','/images/authors/sdove.png',1);
+--Art. 2
+insert into author values (0,'William Forsythe','United States','William Forsythe (born December 30, 1949 in New York City) is an American dancer and choreographer resident in Frankfurt am Main in Hesse, Germany. He is known internationally for his work with the Ballet Frankfurt (1984–2004) and The Forsythe Company (2005–2015). Recognized for the integration of ballet and visual arts, which displayed both abstraction and forceful theatricality, his vision of choreography as an organizational practice has inspired him to produce numerous installations, films, and web-based knowledge creation, incorporating the spoken word and experimental music.','/images/authors/wforsythe.png',1);
+insert into author values (0,'Thom Willems','Netherlands','Dutch composer Thom Willems has collaborated with choreographer William Forsythe on over 60 ballet scores * studied at the Royal Conservatory in The Hague: composition with Louis Andriessen and electronic music with Jan Boerman and Dick Raaijmakers * started working with Forsythe when he became director of the ballet of the Frankfurt Opera in 1984 * created electronic scores and music collages using computer technology * his scores are characterised by subtle soundscapes, insistent rhythms and urban sonorities, forming an intrinsic part of the architecture of the ballets * in 1987 achieved international success with In the Middle, Somewhat Elevated commissioned by Rudolf Nureyev for Paris Opéra Ballet with dancers including the rising star Sylvie Guillem.','/images/authors/twillems.png',1);
+--Art. 3
+insert into author values (0,'Jerome Robbins','United States','Jerome Robbins was an American choreographer, director, dancer, and theater producer who worked in classical ballet, on stage, film, and television. Among his numerous stage productions were On the Town, Peter Pan, High Button Shoes, The King and I, The Pajama Game, Bells Are Ringing, West Side Story, Gypsy, and Fiddler on the Roof. Robbins was a five-time Tony Award-winner and a recipient of the Kennedy Center Honors.','/images/authors/jrobbins.png',1);
+insert into author values (0,'Frédéric Chopin','Poland','Frédéric François Chopin, born Fryderyk Franciszek Chopin, was a Polish composer and virtuoso pianist of the Romantic era who wrote primarily for solo piano. He has maintained worldwide renown as a leading musician of his era, one whose "poetic genius was based on a professional technique that was without equal in his generation."','/images/authors/fchopin.png',1);
+--Art. 4
+insert into author values (0,'Tracie Morris','United States','Tracie Morris earned a Master of Fine Arts (MFA) in Poetry at Hunter College and her Ph.D in Performance Studies at New York University with an emphasis on speech act theory, poetry and Black aesthetics, under the supervision of José Esteban Muñoz. She also studied classical British acting at the Royal Academy of Dramatic Art (London) and American acting techniques and voice at Michael Howard Studios.','/images/authors/tmorris.png',1);
+--Art. 5
+insert into author values (0,'Stephen Petronio','United States','Stephen Petronio was born in Newark, New Jersey. He grew up in nearby Nutley and graduated in 1974 from Nutley High School. He received a B.A. degree from Hampshire College in Amherst, Massachusetts, where he began dancing in 1974. Prior to pursuing a career in dance, Petronio studied pre-medicine before being inspired by the dancing of Rudolf Nureyev and Steve Paxton, with whom he studied contact improvisation. Petronio became the first male dancer of the Trisha Brown Company (1979 to 1986), and founded Stephen Petronio Company in 1984.','/images/authors/spetronio.png',1);
+--Art. 6
+insert into author values (0,'Leonardo da Vinci','Italy','Properly named Leonardo di ser Piero da Vinci, Leonardo was born out of wedlock to a notary, Piero da Vinci, and a peasant woman, Caterina, in Vinci, in the region of Florence, Italy. Leonardo was educated in the studio of the renowned Italian painter Andrea del Verrocchio. Much of his earlier working life was spent in the service of Ludovico il Moro in Milan, and he later worked in Rome, Bologna and Venice. He spent his last three years in France, where he died in 1519.','/images/authors/ldavinci.png',1);
+--Art. 7
+--Unknown Author
+insert into author values (0,'Anonymous','Nowhere','The author of this artwork is unkown.','/images/authors/anonymous.png',1);
+--Art. 8
+insert into author values (0,'Alexandros of Antioch','Greece','Alexandros appears to have been a wandering artist who worked on commission. According to inscriptions at the ancient city of Thespiae, near Mount Helicon, in Greece, he was a winner in contests for composing and singing. The inscriptions date to around 80 BCE. His fathers name was Menides according to all the inscriptions. Alexandros is thought to have sculpted a statue of Alexander the Great that is also displayed at the Louvre Museum. This statue was discovered at the Greek island of Melos. His dates of birth and death are unknown.','/images/authors/anonymous.png',1);
+--Art. 9
+insert into author values (0,'Hieronymus Bosch','Netherlands','Little is known of Boschs life, though there are some records. He spent most of it in the town of s-Hertogenbosch, where he was born in his grandfathers house. The roots of his forefathers are in Nijmegen and Aachen (which is visible in his surname: Van Aken). His pessimistic and fantastical style cast a wide influence on northern art of the 16th century, with Pieter Bruegel the Elder being his best-known follower. Today he is seen as a hugely individualistic painter with deep insight into humanitys desires and deepest fears. Attribution has been especially difficult; today only about 25 paintings are confidently given to his hand along with eight drawings. About another half dozen paintings are confidently attributed to his workshop.','/images/authors/hbosch.png',1);
+--Art. 10
+insert into author values (0,'Pablo Picasso','Spain','Picasso demonstrated extraordinary artistic talent in his early years, painting in a naturalistic manner through his childhood and adolescence. During the first decade of the 20th century, his style changed as he experimented with different theories, techniques, and ideas. After 1906, the Fauvist work of the slightly older artist Henri Matisse motivated Picasso to explore more radical styles, beginning a fruitful rivalry between the two artists, who subsequently were often paired by critics as the leaders of modern art.','/images/authors/ppicasso.png',1);
+--Art. 11
+insert into author values (0,'Diego Velázquez','Spain','Diego Rodríguez de Silva y Velázquez was a Spanish painter, the leading artist in the court of King Philip IV and of the Spanish Golden Age. He was an individualistic artist of the contemporary Baroque period. He began to paint in a precise tenebrist style, later developing a freer manner characterized by bold brushwork. In addition to numerous renditions of scenes of historical and cultural significance, he painted scores of portraits of the Spanish royal family and commoners, culminating in his masterpiece Las Meninas (1656).','/images/authors/dvelazquez.png',1);
+--Art. 12
+insert into author values (0,'Benvenuto Cellini','Italy','Benvenuto Cellini was born in Florence, in present-day Italy. His parents were Giovanni Cellini and Maria Lisabetta Granacci. They were married for 18 years before the birth of their first child. Benvenuto was the second child of the family. The son of a musician and builder of musical instruments, Cellini was pushed towards music, but when he was fifteen, his father reluctantly agreed to apprentice him to a goldsmith, Antonio di Sandro, nicknamed Marcone.','/images/authors/bcellini.png',1);
+--Art. 13
+insert into author values (0,'Andrei Tarkovsky','Russia','Andrei Arsenyevich Tarkovsky was a Russian filmmaker, theatre director, writer, and film theorist. He is widely considered one of the greatest and most influential directors in the history of Russian and world cinema. His films explored spiritual and metaphysical themes, and are noted for their slow pacing and long takes, dreamlike visual imagery, and preoccupation with nature and memory.','/images/authors/atarkovsky.png',1);
+insert into author values (0,'Boris Strugatskiy','Russia','Born 1933 in Leningrad, RSFSR, USSR (now Saint Petersburg in Russia), Boris Natanovich Strugatskiy was a Soviet/Russian sci-fi writer, often writing in collaboration with his older brother Arkadiy Strugatskiy. Strugatskiys father Natan Strugatskiy was a Jewish art critic and their mother was a Russian Orthodox teacher. Living in Leningrad with his mother, Boris survived the 1941-1944 siege of the city by the Nazi Germany army. In 1955 he graduated astronomy and went on to word as an astronomer and computer engineer. In 1958 the Strugatskiy brothers begun their artistic collaboration, which lasted until Arkadiys death in 1991.','/images/authors/bstrugatskiy.png',1);
+insert into author values (0,'Arkadiy Strugatskiy','Russia','Born on August 28, 1925 in Batumi, Georgian SSR, Transcaucasian SFSR, USSR (now in Georgia), Arkadiy Natanovich Strugatskiy was a Soviet/Russian sci-fi writer, often writing in collaboration with his younger brother Boris Strugatskiy. Strugatskiys father Natan Strugatskiy was a Jewish art critic and their mother was a Russian Orthodox teacher. When Arkadiy was a child, the family moved to Leningrad. He was evacuated from the city during the siege of Leningrad in 1942 along with his father, who didnt survive the journey. The following year he was drafted into the Soviet army and went to study at the artillery school in Aktyubinsk.','/images/authors/astrugatskiy.png',1);
+--Art. 14
+-- Andrei Tarkovsky
+insert into author values (0,'Aleksandr Misharin','Russia','Aleksandr Nikolaevich Misharin (Russian: Александр Николаевич Мишарин) also known in English as Alexander Misharin (born 6 April 1939 — died 13 April 2008) was a Soviet - Russian screenwriter, playwright, novelist, actor and senior editor of Russian periodicals. An Honored Artist of the Russian Federation (2000), he was a close friend of Andrei Tarkovsky with whom he wrote several screenplays, including Tarkovskys celebrated masterpiece Mirror.','/images/authors/amisharin.png',1);
+--Art. 15
+-- Andrei Tarkovsky
+insert into author values (0,'Stanislaw Lem','Poland','He was born on September 12, 1921, in Lwów, Poland. His father, Samuel Lem, was a wealthy laryngologist who served in the Austrian army. His mother, Sabina Woller, was a homemaker. Although he was born into a Polish-Jewish family, Lem was raised a Catholic and later became an atheist. He graduated from the Lwów Gymnazium in 1939, then studied medicine at the Lvov Medical Institute in 1940-1941. During WWII, he survived the Nazi occupation of Lwów and worked as a mechanic and welder for a German firm until 1944.','/images/authors/slem.png',1);
+insert into author values (0,'Fridrikh Gorenshteyn','Russia','Gorensteins themes reflect the repressive political life he witnessed in Communist Russia. He expressed his belief in a united, peaceful nation with conformity and without totalitarism and anti-Semitism. His work The House with the Tower has existentialist themes in the style of Franz Kafka, Albert Camus, and Jean-Paul Sartre. Other works move away from existentialism and incorporate religious themes, particularly Judaism. One example is Berdychev, which recounts the life of a Jew in the pre-WWII Ukraine.','/images/authors/fgorenshteyn.png',1);
+--Art. 16
+insert into author values (0,'Howard Hawks','United States','A versatile film director, Hawks explored many genres such as comedies, dramas, gangster films, science fiction, film noir, war films and westerns. His most popular films include Scarface (1932), Bringing Up Baby (1938), Only Angels Have Wings (1939), His Girl Friday (1940), To Have and Have Not (1944), The Big Sleep (1946), Red River (1948), The Thing from Another World (1951), Gentlemen Prefer Blondes (1953), and Rio Bravo (1959). His frequent portrayals of strong, tough-talking female characters came to define the "Hawksian woman".','/images/authors/hhawks.png',1);
+insert into author values (0,'William Faulkner','United States','Faulkner is one of the most celebrated writers in American literature generally and Southern literature specifically. Though his work was published as early as 1919 and largely during the 1920s and 1930s, Faulkners renown reached its peak upon the publication of Malcolm Cowleys The Portable Faulkner and his 1949 Nobel Prize in Literature, making him the only Mississippi-born Nobel winner. Two of his works, A Fable (1954) and his last novel The Reivers (1962), each won the Pulitzer Prize for Fiction.','/images/authors/wfaulkner.png',1);
+insert into author values (0,'Leigh Brackett','United States','Brackett first published in her mid-20s; the science fiction story "Martian Quest" appeared in the February 1940 issue of Astounding Science Fiction. Her earliest years as a writer (1940–42) were her most productive. Some of her stories have social themes, such as "The Citadel of Lost Ships" (1943), which considers the effects on the native cultures of alien worlds of Earths expanding trade empire. During this period, she was also an active member of the Los Angeles Science Fantasy Society (LASFS), and participated in local science fiction fandom in other ways, including contributing to the second issue of Pogos STF-ETTE, an all-female science fiction fanzine (probably the first such).','/images/authors/lbrackett.png',1);
+insert into author values (0,'Jules Furthman','United States','Furthman was born in Chicago. His brother was the writer Charles Furthman. During World War I he wrote under the pen name "Stephen Fox" as he thought Furthman sounded too German. He wrote screenplays for a number of important or popular films, including The Docks of New York (1928), Thunderbolt (1929), Merely Mary Ann (1931), Shanghai Express (1932), Bombshell (1933), Mutiny on the Bounty (1935), Come and Get It (1936), Only Angels Have Wings (1939), To Have and Have Not (1944), The Big Sleep (1946), and Nightmare Alley (1947). He wrote credited screenplays for eight films directed by Josef Von Sternberg and an equal number for Howard Hawks.','/images/authors/jfurthman.png',1);
+insert into author values (0,'Raymond Chandler','United States','Raymond Thornton Chandler (July 23, 1888 – March 26, 1959) was an American-British novelist and screenwriter. In 1932, at the age of forty-four, Chandler became a detective fiction writer after losing his job as an oil company executive during the Great Depression. His first short story, "Blackmailers Dont Shoot", was published in 1933 in Black Mask, a popular pulp magazine. His first novel, The Big Sleep, was published in 1939. In addition to his short stories, Chandler published seven novels during his lifetime.','/images/authors/rchandler.png',1);
+--Art. 17
+insert into author values (0,'Fritz Lang','Austria','Langs most famous films include the groundbreaking futuristic Metropolis (1927) and the influential M (1931), a film noir precursor that he made before he moved to the United States. His other notable films include Dr. Mabuse the Gambler (1922), Die Nibelungen (1924), Fury (1936), You Only Live Once (1937), Hangmen Also Die! (1943), The Woman in the Window (1944) and The Big Heat (1953).','/images/authors/flang.png',1);
+insert into author values (0,'Sydeny Boehm','United States','Sydney Boehm (April 4, 1908 – June 25, 1990) was an American screenwriter and producer. Boehm began his writing career as a newswriter for wire services and newspapers before moving on to screenwriting. His films include High Wall (1947), Anthony Mann-directed Side Street (1950), the sci-fi film When Worlds Collide (1951), and the crime drama The Big Heat (1953), for which Boehm won a 1954 Edgar Award for Best Motion Picture Screenplay.','/images/authors/sboehm.png',1);
+insert into author values (0,'William McGivern','United States','His novels were adapted for a number of films, among them Odds Against Tomorrow (1959), a noir tale of three losers, starring Harry Belafonte; The Big Heat (1953), starring Glenn Ford as a cop who will do anything to get his man; Shield for Murder, about an honest cop going bad; and Rogue Cop (1954), a film noir directed by Roy Rowland, about a crooked cop trying to redeem himself. The Big Heat received an Edgar Award in 1954 as Best Motion Picture, which McGivern shared as author of the original novel. He also published more than one hundred science fiction stories during the 1940s and 1950s. In the 1960s, he moved to Los Angeles, where he wrote for television and film.','/images/authors/wmcgivern.png',1);
+--Art. 18
+insert into author values (0,'Jules Dassin','United States','Julius "Jules" Dassin (December 18, 1911 – March 31, 2008) was an American film director, producer, writer and actor. He was a subject of the Hollywood blacklist as he was a member of the Communist Party USA, and subsequently moved to France, where he continued his career. Dassin was born in Middletown, Connecticut, one of eight children of Berthe Vogel and Samuel Dassin, a barber. His parents were both Jewish immigrants from Odessa, in modern-day Ukraine.','/images/authors/jdassin.png',1);
+insert into author values (0,'Joe Eisinger','United States','Jo Eisinger (1909–1991) was a film and television writer whose career spanned more than 40 years from the early 1940s well into the 1980s. He is widely recognized as the writer of two of the most psychologically complex film noirs, Gilda (1946) and Night and the City (1950). His credits also include The Sleeping City (1950) and Crime of Passion (1957), a coda to the films of the noir style, for which he wrote the story as well as the screenplay. Starring Barbara Stanwyck, its a strikingly modern commentary about how women were driven mad by the limitations imposed upon them in the postwar period.','/images/authors/jeisinger.png',1);
+insert into author values (0,'Gerald Kersh','England','Born in 1912, Kersh began to write at the age of eight. After leaving school, he worked as, amongst other things, a cinema manager, bodyguard, debt collector, fish and chip cook, travelling salesman, French teacher and all-in wrestler whilst attempting to succeed as a writer. Kershs first novel, Jews Without Jehovah, an autobiographical tale of growing up poor and Jewish, was published in 1934. Kersh, however, had not sufficiently concealed the identities of some of the characters, and a member of his family sued for libel; as a result, the book was quickly withdrawn.','/images/authors/gkersh.png',1);
+--Art. 19
+insert into author values (0,'Ingmar Bergman','Sweden','Ernst Ingmar Bergman (14 July 1918 – 30 July 2007) was a Swedish director, writer, and producer who worked in film, television, theatre, and radio. Considered to be among the most accomplished and influential filmmakers of all time, Bergmans films include Smiles of a Summer Night (1955), The Seventh Seal (1957), The Silence (1963), Wild Strawberries (1957), Persona (1966), Cries and Whispers (1972), Scenes from a Marriage (1973), and Fanny and Alexander (1982); the last two exist in extended television versions.','/images/authors/ibergman.png',1);
+--Art. 20
+--Ingmar Bergman
+--Art. 21
+insert into author values (0,'Vilgot Sjörman','Sweden','David Harald Vilgot Sjöman (2 December 1924 – 9 April 2006) was a Swedish writer and film director. His films deal with controversial issues of social class, morality, and sexual taboos, combining the emotionally tortured characters of Ingmar Bergman with the avant garde style of the French New Wave. He is best known as the director of the films 491 (1964), I Am Curious (Yellow) (in Swedish, "Jag är nyfiken – gul") (1967), and I Am Curious (Blue) ("Jag är nyfiken – blå") (1968), which stretched the boundaries of acceptability of what could then be shown on film, deliberately treating their subjects in a provocative and explicit manner.','/images/authors/vsjorman.png',1);
+--Art. 22
+insert into author values (0,'Lars Von Trier','Denmark','Lars von Trier (born Lars Trier; 30 April 1956) is a Danish film director and screenwriter with a prolific and controversial career spanning almost four decades. His work is known for its genre and technical innovation, confrontational examination of existential, social, and political issues, and his treatment of subjects such as mercy, sacrifice, and mental health.','/images/authors/lvtrier.png',1);
+--Art. 23
+--Lars Von Trier
+--Art. 24
+--Lars Von Trier
+--Art. 25
+insert into author values (0,'Krzysztof Kieslowski','Poland','Krzysztof Kieślowski (27 June 1941 – 13 March 1996) was a Polish film director and screenwriter. He is known internationally for Dekalog (1989), The Double Life of Veronique (1991), and the Three Colors trilogy (1993–1994). Kieślowski received numerous awards during his career, including the Cannes Film Festival Jury Prize (1988), FIPRESCI Prize (1988, 1991), and Prize of the Ecumenical Jury (1991); the Venice Film Festival FIPRESCI Prize (1989), Golden Lion (1993), and OCIC Award (1993); and the Berlin International Film Festival Silver Bear (1994). In 1995, he received Academy Award nominations for Best Director and Best Writing.','/images/authors/kkieslowski.png',1);
+insert into author values (0,'Krzysztof Piesiewicz','Poland','In 1982, he met the film director Krzysztof Kieślowski, who was planning to direct a documentary on political show trials in Poland under martial law. Piesiewicz agreed to help, though he doubted whether an accurate film could be made within the constraints of the judicial system; indeed, the filmmakers found that their presence in court seemed to be affecting the outcomes of cases, often improving the prospects of the accused, but making it hard to capture judicial abuses. Kieślowski decided to explore the issue through fiction instead, and the two collaborated for the first time as writers on the feature film No End, released in 1984.','/images/authors/kpiesiewicz.png',1);
+--Art. 26
+--Kieslowski
+--Piesiewicz
+--Art. 27
+--Kieslowski
+--Piesiewicz
+--Art. 28
+--Anonymous
+--Art. 29
+--Anonymous
+--Art. 30
+--Anonymous
+--Art. 31
+--Anonymous
+--Art. 32
+insert into author values (0,'Edmund de Waal','England','Edmund Arthur Lowndes de Waal, OBE (born 10 September 1964) is a contemporary English artist, master potter and author. He is known for his large-scale installations of porcelain vessels often created in response to collections and archives or the history of a particular place. In 2011 he was awarded the Order of the British Empire (OBE) for Service to the Arts. De Waal’s book The Hare with Amber Eyes was awarded the Costa Book Award for Biography, Royal Society of Literature Ondaatje Prize in 2011 and Windham–Campbell Literature Prize for Non-Fiction in 2015.','/images/authors/ewaal.png',1);
+--Art. 33
+insert into author values (0,'Pudlo Pudlat','Canada','Pudlo Pudlat (Pudlo), (February 4, 1916 - December 28, 1992) was a Canadian Inuit artist whose preferred medium was a combination of acrylic wash and coloured pencils. His works are in the collections of most Canadian museums. At his death in 1992, Pudlo left a body of work that included more than 4000 drawings and 200 prints.','/images/authors/ppudlat.png',1);
+--Art. 34
+insert into author values (0,'Grayson Perry','England','Grayson Perry CBE RA (born 24 March 1960) is an English contemporary artist, writer and broadcaster. He is known for his ceramic vases, tapestries and cross-dressing, as well as his observations of the contemporary arts scene, and for dissecting British "prejudices, fashions and foibles".Perrys vases have classical forms and are decorated in bright colours, depicting subjects at odds with their attractive appearance. There is a strong autobiographical element in his work, in which images of Perry as "Claire", his female alter-ego, and "Alan Measles", his childhood teddy bear, often appear.','/images/authors/gperry.png',1);
+--Art. 35
+--Anonymous
+--Art. 36
+--Pablo Picasso
+--Art. 37
+insert into author values (0,'Vija Celmins','Latvia','Vija Celmins is a Latvian American visual artist best known for photo-realistic paintings and drawings of natural environments and phenomena such as the ocean, spider webs, star fields, and rocks. Her earlier work included pop sculptures and monochromatic representational paintings. Based in New York City, she has been the subject of over forty solo exhibitions since 1965, and major retrospectives at the Museum of Modern Art, Whitney Museum of American Art, Los Angeles County Museum of Art, San Francisco Museum of Modern Art, Institute of Contemporary Arts, London and the Centre Pompidou, Paris.','/images/authors/vcelmins.png',1);
+-----------------------------ARTWORK-AUTHOR----------------------------
+--(tableid,id_artwork,id_author)
+--Art. 1
+insert into artwork_author values (0,1,1);
+insert into artwork_author values (0,1,2);
+--Art. 2
+insert into artwork_author values (0,2,3);
+insert into artwork_author values (0,2,4);
+--Art. 3
+insert into artwork_author values (0,3,5);
+insert into artwork_author values (0,3,6);
+--Art. 4
+insert into artwork_author values (0,4,7);
+--Art. 5
+insert into artwork_author values (0,5,8);
+--Art. 6
+insert into artwork_author values (0,6,9);
+--Art. 7
+insert into artwork_author values (0,7,10); --Anonymous id: 10
+--Art. 8
+insert into artwork_author values (0,8,11);
+--Art. 9
+insert into artwork_author values (0,9,12);
+--Art. 10
+insert into artwork_author values (0,10,13); --Pablo Picasso id:13
+--Art. 11
+insert into artwork_author values (0,11,14);
+--Art. 12
+insert into artwork_author values (0,12,15);
+--Art. 13
+insert into artwork_author values (0,13,16); --Tarkovski id:16
+insert into artwork_author values (0,13,17);
+insert into artwork_author values (0,13,18);
+--Art. 14
+insert into artwork_author values (0,14,16);
+insert into artwork_author values (0,14,19);
+--Art. 15
+insert into artwork_author values (0,15,16);
+insert into artwork_author values (0,15,20);
+insert into artwork_author values (0,15,21);
+--Art. 16
+insert into artwork_author values (0,16,22);
+insert into artwork_author values (0,16,23);
+insert into artwork_author values (0,16,24);
+insert into artwork_author values (0,16,25);
+insert into artwork_author values (0,16,26);
+--Art. 17
+insert into artwork_author values (0,17,27);
+insert into artwork_author values (0,17,28);
+insert into artwork_author values (0,17,29);
+--Art. 18
+insert into artwork_author values (0,18,30);
+insert into artwork_author values (0,18,31);
+insert into artwork_author values (0,18,32);
+--Art. 19
+insert into artwork_author values (0,19,33); -- Ingmar id:33
+--Art. 20
+insert into artwork_author values (0,20,33);
+--Art. 21
+insert into artwork_author values (0,21,34);
+--Art. 22
+insert into artwork_author values (0,22,35); --Lars id: 35
+--Art. 23
+insert into artwork_author values (0,23,35);
+--Art. 24
+insert into artwork_author values (0,24,35);
+--Art. 25
+insert into artwork_author values (0,25,36); --Kieslowski id:36
+insert into artwork_author values (0,25,37); --Piesiewicz id:37
+--Art. 26
+insert into artwork_author values (0,26,36);
+insert into artwork_author values (0,26,37);
+--Art. 27
+insert into artwork_author values (0,27,36);
+insert into artwork_author values (0,27,37);
+--Art. 28
+insert into artwork_author values (0,28,10);
+--Art. 29
+insert into artwork_author values (0,29,10);
+--Art. 30
+insert into artwork_author values (0,30,10);
+--Art. 31
+insert into artwork_author values (0,31,10);
+--Art. 32
+insert into artwork_author values (0,32,38);
+--Art. 33
+insert into artwork_author values (0,33,39);
+--Art. 34
+insert into artwork_author values (0,34,40);
+--Art. 35
+insert into artwork_author values (0,35,10);
+--Art. 36
+insert into artwork_author values (0,36,13);
+--Art. 37
+insert into artwork_author values (0,37,41);
+-----------------------------PURCHASE----------------------------
+--(id_table,attendance_date,purchase_time,quantity,total,status,id_user,id_schedule)
+insert into purchase values (0,'2020-10-13','2020-09-25 22:30:15',3,30.00,1,1,1);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,20.00,1,1,2);

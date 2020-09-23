@@ -55,8 +55,7 @@ export class ActivityEntity {
 
   @Column({
     name: 'description',
-    type: 'varchar',
-    length: '1000',
+    type: 'text',
     nullable: false,
   })
   description: string;
