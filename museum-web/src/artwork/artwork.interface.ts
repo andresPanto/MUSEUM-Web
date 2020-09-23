@@ -1,6 +1,6 @@
 export interface ArtworkInterface {
   name: string;
-  year: number;
+  year: string;
   type: string;
   description: string;
   imagePath: string;

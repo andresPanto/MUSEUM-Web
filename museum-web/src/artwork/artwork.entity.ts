@@ -24,10 +24,11 @@ export class ArtworkEntity {
   
   @Column({
     name: 'year',
-    type: 'int',
+    type: 'varchar',
+    length: '256',
     nullable: false
   })
-  year: number;
+  year: string;
   
   @Column({
       name: 'type',

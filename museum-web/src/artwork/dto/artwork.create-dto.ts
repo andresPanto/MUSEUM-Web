@@ -17,7 +17,7 @@ export class ArtworkCreateDto{
   @MinLength(3)
   name: string;
 
-  @IsInt()
+  @IsString()
   @IsNotEmpty()
   year: number;
 
