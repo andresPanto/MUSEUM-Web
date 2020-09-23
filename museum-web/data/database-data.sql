@@ -99,5 +99,78 @@ insert into artwork values (0,'Three Colors: Blue','1993','Film','The first part
 insert into artwork values (0,'Three Colors: White','1994','Film','Karol (Polish) marries Dominique (French) and moves to Paris. The marriage breaks down and Dominique divorces Karol, forcing him into the life of a metro beggar and eventually back to Poland. However, he never forgets Dominique and while building a new life for himself in Warsaw he begins to plot.','/images/artworks/kwhite.png',1);
 insert into artwork values (0,'Three Colors: Red','1994','Film','Valentine is a young model living in Geneva. Because of a dog she ran over, she meets a retired judge who spies his neighbours phone calls, not for money but to feed his cynicism. The film is the story of relationships between some human beings, Valentine and the judge, but also other people who may not be aware of the relationship they have with Valentine or/and the old judge. Redemption, forgiveness and compassion...','/images/artworks/kred.png',1);
 --Exh. 1
-insert into artwork values (0,'Bhairava, Lord of the Demonic Dead','1990','Sculpture','Bhairava is the “terrible” aspect of Shiva. According to the Puranas, it was this aspect that severed Brahman’s fifth head.Shiva created a blazing Bhairava in human form, addressing this Kalabhairava as “Lord of Time-Death” (kala) for he shone like the god of Death: “You are called Bhairava because you are of terrifying features and are capable of supporting the universe. You are called Kala-Bhairava, for even Time-Death is terrified of you.”','/images/artworks/bhairava.png',1);
-insert into artwork values (0,'Varahi, the sow-headed goddess','1998','Sculpture','Bhairava is the “terrible” aspect of Shiva. According to the Puranas, it was this aspect that severed Brahman’s fifth head.Shiva created a blazing Bhairava in human form, addressing this Kalabhairava as “Lord of Time-Death” (kala) for he shone like the god of Death: “You are called Bhairava because you are of terrifying features and are capable of supporting the universe. You are called Kala-Bhairava, for even Time-Death is terrified of you.”','/images/artworks/bhairava.png',1);
+insert into artwork values (0,'Bhairava, Lord of the Demonic Dead','1200 - 1250','Sculpture','Bhairava is the “terrible” aspect of Shiva. According to the Puranas, it was this aspect that severed Brahman’s fifth head.Shiva created a blazing Bhairava in human form, addressing this Kalabhairava as “Lord of Time-Death” (kala) for he shone like the god of Death: “You are called Bhairava because you are of terrifying features and are capable of supporting the universe. You are called Kala-Bhairava, for even Time-Death is terrified of you.”','/images/artworks/bhairava.png',1);
+insert into artwork values (0,'Varahi, the sow-headed goddess','800 - 900 AD','Sculpture','Varahi (Sanskrit: वाराही, Vārāhī) is one of the Matrikas, a group of seven mother goddesses in the Hindu religion. With the head of a sow, Varahi is the shakti (feminine energy) of Varaha, the boar avatar of the god Vishnu. In Nepal, she is called Barahi.Varahi is worshipped by three practices of Hinduism : Shaivism (devotees of Shiva), Brahmanism (devotees of Brahma), and especially Shaktism (goddess worship). She is usually worshipped at night, using secretive Vamamarga Tantric practices. The Buddhist goddesses Vajravārāhī and Marichi have their origins from the Hindu goddess Varahi.','/images/artworks/varahi.png',1);
+--Exh. 2
+insert into artwork values (0,'Decorated ivory plate','6th Century','Ivory Plate','Around 1,500 years ago, walrus hunters of the Bering Strait, between Chukotka, Russia and Alaska, used ivory to make a variety of tools, all elaborately carved and engraved. These complex artworks of interlocking and shape-shifting polar bears, seals, humans and other animals suggest these communities were trying to understand or even control the forces of the universe.','/images/artworks/rivory.png',1);
+insert into artwork values (0,'Young girls parka','1993','Cloth','In 1993, Nancy Myers (1941–2014) from Kivalina, Alaska made this young girls parka. Her grandmother, Lucy-Ayagiaq Jensen, taught her Inupiat skin sewing techniques, such as using wolverine fur to trim the hood. Wolverine fur does not absorb moisture from breath, so it wont freeze against the wearers face. Myers covered the furs with a bright cotton cover, embellished with rickrack (zigzag-patterned trim).','/images/artworks/parka.png',1);
+--Exh. 3
+insert into artwork values (0,'Library of Exile','2019','Porcelain Pavilion','Unveiled to great acclaim during the Venice Biennale 2019, this porcelain-covered pavilion is intended as a place of contemplation and dialogue. It is about exile, says de Waal, what it means to have to move to another country, to speak another language.','/images/artworks/pavilion.png',1);
+insert into artwork values (0,'Loons and Seal in Ocean Swell','1986','Stonecut Print','Hunters and herders in the Arctic study animal behaviour when making weather predictions. In this stonecut print, Pudlat shows how loons (aquatic birds) and seals behave in sudden stormy weather.','/images/artworks/lsseal.png',1);
+--Exh. 4
+insert into artwork values (0,'Grayson Perry Scarf','2012','Silk Scarf','This vibrant silk scarf portrays an alternative map of the British Museum as seen through the eyes of the artist Grayson Perry, taken from the award-winning exhibition Tomb of the Unknown Craftsman (Winner of the South Bank Sky Arts Awards 2012 for Visual Art).','/images/artworks/pscarf.png',1);
+insert into artwork values (0,'Snow googgles','Before 2879','Googgles','When the sunlight returns to the Arctic in spring, the intensity of its reflections on snow and ice is so bright, it can cause blindness without proper protection. Today, people wear sunglasses but in the past, they made snow goggles like this Dolgan example from north-central Russia. Theyre made of reindeer skin and decorated with glass and uranium beads.','/images/artworks/googgles.png',1);
+--Exh. 5
+insert into artwork values (0,'Les Demoiselles dAvignon','1907','Painting','Les Demoiselles dAvignon (The Young Ladies of Avignon, originally titled The Brothel of Avignon) is a large oil painting created in 1907 by the Spanish artist Pablo Picasso. The work, part of the permanent collection of the Museum of Modern Art, portrays five nude female prostitutes in a brothel on Carrer dAvinyó (translated into Spanish: Calle de Aviñón), a street in Barcelona. Each figure is depicted in a disconcerting confrontational manner and none is conventionally feminine.','/images/artworks/avignon.png',1);
+insert into artwork values (0,'Web #3','2002','Painting','Untitled (Web 3) is a one-colour aquatint print, with burnishing, scraping and drypoint, of a spider’s web on Hahnemühle Copperplate paper. It was printed by Jennifer Turner and Carmen Schilaci at Gemini G.E.L. (Graphic Editions Limited) in Los Angeles, where it was published in 2002 in an edition of sixty-five.','/images/artworks/web.png',1);
+-----------------------------ACTIVITY-ARTWORK----------------------------
+--Perf.1 
+insert into activity_artwork values (0,1,1);
+--Perf.2
+insert into activity_artwork values (0,2,2);
+insert into activity_artwork values (0,2,3);
+--Perf.3
+insert into activity_artwork values (0,3,4);
+--Perf.4
+insert into activity_artwork values (0,4,5);
+--Guided & Unguided Tour
+insert into activity_artwork values (0,5,6);
+insert into activity_artwork values (0,5,7);
+insert into activity_artwork values (0,5,8);
+insert into activity_artwork values (0,5,9);
+insert into activity_artwork values (0,5,10);
+insert into activity_artwork values (0,5,11);
+insert into activity_artwork values (0,5,12);
+insert into activity_artwork values (0,6,6);
+insert into activity_artwork values (0,6,7);
+insert into activity_artwork values (0,6,8);
+insert into activity_artwork values (0,6,9);
+insert into activity_artwork values (0,6,10);
+insert into activity_artwork values (0,6,11);
+insert into activity_artwork values (0,6,12);
+--Film 1
+insert into activity_artwork values (0,7,13);
+insert into activity_artwork values (0,7,14);
+insert into activity_artwork values (0,7,15);
+--Film 2
+insert into activity_artwork values (0,8,16);
+insert into activity_artwork values (0,8,17);
+insert into activity_artwork values (0,8,18);
+--Film 3
+insert into activity_artwork values (0,9,19);
+insert into activity_artwork values (0,9,20);
+insert into activity_artwork values (0,9,21);
+--Film 4
+insert into activity_artwork values (0,10,22);
+insert into activity_artwork values (0,10,23);
+insert into activity_artwork values (0,10,24);
+--Film 5
+insert into activity_artwork values (0,11,25);
+insert into activity_artwork values (0,11,26);
+insert into activity_artwork values (0,11,27);
+--Exh. 1
+insert into activity_artwork values (0,12,28);
+insert into activity_artwork values (0,12,29);
+--Exh. 2
+insert into activity_artwork values (0,13,30);
+insert into activity_artwork values (0,13,31);
+--Exh. 3
+insert into activity_artwork values (0,14,32);
+insert into activity_artwork values (0,14,33);
+--Exh. 4
+insert into activity_artwork values (0,15,34);
+insert into activity_artwork values (0,15,35);
+--Exh. 5
+insert into activity_artwork values (0,16,36);
+insert into activity_artwork values (0,16,37);
+-----------------------------AUTHOR----------------------------
