@@ -13,6 +13,7 @@ import { ActivityModule } from './activity/activity.module';
 import { UserRoleModule } from './user-role/user-role.module';
 import { ActivityArtworkModule } from './activity-artwork/activity-artwork.module';
 import { ArtworkAuthorModule } from './artwork-author/artwork-author.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { ArtworkAuthorModule } from './artwork-author/artwork-author.module';
     ActivityModule,
     ActivityArtworkModule,
     ArtworkAuthorModule,
+    AuthModule,
     //UserRoleModule,
 
   ],

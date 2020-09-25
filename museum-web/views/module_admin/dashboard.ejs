@@ -1,20 +1,31 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
 <!--Meter imágenes de cada sección-->
 <div class="d-flex justify-content-around">
-    <button class=" btn-lg btn-primary button-panel" id="button_activities">
-        Activities
-    </button>
-     <button class=" btn-lg btn-primary button-panel" id="button_artworks">
-        Artworks
-    </button>
-     <button class="btn-lg btn-primary button-panel" id="button_authors">
-        Authors
-    </button>
-     <button class="btn-lg btn-primary button-panel" id="button_users">
-        Users
-    </button>
-    <button class="btn-lg btn-primary button-panel" id="button_purchases">
-        Purchases
-    </button>
+    <a href="">
+        <button class=" btn-lg btn-primary button-panel" id="button_activities">
+            Activities
+        </button>
+    </a>
+    <a href="">
+        <button class=" btn-lg btn-primary button-panel" id="button_artworks">
+            Artworks
+        </button>
+    </a>
+    <a href="">
+        <button class="btn-lg btn-primary button-panel" id="button_authors">
+            Authors
+        </button>
+    </a>
+    <a href="/users">
+        <button class="btn-lg btn-primary button-panel" id="button_users">
+            Users
+        </button>
+    </a>
+    <a href="/purchases/admin">
+        <button class="btn-lg btn-primary button-panel" id="button_purchases">
+            Purchases
+        </button>
+    </a>
 </div>

@@ -13,5 +13,11 @@ export class PurchaseService {
     return purchaseSaved
   }
 
+  async findAll(){
+    const purchases = await this._purchaseRepository.find();
+    console.log(purchases);
+    return purchases
+  }
+
 
 }
