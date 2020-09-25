@@ -40,8 +40,7 @@ export class ArtworkEntity {
   
   @Column({
       name: 'description',
-      type: 'varchar',
-      length: '256',
+      type: 'text',
       nullable: false
     })
     description: string;

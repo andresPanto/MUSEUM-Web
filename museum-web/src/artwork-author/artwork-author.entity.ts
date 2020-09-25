@@ -2,7 +2,7 @@ import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ArtworkEntity } from '../artwork/artwork.entity';
 import { AuthorEntity } from '../author/author.entity';
 
-@Entity('artwork-author')
+@Entity('artwork_author')
 export class ArtworkAuthorEntity {
   @PrimaryGeneratedColumn({
     name: 'id_artwork_author',
