@@ -12,7 +12,7 @@ export const CONSTANTS = {
         ...ENTITIES
       ],
       synchronize: true, // actualiza el esquema de la BD
-      dropSchema: true, // vuelve a crear el esquema de la base de datos
+      dropSchema: false, // vuelve a crear el esquema de la base de datos
   },
   Regex : {
     lettersSpaces: '[a-zA-ZñÑ][a-zA-ZñÑ\\s]*',

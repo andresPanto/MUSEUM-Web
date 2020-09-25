@@ -12,6 +12,13 @@ export class PurchaseService {
     const purchaseSaved = await this._purchaseRepository.save(newPurchase);
     return purchaseSaved
   }
-
+  getSchedulePurhcases(idSchedule: number){
+    //Get all purchases from a given schedule
+    //Agrupar por idSchedule los sum(quantities)
+    return this._purchaseRepository.createQueryBuilder("purchase").
+    leftJoin("purchase.schedule","schedule").
+    where("activity.id_activity = :id",{id: idSchedule}).
+    getMany();
+  }
 
 }
