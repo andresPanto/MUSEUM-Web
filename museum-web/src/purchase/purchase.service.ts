@@ -12,13 +12,16 @@ export class PurchaseService {
     const purchaseSaved = await this._purchaseRepository.save(newPurchase);
     return purchaseSaved
   }
-  getSchedulePurhcases(idSchedule: number){
+  getSchedulePurchases(idSchedule: number){
     //Get all purchases from a given schedule
     //Agrupar por idSchedule los sum(quantities)
+    //select sum(quantity) from purchase where scheduleIdSchedule=3 group by scheduleIdSchedule;
     return this._purchaseRepository.createQueryBuilder("purchase").
+    select("SUM(purchase.quantity)").
     leftJoin("purchase.schedule","schedule").
-    where("activity.id_activity = :id",{id: idSchedule}).
-    getMany();
+    where("schedule.id_schedule = :id",{id: idSchedule}).
+    groupBy("id_schedule").
+    getRawOne();
   }
 
 }

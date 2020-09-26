@@ -33,12 +33,15 @@ insert into activity values (0,'Picasso to Celmins', 'Exhibition','Floor 2, Sect
 --Performances
 insert into schedule values (0,'18:00',50,1,1);
 insert into schedule values (0,'20:00',60,1,1);
+
 insert into schedule values (0,'14:00',30,1,2);
 insert into schedule values (0,'15:30',30,1,2);
+
 insert into schedule values (0,'10:00',20,1,3);
 insert into schedule values (0,'10:30',20,1,3);
 insert into schedule values (0,'11:00',35,1,3);
 insert into schedule values (0,'11:30',35,1,3);
+
 insert into schedule values (0,'16:00',30,1,4);
 insert into schedule values (0,'18:30',30,1,4);
 --Tours
@@ -368,5 +371,20 @@ insert into artwork_author values (0,37,41);
 -----------------------------PURCHASE----------------------------
 --(id_table,attendance_date,purchase_time,quantity,total,status,id_user,id_schedule)
 --1,3,5,9
+--Perf. 1
 insert into purchase values (0,'2020-10-13','2020-09-25 22:30:15',3,30.00,1,1,1);
 insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,20.00,1,1,2);
+-- Perf. 2
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,17.00,1,1,3);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',10,85.0,1,1,3);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',1,8.50,1,1,3);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',1,8.50,1,1,4);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,17.00,1,1,4);
+--Perf. 3
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,8.00,1,1,5);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,8.00,1,1,5);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',3,12.00,1,1,6);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',5,20.00,1,1,7);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,8.00,1,1,8);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,8.00,1,1,8);
+insert into purchase values (0,'2020-10-13','2020-09-25 23:35:10',2,8.00,1,1,8);

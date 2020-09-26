@@ -32,40 +32,20 @@
           <h3 class="mb-4 mt-4"><strong>Top Performances</strong></h3>
           <div class="row">
                 <!--Recorrer lista de top performances-->
+                <% performancesArray.forEach((performance) =>{%>
             <div class ="col-sm">
                 <div class="perf-item">
-                    <a href="/performances?view=idperformance1>"><img width="260px" src="images/performances/perf1.png"></a>
+                    <a href="/performances?view=idperformance1>"><img width="260px" src="<%= performance.imagePath %>"></a>
                     <div>
-                        <a href="/performances?view=idperformance1">PERFORMANCE 1</a>
+                        <a href="/performances?view=idperformance1"><%= performance.name %></a>
                     </div>
                     <div>
-                        <a href="/performances?view=idperformance1">14 JUN - 18 JUN</a>
+                        <a href="/performances?view=idperformance1">Duration: <%=performance.duration%></a>
                     </div>
                 </div>
             </div>
+                <% });%>
                 <!--Fin recorrido-->
-                <div class="col-sm">
-                    <div class="perf-item">
-                        <a href="/performances?view=idperformance2"><img width="260px" src="images/performances/perf1.png"></a>
-                        <div>
-                            <a href="/performances?view=idperformance2">PERFORMANCE 2</a>
-                        </div>
-                        <div>
-                            <a href="/performances?view=idperformance2">14 JUN - 18 JUN</a>
-                        </div>
-                    </div>
-                </div>
-                <div class ="col-sm">
-                    <div class="perf-item">
-                        <a href="/performances?view=idperformance3"><img width="260px" src="images/performances/perf1.png"></a>
-                        <div>
-                            <a href="/performances?view=idperformance3">PERFORMANCE 3</a>
-                        </div>
-                        <div>
-                            <a href="/performances?view=idperformance3">14 JUN - 18 JUN</a>
-                        </div>
-                    </div>
-                </div>
           </div>
     </div>
 </div>
@@ -75,40 +55,20 @@
           <h3 class="mb-4"><strong>Top Exhibitions</strong></h3>
           <div class="row">
                 <!--Recorrer lista de top exhibitions-->
+                <% exhibitionsArray.forEach((exhibition) =>{%>
             <div class ="col-sm">
                 <div class="exh-item">
-                    <a href="/exhibitions?view=idexhibition1"><img width="260px" src="images/exhibitions/exh1.png"></a>
+                    <a href="/exhibitions?view=idexhibition1"><img width="260px" src="<%= exhibition.imagePath %>"></a>
                     <div>
-                        <a href="/exhibitions?view=idexhibition1">EXHIBITION 1</a>
+                        <a href="/exhibitions?view=idexhibition1"><%= exhibition.name %></a>
                     </div>
                     <div>
-                        <a href="/exhibitions?view=idexhibition1">12 JUN - 12 JUL</a>
+                        <a href="/exhibitions?view=idexhibition1">Duration: <%=exhibition.duration%></a>
                     </div>
                 </div>
             </div>
+            <% });%>
                 <!--Fin recorrido-->
-                <div class="col-sm">
-                    <div class="exh-item">
-                        <a href="/exhibitions?view=idexhibition2"><img width="260px" src="images/exhibitions/exh1.png"></a>
-                        <div>
-                            <a href="/exhibitions?view=idexhibition2">EXHIBITION 2</a>
-                        </div>
-                        <div>
-                            <a href="/exhibitions?view=exhibition2">12 JUN - 12 JUL</a>
-                        </div>
-                    </div>
-                </div>
-                <div class ="col-sm">
-                    <div class="exh-item">
-                        <a href="/exhibitions?view=idexhibition3"><img width="260px" src="images/exhibitions/exh1.png"></a>
-                        <div>
-                            <a href="/exhibitions?view=idexhibition3">EXHIBITION 3</a>
-                        </div>
-                        <div>
-                            <a href="/exhibitions?view=idexhibition3">12 JUN - 12 JUL</a>
-                        </div>
-                    </div>
-                </div>
           </div>
     </div>
 </div>
@@ -118,40 +78,20 @@
           <h3 class="mb-4"><strong>Top Films</strong></h3>
           <div class="row">
                 <!--Recorrer lista de top films-->
+                <% filmsArray.forEach((film) =>{%>
             <div class ="col-sm">
                 <div class="film-item">
-                    <a href="/films?view=idfilm1"><img width="200px" src="images/films/film1.png"></a>
+                    <a href="/films?view=idfilm1"><img width="260px" src="<%= film.imagePath %>"></a>
                     <div>
-                        <a href="/films?view=idfilm1">STALKER, A. TARKOVSKI</a>
+                        <a href="/films?view=idfilm1"><%= film.name %></a>
                     </div>
                     <div>
-                        <a href="/films?view=idfilm1">12 JUN - 12 JUL</a>
+                        <a href="/films?view=idfilm1">Duration: <%=film.duration%></a>
                     </div>
                 </div>
             </div>
+            <% });%>
                 <!--Fin recorrido-->
-                <div class="col-sm">
-                    <div class="film-item">
-                        <a href="/films?view=idfilm2"><img width="200px" src="images/films/film1.png"></a>
-                        <div>
-                            <a href="/films?view=idfilm2">STALKER, A. TARKOVSKI</a>
-                        </div>
-                        <div>
-                            <a href="/films?view=idfilm2">12 JUN - 12 JUL</a>
-                        </div>
-                    </div>
-                </div>
-                <div class ="col-sm">
-                    <div class="film-item">
-                        <a href="/films?view=idfilm3"><img width="200px" src="images/films/film1.png"></a>
-                        <div>
-                            <a href="/films?view=idfilm3">STALKER, A. TARKOVSKI</a>
-                        </div>
-                        <div>
-                            <a href="/films?view=idfilm3">12 JUN - 12 JUL</a>
-                        </div>
-                    </div>
-                </div>
           </div>
     </div>
 </div>
