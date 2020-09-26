@@ -1,20 +1,44 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { ArtworkEntity } from './artwork.entity';
+import { AuthorEntity } from '../author/author.entity';
 
 @Injectable()
 export class ArtworkService {
   constructor(@InjectRepository(ArtworkEntity) private readonly artworkRepository: Repository<ArtworkEntity>) {
   }
 
-  async create(artworkToCreate: object) {
-    try {
-      const artworkToSave = await this.artworkRepository.create(artworkToCreate);
-      return await this.artworkRepository.save(artworkToSave);
-    } catch (e) {
-      console.error(e);
-      throw new InternalServerErrorException(e);
-    }
+  async create(artwork){
+    const createdArtwork =  await this.artworkRepository.save(artwork);
+    console.log(createdArtwork);
+    return  createdArtwork
   }
+
+  async findAll(){
+    const artworks = await this.artworkRepository.find();
+    console.log('Service Authors', artworks);
+    return artworks
+  }
+
+  async findOneByID(id:number){
+    let findOptions: FindManyOptions<ArtworkEntity>;
+    findOptions = {
+      where: {
+        idArtwork: id,
+      },
+    };
+    const artworkFound =  await this.artworkRepository.findOne(findOptions);
+    console.log(artworkFound);
+    return  artworkFound
+  }
+
+
+  async  update(artwork: ArtworkEntity){
+    const updatedArtwork =  await this.artworkRepository.save(artwork);
+    console.log(updatedArtwork);
+    return  updatedArtwork
+  }
+
+
 }

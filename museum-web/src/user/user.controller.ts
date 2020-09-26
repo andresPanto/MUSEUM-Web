@@ -16,6 +16,7 @@ import { AuthorCreateDto } from '../author/dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
 import { UserCreateDto } from './dto/user.create-dto';
 import { AuthService } from '../auth/auth.service';
+import { UserEntity } from './user.entity';
 
 @Controller('users')
 export class UserController {
@@ -96,26 +97,99 @@ export class UserController {
   @Get()
   async usersAdmin(
     @Res() res,
-    @Session() session
+    @Session() session,
+    @Query() queryParams,
   ){
     const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
     if (isNotAdmin){
       return res.redirect('/users/admin')
     }
     let users;
+    const message = 'Failed to load Users';
     try {
-        users = await this.usersService.findAllUsers()
+        users = await this.usersService.findAllClients()
     }catch (e) {
       console.log(e);
-      const message = 'Failed to load Users';
+
+    }
+    if(users){
+      return res.render('module_admin/users',
+        {
+          username: session.username,
+          users,
+          message: queryParams.message
+        })
+    }else{
       return res.redirect(`/admin?message=${message}`)
     }
-    res.render('module_admin/users',
-    {
-      username: session.username,
-      users
-    })
   }
+
+  @Get('/admin/:id')
+  async updateUserView(
+    @Session() session,
+    @Param() routeParams,
+    @Res() res,
+    @Query() queryParams,
+  ){
+    console.log('Get edit');
+    const message = 'Cannot edit user';
+    const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
+    if (isNotAdmin){
+      return res.redirect('/users/admin')
+    }
+    let user;
+    try{
+      const id = Number(routeParams.id);
+      user = await this.usersService.findOneByID(id)
+    }catch (e) {
+      console.log(e);
+      return res.redirect(`/users?message=${message}`)
+    }
+    if(user){
+      //Todavia no hay la vista
+      // res.render(
+      //   'module_admin/',
+      //   {
+      //       message: queryParams.message
+      //   }
+      // )
+      return 'Get edit'
+    }else{
+      console.log('No user');
+      return res.redirect(`/users?message=${message}`)
+    }
+  }
+
+  @Get('/admin/status/:id')
+  async changeStatus(
+    @Session() session,
+    @Res() res,
+    @Param() routePrams
+  ){
+    console.log('user status');
+    const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
+    const message = 'Failed to change user status';
+    if (isNotAdmin){
+      return res.redirect('/users/admin')
+    }
+    let updatedUser;
+    try {
+      const idUser = Number(routePrams.id);
+      const user: UserEntity = await this.usersService.findOneByID(idUser);
+      user.status = !user.status;
+      updatedUser = await this.usersService.update(user)
+    }catch (e) {
+      console.log(e);
+      return res.redirect(`/users?message=${message}`)
+    }
+    if (updatedUser){
+      return res.redirect('/users')
+    }else{
+      return res.redirect(`/users?message=${message}`)
+    }
+  }
+
+
 
 
   @Get()

@@ -17,14 +17,40 @@ export class UserService {
         password,
       },
     };
-    const userFound =  await this._userRepository.findOne(findOptions);
-    return userFound
+    const userFound = await this._userRepository.findOne(findOptions);
+    return userFound;
   }
 
-  async findAllUsers(){
-    const users = await this._userRepository.find();
+  async findAllClients() {
+    const users = await this._userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.userRoles', 'userRole')
+      .leftJoinAndSelect('userRole.role', 'role')
+      .where('role.roleName = :client', { client: 'client' })
+      .getMany();
     console.log(users);
-    return  users
+    return users;
   }
+
+  async findOneByID(id: number) {
+
+    let findOptions: FindManyOptions<UserEntity>;
+    findOptions = {
+      where: {
+        idUser: id,
+      },
+    };
+    const userFound = await this._userRepository.findOne(findOptions);
+    console.log(userFound);
+    return userFound;
+  }
+
+  async update(user: UserEntity) {
+
+    const updatedUser = await this._userRepository.save(user);
+    console.log(updatedUser);
+    return updatedUser;
+  }
+
 
 }

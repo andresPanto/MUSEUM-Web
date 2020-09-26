@@ -1,8 +1,13 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
 <h1 class="text-center"><b>Authors</b></h1>
 <br>
-<button href="#" class="ml-5 mb-3 btn btn-lg btn-success"><span class="glyphicon glyphicon-pencil"></span> Add Author</button>
+
+<form action="/authors/admin/new" method="get">
+    <button type="submit" class="ml-5 mb-3 btn btn-lg btn-success"><span class="glyphicon glyphicon-pencil"></span> Add Author</button>
+</form>
+
 
 <!--Authors list-->
 <div class="container">
@@ -16,15 +21,49 @@
             <th>Disable</th>
         </tr>
         <!--Iterar con un for-->
+        <%authors.forEach((author)=> { %>
+          <%const isActive = author.status%>
+
         <tr>
-            <td>0000001</td>
-            <td>Name Surname Lastname</td>
-            <td>RU</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum illo, magnam quod ipsam commodi rerum earum neque quia dignissimos unde nemo animi nisi totam iste id eaque modi quam non consectetur, eligendi quas libero? Assumenda labore accusamus illum numquam culpa.</td>
-            <td><a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
-            <td><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Disable</a></td>
+            <td>
+                <%= author.idAuthor%>
+            </td>
+            <td>
+                <%= author.fullName%>
+            </td>
+            <td>
+                <%= author.country%>
+            </td>
+            <td>
+                <%= author.description%>
+            </td>
+            <td>
+                <form action="/authors/admin/edit/<%= author.idAuthor%>" method="get">
+                    <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+                </form>
+
+            </td>
+            <td>
+                <form action="/authors/admin/status/<%= author.idAuthor%>" method="get">
+                    <button type="submit"
+                    <%if(isActive){%>
+                            class="btn btn-danger"
+                    <%}else{%>
+                            class="btn btn-success"
+                            <%}%>
+                    >
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                        <%if(isActive){%>
+                            Disable
+                        <%}else{%>
+                            Enable
+                        <%}%>
+                    </button>
+
+                </form>
+            </td>
         </tr>
-        <!--Fin for-->
+        <% })%>
     </table>
     <hr>
 </div>

@@ -12,7 +12,7 @@ export class ArtworkEntity {
     name: 'id_artwork',
     unsigned: true
   })
-  idAuthor: number;
+  idArtwork: number;
   
   @Column({
       name: 'name',
