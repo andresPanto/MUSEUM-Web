@@ -1,9 +1,9 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('shared/header.ejs')%>
 <!--Imagen de categoría-->
-<p> <%= category %> </p>
-<div >
-    <img class="d-block w-100" src="/images/categories/<%= category %>.png" alt="First slide">
+<h1 class="text-center mb-2"><b><%= category.toUpperCase() %>S</b></h1>
+<div class="container text-center">
+    <img src="/images/categories/<%= category %>.png" alt="Category Image">
 </div>
 <hr>
 <!--Búsqueda-->
@@ -15,51 +15,37 @@
   </form>
 
   <!--Item de categoría--> 
-<div class="container mb-5">
+<div class="container">
+    <% if (typeof search != 'undefined') {%>
     <h3 class="mb-2"><strong>Search Results</strong></h3>
-    <div class="row">
-      <div class ="col">
+    <% } %>
           <!--Recorrer con un for-->
-          <div class="category-item">
-              <h4>Performance 1</h4>
-              <h5>17 JUN - 20 JUN</h5>
-              <span>
-              <a href="/activitites/1"><img width="260px" src=/images/performances/perf2.png class="float-left"></a>
-              <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
-              </span>  
-         <button class="mb-2 float-right">See more</button> 
-         </div>
+        <% activitiesArray.forEach((activity) => {%>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                            <div class="col-sm-12">
+                                <h4><b><%= activity.name %></b></h4>
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-12">
+                                <h5><%= activity.initialDate %> - <%= activity.finalDate %></h5>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <a href="/activities/<%= category %>/<%= activity.idActivity %>"><img class="img-responsive" width="260px" src="<%= activity.imagePath %>"></a>
+                        </div>
+                        <div class="col-sm-10 pl-5 d-flex align-self-center">
+                            <p class="pl-5 text-justify "><%= activity.description %></p>
+                        </div>
+                    </div>
+                    <a href="/activities/<%= category %>/<%= activity.idActivity %>"> <button class="float-right btn btn-warning">See more</button> </a>
+                </div>
+            </div> 
+        <% }); %>
           <!--Fin For-->
-          <div class="category-item">
-            <h4>Performance 1</h4>
-            <h5>17 JUN - 20 JUN</h5>
-            <span>
-            <a href="/activitites/1"><img width="260px" src=/images/performances/perf2.png class="float-left"></a>
-            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
-            </span>
-            <button class="mb-2 float-right">See more</button> 
-        </div>
-        <div class="category-item">
-            <h4>Performance 1</h4>
-            <h5>17 JUN - 20 JUN</h5>
-            <span>
-            <a href="/activitites/1"><img width="260px" src=/images/performances/perf2.png class="float-left"></a>
-            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
-            </span>
-            <button class="mb-2 float-right">See more</button> 
-        </div>
-        <div class="category-item">
-            <h4>Performance 1</h4>
-            <h5>17 JUN - 20 JUN</h5>
-            <span>
-            <a href="/activitites/1"><img width="260px" src=/images/performances/perf2.png class="float-left"></a>
-            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
-            </span>
-            <button class="mb-2 float-right">See more</button> 
-        </div>
-      </div> 
-      
-    </div>
 </div>
 
 

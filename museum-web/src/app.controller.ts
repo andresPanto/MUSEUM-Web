@@ -29,10 +29,13 @@ export class AppController {
         //Get the three most purchased film activities 
         let rf =  await this.getTopPurchasedActivities('Film',3);
         let films = await this._activityService.getActivities(rf);
+        //Get tours
+        let tours =  await this._activityService.getCategoryActivities('Tour');
         res.render('module_client/index.ejs',{logged_in: false, 
                                               performancesArray: performances,
                                               exhibitionsArray:exhibitions,
-                                              filmsArray: films});
+                                              filmsArray: films,
+                                              toursArray: tours});
 
   }
   

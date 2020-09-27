@@ -30,5 +30,9 @@ export class ActivityService {
     } 
     return this.activityRepository.find(query); //Devuelve una promesa
   }
+  //Obtain a certain activity given an id
+  getActivity(idActivity: number){
+    return this.activityRepository.findOne(idActivity);
+  }
    
 }
