@@ -6,6 +6,8 @@ import { ActivityEntity } from './activity.entity';
 import { AuthorCreateDto } from '../author/dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
 import { ActivityCreateDto } from './dto/activity.create-dto';
+import { AuthorUpdateDto } from '../author/dto/author.update-dto';
+import { ActivityUpdateDto } from './dto/activity.update-dto';
 
 @Controller('activities')
 export class ActivityController {
@@ -233,9 +235,145 @@ export class ActivityController {
   }
 
   @Get('/admin/edit/:id')
-  editar() {
-    //Render activity.ejs with loaded data
+  async editar(
+    @Session() session,
+    @Res() res,
+    @Param() routeParams,
+    @Query() queryParams
+  ) {
+    const errorMessage = 'Error Editing Activity';
+    const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
+    if (isNotAdmin){
+      return res.redirect('/users/admin')
+    }
+    let activity;
+    try{
+      const idActivity = Number(routeParams.id);
+      activity = await this._activityService.findOneByID(idActivity)
+    }catch (e) {
+      console.log(e);
+      return res.redirect(`/activities/admin?message=${errorMessage}`)
+    }
+    if(activity){
+      return res.render(
+        'module_admin/activity',
+        {
+          username: session.username,
+          fullName: queryParams.fullName,
+          country: queryParams.country,
+          description: queryParams.description,
+          message: queryParams.message,
+          activity
+        }
+      )
+    }else{
+      return res.redirect(`/activities/admin?message=${errorMessage}`)
+    }
+
   }
 
+  @Post('admin/edit/:id')
+  async editActivityAdminPost(
+    @Session() session,
+    @Res() res,
+    @Param() routeParams,
+    @Query() queryParams,
+    @Body() bodyParams
+  ){
+    const errorMessage = 'Error Editing Activity';
+    const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
+    if (isNotAdmin){
+      return res.redirect('/users/admin')
+    }
+    let updatedActivity;
+    console.log(bodyParams);
+    const idActivity = Number(routeParams.id);
+    const name = bodyParams.name;
+    const type = bodyParams.type;
+    const duration = bodyParams.duration;
+    const pmName = bodyParams.pmName;
+    const pmPhoneNumber = bodyParams.pmPhoneNumber;
+    const initialDate = new Date(bodyParams.initialDate);
+    const finalDate = new Date(bodyParams.finalDate);
+    const location = bodyParams.location;
+    const price = Number(bodyParams.price);
+
+
+    const description = bodyParams.description.toString().trim();
+    try{
+      const newActivity = new ActivityUpdateDto();
+      finalDate.setDate(finalDate.getDate() + 1);
+      initialDate.setDate(initialDate.getDate() + 1);
+      newActivity.name = name;
+      newActivity.type = type;
+      newActivity.pmName = pmName;
+      newActivity.pmPhoneNumber = pmPhoneNumber;
+      newActivity.price = price;
+      newActivity.location = location;
+
+      newActivity.finalDate = finalDate;
+      newActivity.initialDate = initialDate;
+      newActivity.duration = duration;
+      newActivity.description = description;
+      newActivity.imagePath = 'image';
+
+
+      const errors : ValidationError[] = await validate(newActivity);
+      if(errors.length > 0){
+        const errorMessage = 'Failed to update Activity';
+        let queryParamsString = `?message=${errorMessage}`;
+        console.log('Errors', errors);
+        errors.forEach( err => {
+          console.log(err.property);
+          newActivity[err.property] = undefined
+
+        });
+        const keys = Object.keys(newActivity);
+        keys.forEach(key =>{
+
+          if(newActivity[key] != undefined){
+
+            if(newActivity[key] instanceof Date){
+              const date = newActivity[key],
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+              newActivity[key] = [date.getFullYear(), mnth, day].join("-");
+            }
+            queryParamsString = queryParamsString + `&${key}=${newActivity[key]}`
+            queryParamsString = queryParamsString.replace('+', '%2B');
+            console.log(queryParamsString)
+          }
+        });
+        return res.redirect(`/activities/admin/edit/${idActivity}` + queryParamsString)
+
+      }else {
+        const activity  = new ActivityEntity();
+
+        activity.idActivity = idActivity;
+        activity.name = newActivity.name;
+        activity.type = newActivity.type;
+        activity.location = newActivity.location;
+        activity.initialDate = newActivity.initialDate;
+        activity.finalDate = newActivity.finalDate;
+        activity.description = newActivity.description;
+        activity.duration = newActivity.duration;
+        activity.pmName = newActivity.pmName;
+        activity.pmPhoneNumber = newActivity.pmPhoneNumber;
+        activity.price = newActivity.price;
+        activity.imagePath = newActivity.imagePath;
+
+        updatedActivity = await this._activityService.update(activity);
+      }
+
+    }catch (e) {
+      return res.redirect(`/activities/admin/edit/${idActivity}?message=${errorMessage}`)
+    }
+    if (updatedActivity){
+      return res.redirect('/activities/admin')
+    }else{
+      return res.redirect(`/activities/admin/edit/${idActivity}?message=${errorMessage}`)
+    }
+
+  }
 
 }
