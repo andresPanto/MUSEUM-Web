@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ActivityEntity } from './activity.entity';
-import { FindManyOptions, In, Repository } from 'typeorm';
+import { FindManyOptions, In, Repository, Like } from 'typeorm';
 
 @Injectable()
 
@@ -34,5 +34,16 @@ export class ActivityService {
   getActivity(idActivity: number){
     return this.activityRepository.findOne(idActivity);
   }
-   
+   //Obtain all activities matching a certain name
+   searchActivities(query: String, type: String){
+    const search: FindManyOptions<ActivityEntity> ={
+          where: [
+            {
+                name: Like(`%${query}%`),
+                type: type
+            }
+        ]
+    }
+    return this.activityRepository.find(search);
+   }
 }

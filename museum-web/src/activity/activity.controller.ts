@@ -11,15 +11,24 @@ export class ActivityController {
     @Param() route,
     @Query() query
   ){
-    //Validar si existen parametros de consulta a raíz del search
-
+      const search = query.q;  
       try{
-        let activities = await this._activityService.getCategoryActivities(route.type);
-        if(activities && activities.length>=1){
-          res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, logged_in:false});
+        if (typeof search != 'undefined'){
+          let activities = await this._activityService.searchActivities(search,route.type);
+          if(activities && activities.length>=1){
+            res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, logged_in:false});
+          }else{
+            res.render('module_client/category.ejs', {category: route.type, logged_in:false});
+          }
         }else{
-          throw new NotFoundException('There are no activities matching this category.');
+          let activities = await this._activityService.getCategoryActivities(route.type);
+          if(activities && activities.length>=1){
+            res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, logged_in:false});
+          }else{
+            throw new NotFoundException('There are no activities matching this category.');
+          }
         }
+        
       }catch(e){
         console.log("Error:",e);
         throw new NotFoundException('This page is not available.');

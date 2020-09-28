@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In, FindManyOptions } from 'typeorm';
 import { AuthorEntity } from './author.entity';
 
 @Injectable()
@@ -20,4 +20,15 @@ export class AuthorService {
   //   }
   //}
 
+  //Obtain all authors from a given array of ids
+  getAuthors(ids: String[]){
+    const query: FindManyOptions<AuthorEntity> = {
+      where:[
+        {
+          idAuthor:In(ids)
+          }
+        ]
+    } 
+    return this.authorRepository.find(query);
+  }
 }

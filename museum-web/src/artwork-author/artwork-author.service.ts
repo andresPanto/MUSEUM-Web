@@ -7,5 +7,11 @@ import { Repository } from 'typeorm';
 export class ArtworkAuthorService {
   constructor(@InjectRepository(ArtworkAuthorEntity) private readonly _artworkAuthorRepository: Repository<ArtworkAuthorEntity>) {
   }
-
+  //Obtain the id of  all of the authors of a given artwork
+  getArtworkAuthors(idArtwork: number){
+    return this._artworkAuthorRepository.createQueryBuilder("artwork_author").
+    select("authorIdAuthor").
+    where("artworkIdArtwork = :id",{id: idArtwork}).
+    getRawMany();
+  }
 }

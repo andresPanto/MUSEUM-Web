@@ -1,15 +1,46 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException } from '@nestjs/common';
 import { AuthorService } from './author.service';
-import { AuthorInteface } from './author.inteface';
 import { AuthorCreateDto } from './dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
+import { ArtworkAuthorService } from 'src/artwork-author/artwork-author.service';
+import { ActivityService } from 'src/activity/activity.service';
+import { ArtworkService } from 'src/artwork/artwork.service';
+
 
 @Controller('authors')
 export class AuthorController {
-  constructor(private readonly _AuthorService: AuthorService) {
+  constructor(private readonly _authorService: AuthorService,
+    private readonly _artworkAuthorService: ArtworkAuthorService,
+    private readonly _activityService: ActivityService,
+    private readonly _artworkService: ArtworkService) {
   }
-  @Get('/:idArtwork')
-  getAuthors(){
+  @Get('/:idActivity/:idArtwork')
+  async getAuthors(
+    @Param() route,
+    @Res() res
+  ){
+    const idArtwork = route.idArtwork;
+    const idActivity = route.idActivity;
+    if(!isNaN(idArtwork) && !isNaN(idActivity)){
+        try{
+          const idActivity = route.idActivity;
+              let activity = await this._activityService.getActivity(Number(idActivity));
+              let registry = await this._artworkAuthorService.getArtworkAuthors(Number(idArtwork));  
+              let artwork = await this._artworkService.getArtwork(Number(idArtwork));     
+              let idsAuthors = []
+              registry.forEach(element => {
+                idsAuthors.push(element['authorIdAuthor']);
+              });
+              let authors = await this._authorService.getAuthors(idsAuthors);
+              res.render('module_client/authors',{logged_in:false, activity: activity, artwork: artwork, authorsArray: authors})
+          
+        } catch(e){
+          console.log("Error artwork: ",e);
+          throw new NotFoundException('Error while getting authors.');
+        }
+    }else{
+      throw new NotFoundException('Invalid artwork.');
+    }
     //Render authors.ejs
   }
   @Get() //Validar si es admin

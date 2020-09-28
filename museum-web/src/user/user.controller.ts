@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res, Session } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthorCreateDto } from '../author/dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
@@ -9,7 +9,16 @@ export class UserController {
   constructor(private readonly usersService: UserService) {
   }
   @Get('signup')
-  index(){
+  index(
+    @Res() res,
+    @Session() session
+  ){
+    const estaLogeado = session.usuario;
+    if(estaLogeado){
+      return res.redirect('/');
+    }else{
+      return res.render('module_client/signup',{logged_in:false})
+    }
       //Render sign up template
   }
   @Post('signup')

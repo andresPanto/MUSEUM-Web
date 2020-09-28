@@ -7,18 +7,21 @@
 </div>
 <hr>
 <!--Búsqueda-->
-<form action="/search" method="get" class="form-inline active-pink-3 active-pink-4 justify-content-center mt-4 ">
+<form action="/activities/<%= category %>" method="get" class="form-inline active-pink-3 active-pink-4 justify-content-center mt-4 ">
     <!--Falta agregar un label-->
     <input class="form-control form-control-sm ml-3 w-50 mr-1" type="text" placeholder="What <%= category %> are you looking for?"
       aria-label="Search" name="q">
       <span><button type="submit" class="btn btn-primary">Search</button></span>
   </form>
 
+  <% if (typeof activitiesArray != 'undefined'){%>
   <!--Item de categoría--> 
 <div class="container">
     <% if (typeof search != 'undefined') {%>
     <h3 class="mb-2"><strong>Search Results</strong></h3>
     <% } %>
+   
+        
           <!--Recorrer con un for-->
         <% activitiesArray.forEach((activity) => {%>
             <div class="row">
@@ -46,9 +49,12 @@
             </div> 
         <% }); %>
           <!--Fin For-->
+        
 </div>
-
-
-
+<% } else { %>
+    <div class="alert alert-danger text-center container" role="alert">
+        There are no <%= category.toLowerCase() %>s matching the query!
+      </div>
+<% }%>
 
 <%- include ('shared/footer.ejs')%>

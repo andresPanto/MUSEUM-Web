@@ -35,7 +35,6 @@ import { ArtworkAuthorModule } from './artwork-author/artwork-author.module';
     PurchaseModule,
     ScheduleModule,
     ActivityModule,
-    ActivityArtworkModule,
     ArtworkAuthorModule,
     //UserRoleModule,
 

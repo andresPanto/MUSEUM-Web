@@ -5,5 +5,5 @@ import { ActivityArtworkService } from './activity-artwork.service';
 export class ActivityArtworkController {
   constructor(private readonly _activityArtworkService: ActivityArtworkService) {
   }
-
+ 
 }
