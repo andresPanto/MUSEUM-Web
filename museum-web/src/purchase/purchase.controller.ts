@@ -18,6 +18,8 @@ import { PurchaseCreateDto } from './dto/purchase.create-dto';
 import moment from 'moment';
 import { resolve } from 'path';
 import { AuthService } from '../auth/auth.service';
+import { ScheduleEntity } from '../schedule/schedule.entity';
+import { PurchaseEntity } from './purchase.entity';
 
 @Controller('purchases')
 export class PurchaseController {
@@ -32,7 +34,15 @@ export class PurchaseController {
   }
 
   @Get('/:idActivity')
-  getPurchase() {
+  getPurchase(
+    @Res() res,
+    @Session() session,
+    @Query() queryParams,
+    @Param() routeParams
+  ) {
+    if (routeParams.idActivity == 'admin'){
+      this.purchaseAdmin(res, session, queryParams)
+    }
     //Render purchase.ejs
   }
 
@@ -41,7 +51,39 @@ export class PurchaseController {
     //For purchasing
   }
 
-  @Get('/admin')
+  @Get('/admin/status/:idPurchase')
+  async changeStatus(
+    @Session() session,
+    @Res() res,
+    @Param() routePrams
+  ){
+    console.log('purchase status');
+    const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
+    const message = 'Failed to change purchase status';
+    if (isNotAdmin){
+      return res.redirect('/users/admin')
+    }
+    let updatedPurchase;
+
+    try {
+      const idPurchase = Number(routePrams.idPurchase);
+
+      const purchase: PurchaseEntity = await this.purchasesService.findOneByID(idPurchase);
+      purchase.status = !purchase.status;
+      updatedPurchase = await this.purchasesService.update(purchase)
+    }catch (e) {
+      console.log(e);
+      return res.redirect(`/purchases/admin?message=${message}`)
+    }
+      if (updatedPurchase){
+        return res.redirect(`/purchases/admin`)
+      }else{
+        return res.redirect(`/purchases/admin?message=${message}`)
+      }
+  }
+
+
+
   async purchaseAdmin(
     @Res() res,
     @Session() session,
@@ -65,7 +107,8 @@ export class PurchaseController {
       'module_admin/purchases',
       {
         purchases,
-        username: session.username
+        username: session.username,
+        message: queryParams.message
       });
   }
 

@@ -1,5 +1,6 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
 <h1 class="text-center"><b>Purchases</b></h1>
 <!--Purchases list-->
 <div class="container">
@@ -13,15 +14,45 @@
             <th>Disable</th>
         </tr>
         <!--Iterar con un for-->
+        <%purchases.forEach((purchase)=> { %>
+        <%const isActive = purchase.status%>
+
         <tr>
-            <td>0000001</td>
-            <td>Username1</td>
-            <td>Activity 1</td>
-            <td>5</td>
-            <td>25.00</td>
-            <td><button href="#" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Disable</button></td>
+            <td>
+                <%= purchase.idPurchase%>
+            </td>
+            <td>
+                <%= purchase.user.username%>
+            </td>
+            <td>
+                <%= purchase.schedule.activity.name%>
+            </td>
+            <td>
+                <%= purchase.quantity%>
+            </td>
+            <td>
+                <%= purchase.total%>
+            </td>
+            <td>
+                <form action="/purchases/admin/status/<%=purchase.idPurchase%>" method="get">
+                    <button type="submit"
+                    <%if(isActive){%>
+                            class="btn btn-danger"
+                    <%}else{%>
+                            class="btn btn-success"
+                            <%}%>
+                    >
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                        <%if(isActive){%>
+                            Disable
+                        <%}else{%>
+                            Enable
+                        <%}%>
+                    </button>
+            </td>
         </tr>
         <!--Fin for-->
+        <% })%>
     </table>
     <hr>
 </div>

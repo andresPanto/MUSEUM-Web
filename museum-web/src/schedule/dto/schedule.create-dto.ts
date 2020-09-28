@@ -4,7 +4,7 @@ import { CONSTANTS } from '../../enviroment/constants';
 export class ScheduleCreateDto {
   @IsString()
   @IsNotEmpty()
-  @Matches(new RegExp(CONSTANTS.Regex.schedule))
+  @Matches(new RegExp(CONSTANTS.Regex.hour))
   schedule: string;
 
   @IsInt()
@@ -15,4 +15,9 @@ export class ScheduleCreateDto {
   @IsBoolean()
   @IsNotEmpty()
   status: boolean
+
+  @IsInt()
+  @IsPositive()
+  @IsNotEmpty()
+  activity: number;
 }

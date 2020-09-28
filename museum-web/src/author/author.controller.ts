@@ -51,7 +51,7 @@ export class AuthorController {
     @Res() res,
     @Query() queryParams,
   ){
-    const errorMessage = 'Error Loading Authors';
+
     const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
     if (isNotAdmin){
       return res.redirect('/users/admin')

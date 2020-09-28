@@ -3,11 +3,11 @@
 <%- include ('./error_message.ejs')%>
 <!--Meter imágenes de cada sección-->
 <div class="d-flex justify-content-around">
-    <a href="">
-        <button class=" btn-lg btn-primary button-panel" id="button_activities">
+    <form action="/activities/admin" method="get">
+        <button class="btn-lg btn-primary button-panel" id="button_activities">
             Activities
         </button>
-    </a>
+    </form>
     <form action="/artworks/admin" method="get">
         <button class="btn-lg btn-primary button-panel" id="button_artworks">
             Artworks
