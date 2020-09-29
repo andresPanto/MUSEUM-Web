@@ -1,5 +1,17 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('shared/header.ejs')%>
+
+<% if (typeof message != 'undefined'){%>
+    <div class="alert alert-info mt-2 mb-2 text-center container" role="alert">
+        <%= message %>
+      </div>
+<% } %>
+
+<% if (typeof error != 'undefined'){%>
+    <div class="alert alert-danger mt-2 mb-2 text-center container" role="alert">
+        <%= error %>
+      </div>
+<% } %>
 <!--Carousel-->
 <!-- Sacar de la base para mostrar-->
 <div class="w-75" style="margin: 0 auto;">

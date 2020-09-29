@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res, NotFoundException, InternalServerErrorException, Session } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 
 @Controller('activities')
@@ -9,21 +9,26 @@ export class ActivityController {
   async categoryActivities(
     @Res() res,
     @Param() route,
-    @Query() query
+    @Query() query,
+    @Session() session
   ){
+        let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
       const search = query.q;  
       try{
         if (typeof search != 'undefined'){
           let activities = await this._activityService.searchActivities(search,route.type);
           if(activities && activities.length>=1){
-            res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, logged_in:false});
+            res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, username:username});
           }else{
-            res.render('module_client/category.ejs', {category: route.type, logged_in:false});
+            res.render('module_client/category.ejs', {category: route.type, username: username });
           }
         }else{
           let activities = await this._activityService.getCategoryActivities(route.type);
           if(activities && activities.length>=1){
-            res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, logged_in:false});
+            res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, username:username});
           }else{
             throw new NotFoundException('There are no activities matching this category.');
           }
@@ -39,13 +44,18 @@ export class ActivityController {
   @Get('/:type/:idActivity')
   async getActivity(
     @Res() res,
-    @Param() route
+    @Param() route,
+    @Session() session
   ){
     try{
+      let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
       const idActivity = route.idActivity;
       let activity = await this._activityService.getActivity(idActivity);
       if (activity){
-        res.render('module_client/activity.ejs',{logged_in:false, activity: activity});
+        res.render('module_client/activity.ejs',{username:username, activity: activity});
       }else{
         throw new NotFoundException('Activity not found.');
       }

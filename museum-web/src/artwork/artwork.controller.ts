@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException, Session } from '@nestjs/common';
 import { ActivityArtworkService } from 'src/activity-artwork/activity-artwork.service';
 import { ActivityService } from 'src/activity/activity.service';
 import { ArtworkService } from './artwork.service';
@@ -12,8 +12,13 @@ export class ArtworkController {
     @Get('/:idActivity')
     async getActivityArtworks(
       @Param() route,
-      @Res() res
+      @Res() res,
+      @Session() session
     ){
+      let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
         if (!isNaN(route.idActivity)){
           try{
               //TODO: Refactorize this
@@ -25,7 +30,7 @@ export class ArtworkController {
                 idsArtworks.push(element['artworkIdArtwork']);
               });
               let artworks = await this._artworksService.getArtworks(idsArtworks);
-              res.render('module_client/artworks',{logged_in:false, activity: activity, artworksArray: artworks})
+              res.render('module_client/artworks',{username:username, activity: activity, artworksArray: artworks})
           
           }catch(e){
             console.log("Error artwork: ",e);

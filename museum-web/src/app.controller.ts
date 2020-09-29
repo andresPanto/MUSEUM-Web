@@ -1,4 +1,4 @@
-import { Controller, Get, Res, Param, InternalServerErrorException } from '@nestjs/common';
+import { Controller, Get, Res, Param, InternalServerErrorException, Query, Session } from '@nestjs/common';
 import { ActivityEntity } from './activity/activity.entity';
 import { ActivityService } from './activity/activity.service';
 import { AppService } from './app.service';
@@ -17,10 +17,17 @@ export class AppController {
   //Según esto se renderiza el index deslogeado o index logeado
   @Get('/')
   async gethome(
-        @Res() res
+        @Res() res,
+        @Query() query,
+        @Session() session
     ) {
-        
-        //Get the three most purchased performances        
+        const logged_in = (typeof session.username != 'undefined');
+        let username;
+        if(logged_in){
+          username = session.username
+        }
+        try{
+          //Get the three most purchased performances        
         let rp =  await this.getTopPurchasedActivities('Performance',3);
         let performances = await this._activityService.getActivities(rp);
         //Get the three most purchased exhibitions 
@@ -31,11 +38,18 @@ export class AppController {
         let films = await this._activityService.getActivities(rf);
         //Get tours
         let tours =  await this._activityService.getCategoryActivities('Tour');
-        res.render('module_client/index.ejs',{logged_in: false, 
+        res.render('module_client/index.ejs',{logged_in: logged_in, 
                                               performancesArray: performances,
                                               exhibitionsArray:exhibitions,
                                               filmsArray: films,
-                                              toursArray: tours});
+                                              toursArray: tours,
+                                              message: query.message,
+                                             username: username,
+                                            error:query.error});
+        } catch(e){
+          throw new InternalServerErrorException('Error getting main activities.');
+        }
+        
 
   }
   
@@ -92,7 +106,7 @@ export class AppController {
               }  
         }catch (error){
           console.log(error);
-          throw new InternalServerErrorException('Error encontrando activities.');
+          throw new InternalServerErrorException('Error finding activities.');
         }
   }
   

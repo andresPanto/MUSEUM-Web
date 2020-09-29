@@ -39,12 +39,6 @@ export class UserCreateDto{
   @Matches(new RegExp(CONSTANTS.Regex.phone))
   phoneNumber: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @MaxLength(256)
-  @MinLength(3)
-  imagePath: string;
-
   @IsBoolean()
   @IsNotEmpty()
   status: boolean

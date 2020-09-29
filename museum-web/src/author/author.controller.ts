@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException, Session } from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { AuthorCreateDto } from './dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
@@ -17,8 +17,13 @@ export class AuthorController {
   @Get('/:idActivity/:idArtwork')
   async getAuthors(
     @Param() route,
-    @Res() res
+    @Res() res,
+    @Session() session
   ){
+    let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
     const idArtwork = route.idArtwork;
     const idActivity = route.idActivity;
     if(!isNaN(idArtwork) && !isNaN(idActivity)){
@@ -32,7 +37,7 @@ export class AuthorController {
                 idsAuthors.push(element['authorIdAuthor']);
               });
               let authors = await this._authorService.getAuthors(idsAuthors);
-              res.render('module_client/authors',{logged_in:false, activity: activity, artwork: artwork, authorsArray: authors})
+              res.render('module_client/authors',{username:username, activity: activity, artwork: artwork, authorsArray: authors})
           
         } catch(e){
           console.log("Error artwork: ",e);

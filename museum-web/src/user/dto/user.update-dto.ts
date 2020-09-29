@@ -14,6 +14,10 @@ export class UserUpdateDto{
   @IsOptional()
   email: string;
 
+  @IsString()
+  @IsNotEmpty()
+  @Matches(new RegExp(CONSTANTS.Regex.phone))
+  phoneNumber: string;
 
   @IsString()
   @IsOptional()
