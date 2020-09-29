@@ -8,7 +8,7 @@ import { diskStorage } from 'multer';
 import {  FileInterceptor } from '@nestjs/platform-express';
 import { UserRoleService } from 'src/user-role/user-role.service';
 import { UserRoleEntity } from 'src/user-role/user-role.entity';
-import { RoleService } from 'src/role/role.service';
+import { RoleService } from 'src/role/role.service'; 
 import { UserUpdateDto } from './dto/user.update-dto';
 
 @Controller('users')
@@ -139,8 +139,8 @@ export class UserController {
         this._authService.logIn(userInfo.idUser, 'client', userInfo.username, session);
         //To replace the message that appears when Log in -> Log Out -> Log In
         let backURL=req.header('Referer') || '/';
-        if(backURL.includes('?message')){
-          let re = backURL.split("?message")[0] + "?message=Welcome Back!"
+        if(backURL.includes('?error') || backURL.includes('?message')){
+          let re = backURL.split("?")[0] + "?message=Welcome Back!"
           res.redirect(re);
         }else{
           if(backURL.includes('signup')){

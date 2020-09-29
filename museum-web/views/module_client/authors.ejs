@@ -45,7 +45,9 @@
 
 
 <div class="container text-center">
-    <button class="bg-warning mt-3 btn-lg">Buy your ticket</button>
+    <a href="/purchases/<%= activity.idActivity %>">
+        <button class="bg-warning mt-3 btn-lg">Buy your ticket</button>
+    </a>
     <br>
     <!-- activities = activity category-->
     <a href="/activities/<%= activity.type.toLowerCase() %>">

@@ -38,8 +38,6 @@ export class ActivityController {
         console.log("Error:",e);
         throw new NotFoundException('This page is not available.');
       }
-    
-    //Render template category.ejs
   }
   @Get('/:type/:idActivity')
   async getActivity(
@@ -63,7 +61,6 @@ export class ActivityController {
         console.log("Error:",e);
         throw new NotFoundException('This page is not available.');
       }
-    //Render activity.ejs
   }
   @Get('Queryparam')
   searchActivity(){

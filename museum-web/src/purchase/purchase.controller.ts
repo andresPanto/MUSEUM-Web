@@ -1,14 +1,15 @@
 import { PurchaseService } from './purchase.service';
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
-import { AuthorCreateDto } from '../author/dto/author.create-dto';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res, Session } from '@nestjs/common';
 import { validate, ValidationError } from 'class-validator';
 import { PurchaseCreateDto } from './dto/purchase.create-dto';
-import moment from 'moment';
-import { resolve } from 'path';
+import { ActivityService } from 'src/activity/activity.service';
+import { ScheduleService } from 'src/schedule/schedule.service';
 
 @Controller('purchases')
 export class PurchaseController {
-  constructor(private readonly purchasesService: PurchaseService) {
+  constructor(private readonly purchasesService: PurchaseService,
+    private readonly _activityService: ActivityService,
+    private readonly _scheduleService: ScheduleService) {
   }
   @Get()
   myPurchases(){ //Valido si es cliente o admin, renderizo client/myactivities ó admin/purchases.ejs
@@ -16,11 +17,45 @@ export class PurchaseController {
     //Render myactivities.ejs
   }
   @Get('/:idActivity')
-  getPurchase(){
-    //Render purchase.ejs
+  async getPurchase(
+    @Res() res,
+    @Session() session,
+    @Param() route
+  ){
+    const estaLogeado = session.username;
+    if(estaLogeado){
+      const idActivity = route.idActivity;
+      if(!isNaN(idActivity)){
+        try{
+          let activity = await this._activityService.getActivity(idActivity);
+          let schedules = await this._scheduleService.getScheduleActivity(activity.idActivity);
+          res.render('module_client/purchase',{username:session.username, activity: activity, schedules:schedules});
+        }catch(e){
+          console.log("Error activity purchase: ",e);
+          res.redirect('/?error=Error while getting activity, try again later.')
+        }
+        
+      }else{
+        res.redirect('/?error=Activity Not Found')
+      }
+      
+    }else{
+      res.redirect('/?message=Please log in.');     
+    }
+      
+    
   }
   @Post('/:idActivity')
-  purchase(){
+  purchase(
+    @Res() res,
+    @Body() body,
+    @Param() route
+  ){
+    const idActivity = Number(route.idActivity);
+    const idSchedule = Number(body.schedule);
+    const quantity = Number(body.quantity);
+    const attendance_date = body.date;
+    //Hacer un update en la tabla schedule para disminuir el campo 'capacity' según lo que se compró (quantity)
     //For purchasing
   }
   @Get()
