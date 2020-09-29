@@ -13,8 +13,7 @@ export class AppController {
               private readonly _scheduleService: ScheduleService,
               private readonly _purchaseService: PurchaseService) {}
 
-  //Validar si está o no logeado
-  //Según esto se renderiza el index deslogeado o index logeado
+
   @Get('/')
   async gethome(
         @Res() res,

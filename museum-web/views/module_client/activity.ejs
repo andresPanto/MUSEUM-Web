@@ -50,9 +50,15 @@
     </div>
 </div>
 <div class="container text-center">
+<% const logged_in = typeof username != 'undefined' %>
+<% if (logged_in) {%>
 <a href="/purchases/<%= activity.idActivity %>">
-<button class="bg-warning mt-3 btn-lg">Buy your ticket</button>
+    <button class="bg-warning mt-3 btn-lg" >Buy your ticket</button>
 </a>
+<% } else {%>
+    <button class="bg-warning mt-3 btn-lg" data-toggle="modal" data-target="#modalLoginForm">Buy your ticket</button>
+<% }%>
+
 <br>
 <!-- activities = activity category-->
 <a href="/activities/<%= activity.type.toLowerCase() %>">
