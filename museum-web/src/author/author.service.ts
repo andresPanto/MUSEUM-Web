@@ -13,7 +13,7 @@ export class AuthorService {
 
   async findAll(){
     const authors = await this.authorRepository.find();
-    console.log('Service Authors', authors);
+
     return authors
   }
 

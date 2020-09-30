@@ -13,7 +13,7 @@ export class ActivityService {
 
   async findAll(){
     const activities = await this.activityRepository.find();
-    console.log('Service Authors', activities);
+
     return activities
   }
 

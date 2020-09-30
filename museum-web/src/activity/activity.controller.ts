@@ -1,13 +1,31 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res, Session } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  Res,
+  Session,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ActivityService } from './activity.service';
 import { AuthService } from '../auth/auth.service';
-import { AuthorEntity } from '../author/author.entity';
+
 import { ActivityEntity } from './activity.entity';
-import { AuthorCreateDto } from '../author/dto/author.create-dto';
+
 import { validate, ValidationError } from 'class-validator';
 import { ActivityCreateDto } from './dto/activity.create-dto';
-import { AuthorUpdateDto } from '../author/dto/author.update-dto';
+
+import { diskStorage } from 'multer';
 import { ActivityUpdateDto } from './dto/activity.update-dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+const fs = require('fs');
+var path = require('path');
+
 
 @Controller('activities')
 export class ActivityController {
@@ -57,17 +75,25 @@ export class ActivityController {
         finalDate: queryParams.finalDate,
         duration: queryParams.duration,
         description: queryParams.description,
+        imagePath: queryParams.imagePath,
         message: queryParams.message
 
       }
     )
   }
 
+  // noinspection TypeScriptValidateTypes
   @Post('/admin/new')
-  async newAuthorPost(
+  @UseInterceptors(FileInterceptor('avatar', {
+    storage: diskStorage({
+      destination: 'public/images/activities/',
+    }),
+  }))
+  async newActivityPost(
     @Session() session,
     @Res() res,
-    @Body() bodyParams
+    @Body() bodyParams,
+    @UploadedFile() avatar,
   ){
     const errorMessage = 'Error Creating Activity';
     const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
@@ -103,7 +129,11 @@ export class ActivityController {
       newActivity.initialDate = initialDate;
       newActivity.duration = duration;
       newActivity.description = description;
-      newActivity.imagePath = 'image';
+      if(typeof  avatar !== 'undefined'){
+        newActivity.imagePath = '/images/activities/' + avatar.filename;
+      }else{
+        newActivity.imagePath = undefined
+      }
       newActivity.status = true;
 
       const errors : ValidationError[] = await validate(newActivity);
@@ -111,8 +141,9 @@ export class ActivityController {
         const errorMessage = 'Failed to create Activity';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
+        newActivity.imagePath = undefined;
         errors.forEach( err => {
-          console.log(err.property)
+          console.log(err.property);
            newActivity[err.property] = undefined
 
         });
@@ -259,9 +290,17 @@ export class ActivityController {
         'module_admin/activity',
         {
           username: session.username,
-          fullName: queryParams.fullName,
-          country: queryParams.country,
+          name: queryParams.name,
+          type: queryParams.type,
+          pmName: queryParams.pmName,
+          pmPhoneNumber: queryParams.pmPhoneNumber,
+          price: queryParams.price,
+          location: queryParams.location,
+          initialDate: queryParams.initialDate,
+          finalDate: queryParams.finalDate,
+          duration: queryParams.duration,
           description: queryParams.description,
+          imagePath: queryParams.imagePath,
           message: queryParams.message,
           activity
         }
@@ -272,13 +311,20 @@ export class ActivityController {
 
   }
 
+  // noinspection TypeScriptValidateTypes
   @Post('admin/edit/:id')
+  @UseInterceptors(FileInterceptor('avatar', {
+    storage: diskStorage({
+      destination: 'public/images/activities/',
+    }),
+  }))
   async editActivityAdminPost(
     @Session() session,
     @Res() res,
     @Param() routeParams,
     @Query() queryParams,
-    @Body() bodyParams
+    @Body() bodyParams,
+    @UploadedFile() avatar
   ){
     const errorMessage = 'Error Editing Activity';
     const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
@@ -286,6 +332,7 @@ export class ActivityController {
       return res.redirect('/users/admin')
     }
     let updatedActivity;
+    let prevoiusImage;
     console.log(bodyParams);
     const idActivity = Number(routeParams.id);
     const name = bodyParams.name;
@@ -297,6 +344,7 @@ export class ActivityController {
     const finalDate = new Date(bodyParams.finalDate);
     const location = bodyParams.location;
     const price = Number(bodyParams.price);
+    const imageExists = typeof  avatar !== 'undefined'
 
 
     const description = bodyParams.description.toString().trim();
@@ -315,7 +363,11 @@ export class ActivityController {
       newActivity.initialDate = initialDate;
       newActivity.duration = duration;
       newActivity.description = description;
-      newActivity.imagePath = 'image';
+      if(imageExists){
+        newActivity.imagePath = '/images/activities/' + avatar.filename;
+      }else{
+        newActivity.imagePath = undefined
+      }
 
 
       const errors : ValidationError[] = await validate(newActivity);
@@ -361,7 +413,8 @@ export class ActivityController {
         activity.pmPhoneNumber = newActivity.pmPhoneNumber;
         activity.price = newActivity.price;
         activity.imagePath = newActivity.imagePath;
-
+        const previousActivity = await this._activityService.findOneByID(activity.idActivity)
+        prevoiusImage = previousActivity.imagePath;
         updatedActivity = await this._activityService.update(activity);
       }
 
@@ -369,6 +422,16 @@ export class ActivityController {
       return res.redirect(`/activities/admin/edit/${idActivity}?message=${errorMessage}`)
     }
     if (updatedActivity){
+      if(imageExists && prevoiusImage){
+        console.log('dirname', __dirname);
+        try {
+          const pathName = path.join(__dirname,'..', '..', 'public', prevoiusImage)
+
+          fs.unlinkSync(pathName)
+        }catch (e) {
+          console.log(e)
+        }
+      }
       return res.redirect('/activities/admin')
     }else{
       return res.redirect(`/activities/admin/edit/${idActivity}?message=${errorMessage}`)

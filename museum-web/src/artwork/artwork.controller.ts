@@ -1,4 +1,17 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res, Session } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  Res,
+  Session,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ArtworkService } from './artwork.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -8,6 +21,11 @@ import { validate, ValidationError } from 'class-validator';
 import { ArtworkCreateDto } from './dto/artwork.create-dto';
 
 import { ArtworkUpdateDto } from './dto/artwork.update-dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+
+const fs = require('fs');
+var path = require('path');
 
 @Controller('artworks')
 export class ArtworkController {
@@ -93,7 +111,9 @@ export class ArtworkController {
     }
   }
 
+  // noinspection TypeScriptValidateTypes
   @Get('/admin/new')
+
   async newArtwork(
     @Session() session,
     @Res() res,
@@ -112,17 +132,24 @@ export class ArtworkController {
         year: queryParams.year,
         type: queryParams.type,
         description: queryParams.description,
+        imagePath: queryParams.imagePath,
         message: queryParams.message,
       },
     );
   }
 
-
+// noinspection TypeScriptValidateTypes
   @Post('/admin/new')
+  @UseInterceptors(FileInterceptor('avatar', {
+    storage: diskStorage({
+      destination: 'public/images/artworks/',
+    }),
+  }))
   async newArtworkPost(
     @Session() session,
     @Res() res,
     @Body() bodyParams,
+    @UploadedFile() avatar,
   ) {
     const errorMessage = 'Error Creating Artwork';
     const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
@@ -131,6 +158,7 @@ export class ArtworkController {
     }
     let createdArtwork;
     console.log(bodyParams);
+    console.log('avatar', avatar);
     const name = bodyParams.name;
     const year = bodyParams.year;
     const type = bodyParams.type;
@@ -141,7 +169,11 @@ export class ArtworkController {
       newArtwork.year = year;
       newArtwork.type = type;
       newArtwork.description = description;
-      newArtwork.imagePath = 'image';
+      if (typeof avatar !== 'undefined') {
+        newArtwork.imagePath = '/images/artworks/' + avatar.filename;
+      } else {
+        newArtwork.imagePath = undefined;
+      }
       newArtwork.status = true;
 
       const errors: ValidationError[] = await validate(newArtwork);
@@ -149,6 +181,7 @@ export class ArtworkController {
         const errorMessage = 'Failed to create Artwork';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
+        newArtwork.imagePath = undefined;
         errors.forEach(err => {
           newArtwork[err.property] = undefined;
         });
@@ -204,6 +237,7 @@ export class ArtworkController {
           type: queryParams.type,
           description: queryParams.description,
           message: queryParams.message,
+          imagePath: queryParams.imagePath,
           artwork,
         },
       );
@@ -213,13 +247,20 @@ export class ArtworkController {
 
   }
 
+  // noinspection TypeScriptValidateTypes
   @Post('admin/edit/:id')
+  @UseInterceptors(FileInterceptor('avatar', {
+    storage: diskStorage({
+      destination: 'public/images/artworks/',
+    }),
+  }))
   async editArtworkAdminPost(
     @Session() session,
     @Res() res,
     @Param() routeParams,
     @Query() queryParams,
     @Body() bodyParams,
+    @UploadedFile() avatar,
   ) {
     const errorMessage = 'Error Editing Artwork';
     const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
@@ -227,23 +268,29 @@ export class ArtworkController {
       return res.redirect('/users/admin');
     }
     let updatedArtwork;
+    let prevoiusImage;
     console.log(bodyParams);
     const name = bodyParams.name;
     const type = bodyParams.type;
     const year = bodyParams.year;
     const description = bodyParams.description.toString().trim();
     const idArtwork = Number(routeParams.id);
+    const imageExists = typeof avatar !== 'undefined';
     try {
       const newArtwork = new ArtworkUpdateDto();
       newArtwork.name = name;
       newArtwork.type = type;
       newArtwork.year = year;
       newArtwork.description = description;
-      newArtwork.imagePath = 'image';
+      if (imageExists) {
+        newArtwork.imagePath = '/images/authors/' + avatar.filename;
+      } else {
+        newArtwork.imagePath = undefined;
+      }
 
       const errors: ValidationError[] = await validate(newArtwork);
       if (errors.length > 0) {
-        const errorMessage = 'Failed to create Artwork';
+        const errorMessage = 'Failed to update Artwork';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         errors.forEach(err => {
@@ -265,7 +312,8 @@ export class ArtworkController {
         artwork.year = newArtwork.year;
         artwork.description = newArtwork.description;
         artwork.imagePath = newArtwork.imagePath;
-
+        const previuosArtwork = await this.artworksService.findOneByID(artwork.idArtwork);
+        prevoiusImage = previuosArtwork.imagePath;
         updatedArtwork = await this.artworksService.update(artwork);
       }
 
@@ -273,11 +321,21 @@ export class ArtworkController {
       return res.redirect(`/artworks/admin/edit/${idArtwork}?message=${errorMessage}`);
     }
     if (updatedArtwork) {
+      if (imageExists && prevoiusImage) {
+
+        console.log('dirname', __dirname);
+        try {
+          const pathName = path.join(__dirname, '..', '..', 'public', prevoiusImage);
+          console.log('pathName', pathName);
+          fs.unlinkSync(pathName);
+        } catch (e) {
+          console.log(e);
+        }
+      }
       return res.redirect('/artworks/admin');
     } else {
       return res.redirect(`/artworks/admin/edit/${idArtwork}?message=${errorMessage}`);
     }
-
 
   }
 

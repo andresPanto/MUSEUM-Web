@@ -3,28 +3,37 @@ import {
   Body,
   Controller,
   Delete,
-  Get, Header, HttpCode,
+  Get, Header, HttpCode, NestInterceptor,
   Param,
   Post,
   Put,
   Query,
   Res,
-  Session,
+  Session, UploadedFile, UseInterceptors,
 } from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { AuthorInteface } from './author.inteface';
 import { AuthorCreateDto } from './dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
 import { AuthService } from '../auth/auth.service';
-
+import { diskStorage } from 'multer';
 import { AuthorEntity } from './author.entity';
 import { AuthorUpdateDto } from './dto/author.update-dto';
+
+//import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
+const fs = require('fs')
+var path = require('path');
+import { FileInterceptor } from '@nestjs/platform-express';
+import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
 
 @Controller('authors')
 export class AuthorController {
   constructor(private readonly _AuthorService: AuthorService,
               private readonly _authService: AuthService) {
   }
+
+
+
   @Get('/:idArtwork')
   getAuthors(
 
@@ -63,6 +72,7 @@ export class AuthorController {
         fullName: queryParams.fullName,
         country: queryParams.country,
         description: queryParams.description,
+        imagePath: queryParams.imagePath,
         message: queryParams.message
       }
     )
@@ -70,12 +80,21 @@ export class AuthorController {
 
 
 
+
+  // noinspection TypeScriptValidateTypes
   @Post('/admin/new')
+  @UseInterceptors(FileInterceptor('avatar', {
+    storage: diskStorage({
+      destination: 'public/images/authors/',
+    }),
+  }))
   async newAuthorPost(
     @Session() session,
     @Res() res,
-    @Body() bodyParams
+    @Body() bodyParams,
+    @UploadedFile() avatar,
   ){
+
     const errorMessage = 'Error Creating Author';
     const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
     if (isNotAdmin){
@@ -86,18 +105,24 @@ export class AuthorController {
     const fullName = bodyParams.fullName;
     const country = bodyParams.country;
     const description = bodyParams.description.toString().trim();
+    console.log('avatar', avatar)
     try{
       const newAuthor = new AuthorCreateDto();
       newAuthor.fullName = fullName;
       newAuthor.country = country;
       newAuthor.description = description;
-      newAuthor.imagePath = 'image';
+      if(typeof  avatar !== 'undefined'){
+        newAuthor.imagePath = '/images/authors/' + avatar.filename;
+      }else{
+        newAuthor.imagePath = undefined
+      }
       newAuthor.status = true;
       const errors : ValidationError[] = await validate(newAuthor);
       if(errors.length > 0){
         const errorMessage = 'Failed to create Author';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
+        newAuthor.imagePath = undefined;
         errors.forEach( err => {
           newAuthor[err.property] = undefined
         });
@@ -152,7 +177,8 @@ export class AuthorController {
           country: queryParams.country,
           description: queryParams.description,
           message: queryParams.message,
-          author
+          author,
+          imagePath: queryParams.imagePath
         }
       )
     }else{
@@ -161,13 +187,20 @@ export class AuthorController {
 
   }
 
+  // noinspection TypeScriptValidateTypes
   @Post('admin/edit/:id')
+  @UseInterceptors(FileInterceptor('avatar', {
+    storage: diskStorage({
+      destination: 'public/images/authors/',
+    }),
+  }))
   async editAuthorAdminPost(
     @Session() session,
     @Res() res,
     @Param() routeParams,
     @Query() queryParams,
-    @Body() bodyParams
+    @Body() bodyParams,
+    @UploadedFile() avatar
   ){
     const errorMessage = 'Error Editing Author';
     const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
@@ -175,21 +208,26 @@ export class AuthorController {
       return res.redirect('/users/admin')
     }
     let updatedAuthor;
+    let prevoiusImage;
     console.log(bodyParams);
     const fullName = bodyParams.fullName;
     const country = bodyParams.country;
     const description = bodyParams.description.toString().trim();
     const idAuthor = Number(routeParams.id);
+    const imageExists = typeof  avatar !== 'undefined'
     try{
       const newAuthor = new AuthorUpdateDto();
       newAuthor.fullName = fullName;
       newAuthor.country = country;
       newAuthor.description = description;
-      newAuthor.imagePath = 'image';
-
+      if(imageExists){
+        newAuthor.imagePath = '/images/authors/' + avatar.filename;
+      }else{
+        newAuthor.imagePath = undefined
+      }
       const errors : ValidationError[] = await validate(newAuthor);
       if(errors.length > 0){
-        const errorMessage = 'Failed to create Author';
+        const errorMessage = 'Failed to update Author';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         errors.forEach( err => {
@@ -210,14 +248,28 @@ export class AuthorController {
           author.country = newAuthor.country;
           author.description = newAuthor.description;
           author.imagePath = newAuthor.imagePath;
-
+        const previuosAuthor = await this._AuthorService.findOneByID(author.idAuthor)
+        prevoiusImage = previuosAuthor.imagePath;
         updatedAuthor = await this._AuthorService.update(author);
       }
 
     }catch (e) {
       return res.redirect(`/authors/admin/edit/${idAuthor}?message=${errorMessage}`)
     }
+
     if (updatedAuthor){
+      if(imageExists && prevoiusImage){
+
+        console.log('dirname', __dirname);
+        try {
+          const pathName = path.join(__dirname,'..', '..', 'public', prevoiusImage)
+          console.log('pathName', pathName)
+          fs.unlinkSync(pathName)
+        }catch (e) {
+          console.log(e)
+        }
+
+      }
       return res.redirect('/authors/admin')
     }else{
       return res.redirect(`/authors/admin/edit/${idAuthor}?message=${errorMessage}`)

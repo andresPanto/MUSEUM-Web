@@ -11,13 +11,13 @@ export class ArtworkService {
 
   async create(artwork){
     const createdArtwork =  await this.artworkRepository.save(artwork);
-    console.log(createdArtwork);
+
     return  createdArtwork
   }
 
   async findAll(){
     const artworks = await this.artworkRepository.find();
-    console.log('Service Authors', artworks);
+
     return artworks
   }
 
@@ -29,14 +29,14 @@ export class ArtworkService {
       },
     };
     const artworkFound =  await this.artworkRepository.findOne(findOptions);
-    console.log(artworkFound);
+
     return  artworkFound
   }
 
 
   async  update(artwork: ArtworkEntity){
     const updatedArtwork =  await this.artworkRepository.save(artwork);
-    console.log(updatedArtwork);
+
     return  updatedArtwork
   }
 

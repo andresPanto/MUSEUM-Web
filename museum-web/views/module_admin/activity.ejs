@@ -30,7 +30,8 @@
             <%}else{%>
                 action="/activities/admin/new"
             <%}%>
-            method="POST">
+            method="POST"
+            enctype="multipart/form-data">
         <div class="form-group row">
             <label for="nameActivity" class="col-sm-2 col-form-label">Activity Name:</label>
             <div class="col-sm-10">
@@ -72,6 +73,7 @@
                 <%}else if (activityExists){%>
                    value="<%= activity.initialDate%>"
                 <%}%>
+                    onchange="setMinToSelected()"
             >
         </div>
         <br>
@@ -147,14 +149,35 @@
         </div>
         <br>
         <div class="form-group">
-            <label for="image">Add image:</label>
-            <input class="form-control-file" type="file" id="image" name="image">
+            <label for="avatar">
+                <%if(imageExists || activityExists){%>
+                    Edit image:
+                <%}else{%>
+                    Upload image:
+                <%}%>
+            </label>
+            <input class="form-control-file" type="file" id="image" name="avatar">
         </div>
-
+        <%if(imageExists) { %>
+            <img src="<%=imagePath%>" alt="..." class="img-thumbnail">
+        <%}else if (activityExists){%>
+            <img src="<%=activity.imagePath%>" alt="..." class="img-thumbnail">
+        <%}%>
         <div class="d-flex justify-content-center">
-            <button type="submit"  class="bg-warning mt-3 btn-lg">Save Author</button>
+            <button type="submit"  class="bg-warning mt-3 btn-lg">Save Activity</button>
         </div>
 
     </form>
 </div>
+
+<script>
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("initial").setAttribute('min', today);
+  document.getElementById("final").setAttribute('min', today);
+  function setMinToSelected() {
+    var value = document.getElementById("initial").value
+    console.log(value)
+    document.getElementById("final").setAttribute('min', value);
+  }
+</script>
 <!--Button-->
