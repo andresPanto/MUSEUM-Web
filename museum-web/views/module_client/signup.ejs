@@ -1,0 +1,81 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('shared/header.ejs')%>
+<% const userExists = typeof(user) != 'undefined'%>
+<!--Title-->
+<div class="text-center">
+<h2><b>Welcome to MUSEUM</b></h2>
+<h3><%= userExists ? 'Edit My Info' : 'Please, complete the following form.' %></h3>
+</div>
+
+<% if (typeof error != 'undefined'){%>
+    <div class="alert alert-danger mt-2 mb-2 text-center container" role="alert">
+        <%= error %>
+      </div>
+<% } %>
+
+<% if (typeof success != 'undefined'){%>
+    <div class="alert alert-success mt-2 mb-2 text-center container" role="alert">
+        <%= success %>
+      </div>
+<% } %>
+
+<% if (userExists) { %>
+<div class="container text-center mb-3">
+    <img class="img-responsive" width="260px" src="<%= user.imagePath %>">
+</div>
+<% } %>
+<!--Mandar este estilo al archivo de estilos-->
+<div  style="margin: 0 auto; width:80%;">
+    <form action="<%= userExists ?  '/users/me' : '/users/signup'%>" method="POST" enctype="multipart/form-data">
+        <div class="form-group row">
+            <label for="fullname" class="col-sm-2 col-form-label">Full Name:</label>
+            <div class="col-sm-10">                                                         <!--For editing a user-->               <!--When signing up fails-->
+            <input class="form-control" id="fullname" type="text" name="fullname" value="<%= userExists ? user.fullName : '' %><%= typeof(fullname)!='undefined' ? fullname : '' %>" <%= userExists ? 'disabled' : '' %>>
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label" >E-mail:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="email" type="email" name="email" value="<%= userExists ? user.email : '' %><%= typeof(email)!='undefined' ? email : '' %>">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="phone" class="col-sm-2 col-form-label">Phone Number:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="phone" type="text" name="phone" value="<%= userExists ? user.phoneNumber : '' %><%= typeof(phone)!='undefined' ? phone : '' %>">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="usernamef" class="col-sm-2 col-form-label">Username:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="usernamef" type="text" name="username" value="<%= typeof(username)!='undefined' ? username : '' %>" <%= userExists ? 'disabled' : '' %>>
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="password" class="col-sm-2 col-form-label"><%= userExists ? 'Change Password:' : 'Password:' %></label>
+            <div class="col-sm-10">
+            <input class="form-control" id="password" type="password" name="password">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="cpassword" class="col-sm-2 col-form-label">Confirm Password:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="cpassword" type="password" name="cpassword">
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="file"><%= userExists ? 'Change Image:' : 'Select an image:' %></label>
+            <input class="form-control-file" type="file" id="file" name="file">
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+            <button class="bg-warning mt-3 btn-lg" type="submit"><%= userExists ? 'Save Changes' : 'Sign me Up!' %></button>
+        </div>
+    </form>
+</div>
+

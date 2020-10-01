@@ -1,0 +1,73 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
+<h1 class="text-center"><b>Artworks</b></h1>
+<br>
+<form action="/artworks/admin/new" method="get">
+    <button type="submit" class="ml-5 mb-3 btn btn-lg btn-success"><span class="glyphicon glyphicon-pencil"></span> Add Artwork</button>
+</form>
+
+<!--Artworks list-->
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Artwork Name</th>
+            <th>Year</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Manage Authors</th>
+            <th>Status</th>
+        </tr>
+        <!--Iterar con un for-->
+        <%artworks.forEach((artwork)=> { %>
+        <%const isActive = artwork.status%>
+        <tr>
+            <td>
+                <%= artwork.name%>
+            </td>
+            <td>
+                <%= artwork.year%>
+            </td>
+            <td>
+                <%= artwork.type%>
+            </td>
+            <td>
+                <%= artwork.description%>
+            </td>
+            <td>
+                <form action="/artworks/admin/edit/<%= artwork.idArtwork%>" method="get">
+                    <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+                </form>
+            </td>
+            <td>
+                <form action="/artwork-authors/<%=artwork.idArtwork%>" method="get">
+                    <button type="submit" class="btn btn-warning"> <span class="glyphicon glyphicon-user"></span> Authors</button>
+                </form>
+
+            </td>
+            <td>
+                <form action="/artworks/admin/status/<%= artwork.idArtwork%>" method="get">
+                    <button type="submit"
+                    <%if(isActive){%>
+                            class="btn btn-danger"
+                    <%}else{%>
+                            class="btn btn-success"
+                            <%}%>
+                    >
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                        <%if(isActive){%>
+                            Disable
+                        <%}else{%>
+                            Enable
+                        <%}%>
+                    </button>
+
+                </form>
+            </td>
+        </tr>
+        <!--Fin for-->
+        <% })%>
+    </table>
+    <hr>
+</div>

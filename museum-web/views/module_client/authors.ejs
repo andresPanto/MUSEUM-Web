@@ -1,0 +1,66 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('shared/header.ejs')%>
+<!--Breadcrumbs-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-white">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/activities/<%= activity.type.toLowerCase() %>"><%= activity.type.charAt(0).toUpperCase() + activity.type.slice(1) %>s</a></li>
+      <li class="breadcrumb-item"><a href="/activities/<%= activity.type.toLowerCase() %>/<%= activity.idActivity%>"><%= activity.name %></a></li>
+      <li class="breadcrumb-item"><a href="/artworks/<%= activity.idActivity %>">Artworks</a></li>
+      <li class="breadcrumb-item active">Authors</li>
+    </ol>
+</nav>
+<!--Artwork Main Info-->
+<div>
+  <h3 class="text-center"><%= artwork.type.charAt(0).toUpperCase() + artwork.type.slice(1) %>s</h3>
+  <h3 class="text-center"><b><%= artwork.name.toUpperCase()%></b></h3>
+  <h4 class="text-center">AUTHORS</h4>
+</div>
+
+<!--Artwork's Authors-->
+<div class="container mb-5">
+  <!--Recorrer con un for de dos en dos -->
+  <% authorsArray.forEach((author) => {%>
+    <% if (author.status) { %>
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <div class="row">
+                    <div class="col-sm-12">
+                        <h4><b><%= author.fullName %></b></h4>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <img class="img-responsive" width="260px" src="<%= author.imagePath %>">
+                </div>
+                <div class="col-sm-10 pl-5 d-flex align-self-center">
+                    <p class="pl-5 text-justify "><%= author.description %></p>
+                </div>
+            </div>
+           
+        </div>
+    </div> 
+    <% } %>
+<% }); %>
+<!--Fin For-->
+</div>
+
+
+<div class="container text-center">
+    <% const logged_in = typeof username != 'undefined' %>
+    <% if (logged_in) {%>
+    <a href="/purchases/<%= activity.idActivity %>">
+        <button class="bg-warning mt-3 btn-lg" >Buy your ticket</button>
+    </a>
+    <% } else {%>
+        <button class="bg-warning mt-3 btn-lg" data-toggle="modal" data-target="#modalLoginForm">Buy your ticket</button>
+    <% }%>
+    <br>
+    <!-- activities = activity category-->
+    <a href="/activities/<%= activity.type.toLowerCase() %>">
+      <button class="bg-primary mt-3 btn-lg">See other <%= activity.type.toLowerCase() %>s</button>
+    </a>
+</div>
+
+
+<%- include ('shared/footer.ejs')%>

@@ -1,0 +1,83 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
+
+<!--Podemos usar un plugin de jquery o una librería de js para que se vea mejor-->
+<%const hoursExists = typeof hours !== 'undefined'%>
+<%const minutesExists = typeof minutes !== 'undefined'%>
+<%const capacityExists = typeof capacity !== 'undefined'%>
+<%const scheduleExists = typeof schedule !== 'undefined'%>
+<%if(scheduleExists){%>
+<% const scheduleSplit = schedule.schedule.split(':')%>
+<%}%>
+
+<h1 class="text-center"><b>
+        <%if(scheduleExists){%>
+            Edit Schedule
+        <%}else{%>
+            New Schedule
+        <%}%>
+    </b></h1>
+<div class="container">
+    <form
+            <%if(scheduleExists){%>
+                action="/schedules/admin/edit/<%=idActivity%>/<%=schedule.idSchedule%>"
+            <%}else{%>
+                action="/schedules/admin/new/<%=idActivity%>"
+            <%}%>
+          method="post">
+
+
+        <div class="form-group row">
+            <label for="hours" class="col-sm-2 col-form-label">Hours:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="hours"  type="number" name="hours" max="24" min="0"
+                <%if(hoursExists) { %>
+                   value="<%= hours%>"
+                <%}else if (scheduleExists){%>
+                    value="<%= schedule.schedule.split(':')[0]%>"
+                <%}%>
+            >
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="minutes" class="col-sm-2 col-form-label">Minutes:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="minutes"  type="number" name="minutes" max="60" min="0"
+                <%if(minutesExists) { %>
+                   value="<%= minutes%>"
+                <%}else if (scheduleExists){%>
+                   value="<%= schedule.schedule.split(':')[1]%>"
+                <%}%>
+            >
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="capacity" class="col-sm-2 col-form-label">Capacity:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="capacity"  type="number" name="capacity" min="0"
+                <%if(capacityExists) { %>
+                   value="<%= capacity%>"
+                <%}else if (scheduleExists){%>
+                   value="<%= schedule.capacity%>"
+                <%}%>
+                <%if(scheduleExists){%>
+                   readonly
+                <%}%>
+            >
+            </div>
+        </div>
+        <div class="container text-center">
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-time"></span>
+
+                <%if(scheduleExists){%>
+                    Edit Schedule
+                <%}else{%>
+                    Add Schedule
+                <%}%>
+            </button>
+        </div>
+    </form>
+</div>

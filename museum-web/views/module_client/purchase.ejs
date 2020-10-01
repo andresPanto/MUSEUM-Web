@@ -1,0 +1,98 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('shared/header.ejs')%>
+<% if (typeof error != 'undefined'){%>
+    <div class="alert alert-danger mt-2 mb-2 text-center container" role="alert">
+        <%= error %>
+      </div>
+<% } %>
+<% if (typeof success != 'undefined'){%>
+    <div class="alert alert-success mt-2 mb-2 text-center container" role="alert">
+        <%= success %>
+      </div>
+<% } %>
+<!--Activity info (main)-->
+<div >
+    <h3 class="text-center"><%= activity.type.charAt(0).toUpperCase() + activity.type.slice(1) %>s</h3>
+    <h3 class="text-center"><b><%= activity.name.toUpperCase()%></b></h3>
+    <img class="rounded mx-auto d-block mb-2" width="400px" src="<%= activity.imagePath %>">
+    <h3 class="text-center">BUY YOUR TICKET</h3>
+</div>
+<!--Purhcase form-->
+<% const today = new Date().toJSON().slice(0,10).replace(/-/g,'-'); %>
+
+<div class="container">
+    <form action="/purchases/<%= activity.idActivity %>" method="POST">
+        <!--Date picker-->
+        <div>
+            <label for="date">Choose the date of your visit:</label>
+            <input type="date" id="date" name="date" min="<%= today > activity.initialDate ? today : activity.initialDate %>" max="<%= activity.finalDate %>" >
+        </div>
+        
+        <!--For Schedules-->
+        <% schedules.forEach((schedule) => {%>
+            <% if ((schedule.capacity > 0 ) && (schedule.status)) { %>
+        <div class="form-check form-check-inline ml-2" data-onload="loadSchedule(<%= schedule %>)">
+            <!--Soy gil, aquí directamente se puede pasar el capacity del schedule seleccionado y no el id.-->
+                                            <!-- schedule.capacity   -->
+            <input onclick = "updateCapacity(<%= schedule.idSchedule %>)"  class="form-check-input" type="radio" name="schedule" id="<%= schedule.idSchedule %>" value="<%= schedule.idSchedule %>" checked>
+            <label class="form-check-label" for="<%= schedule.idSchedule %>">
+                <%= schedule.schedule %>
+             </label>
+        </div>
+            <% } %>
+        <% }); %>
+        <!--Fin for-->
+        <div class="container text-center">
+            <label>Quantity:</label>
+            <input onchange="getPrice()" name="quantity" id="quantity" type="number" value="1" min="1" max="<%= schedules[schedules.length - 1].capacity %>" step="1"/>
+        </div>
+        <div class="container text-center">
+            <table>
+                <tr>
+                    <th class="pr-5"><b>Admission</b></th>
+                    <th><b>Total</b></th>
+                </tr>
+                <tr>
+                    <td id="price" class="pr-5">
+                        $<%= activity.price %>
+                    </td>
+                    <td id="total">
+                        $60.00
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="container text-center">
+            <button class="bg-warning mt-3 btn-lg" onclick="getPrice()" type="submit">Buy your ticket</button>
+        </div>
+      </form>
+</div>
+
+<script>
+    var schedules = <%-JSON.stringify(schedules)%>;
+    //Soy gil, aquí directamente se puede recibir el capacity del schedule seleccionado.
+    function updateCapacity(idSchedule){
+        for (var schedule of schedules){
+            if(schedule.idSchedule==idSchedule){
+                document.getElementById("quantity").value = 1;
+                document.getElementById("quantity").setAttribute("max",schedule.capacity);
+                getPrice();
+            }
+        }
+    }
+    //Se puede hacer esto
+    /*
+    function updateCapacity(capacity){
+        document.getElementById("quantity").value = 1;
+        document.getElementById("quantity").setAttribute("max",capacity);
+        getPrice();
+    }
+    */
+    function getPrice(){
+        var price = document.getElementById("price").innerHTML.split('$')[1];
+        var quantity = document.getElementById("quantity").value;
+        document.getElementById("total").innerHTML = "$" + price*quantity;
+    }
+    window.onload = getPrice();
+</script>
+<%- include ('shared/footer.ejs')%>

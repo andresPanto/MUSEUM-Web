@@ -1,0 +1,69 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('shared/header.ejs')%>
+<!--Breadcrumbs-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-white">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/activities/<%= activity.type.toLowerCase() %>"><%= activity.type.charAt(0).toUpperCase() + activity.type.slice(1) %>s</a></li>
+      <li class="breadcrumb-item active"><%= activity.name %></li>
+    </ol>
+</nav>
+<!--Activity info (main)-->
+<div>
+<h3 class="text-center"><%= activity.type.charAt(0).toUpperCase() + activity.type.slice(1) %>s</h3>
+<h3 class="text-center"><b><%= activity.name.toUpperCase()%></b></h3>
+<% if (activity.type != 'Tour') { %>
+<h4 class="text-center"><%= activity.initialDate %> - <%= activity.finalDate %></h4>
+<% } else {  %>
+<h4 class="text-center">EVERYDAY</h4>
+<% }%>
+<img class="rounded mx-auto d-block mb-2" width="400px" src="<%= activity.imagePath %>">
+<p class=" mx-5 text-center"><%= activity.description %></p>
+</div>
+<!--Activity info (essential)-->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 bg-info card card-body d-flex align-self-center">
+            <h3 class="text-center"><b>Essential Information</b></h3>
+            <h4><b>Location</b></h4>
+            <p><%= activity.location %></p>
+            <h4><b>Admission</b></h4>
+            <p>$<%= activity.price %></p>
+            <% if (activity.name != 'Self-guided Tour') { %>
+            <h4><b>Duration</b></h4>
+            <p><%= activity.duration %></p>
+            <% } %>
+            <h4><b>Further Information</b></h4>
+            <p><%= activity.pmPhoneNumber %></p>
+            <h4><b>Project Manager</b></h4>
+            <p><%= activity.pmName %></p>
+        </div>
+        <div class="col-sm-6 text-center border-0 card card-body justify-content-center ">
+            <div>
+            <a href="/artworks/<%= activity.idActivity %>"><button class="btn-lg">See the artworks</button></a>
+            </div>
+            <br>
+            <div>
+            <img width="400px" src="/images/see/<%= activity.type %>.png">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container text-center">
+<% const logged_in = typeof username != 'undefined' %>
+<% if (logged_in) {%>
+<a href="/purchases/<%= activity.idActivity %>">
+    <button class="bg-warning mt-3 btn-lg" >Buy your ticket</button>
+</a>
+<% } else {%>
+    <button class="bg-warning mt-3 btn-lg" data-toggle="modal" data-target="#modalLoginForm">Buy your ticket</button>
+<% }%>
+
+<br>
+<!-- activities = activity category-->
+<a href="/activities/<%= activity.type.toLowerCase() %>">
+<button class="bg-primary mt-3 btn-lg">See other <%= activity.type.toLowerCase() %>s</button>
+</a>
+</div>
+
+<%- include ('shared/footer.ejs')%>

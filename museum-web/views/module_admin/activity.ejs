@@ -1,0 +1,183 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
+
+<!--Activity form-->
+<!--Mandar este estilo al archivo de estilos-->
+<%const nameExists = typeof name !== 'undefined'%>
+<%const typeExists = typeof type !== 'undefined'%>
+<%const locationExists = typeof location !== 'undefined'%>
+<%const initialDateExists = typeof initialDate !== 'undefined'%>
+<%const finalDateExists = typeof finalDate !== 'undefined'%>
+<%const durationExists = typeof duration !== 'undefined'%>
+<%const pmNameExists = typeof pmName !== 'undefined'%>
+<%const pmPhoneNumberExists = typeof pmPhoneNumber !== 'undefined'%>
+<%const priceExists = typeof price !== 'undefined'%>
+<%const descriptionExists = typeof description !== 'undefined'%>
+<%const imageExists = typeof imagePath !== 'undefined'%>
+<%const activityExists = typeof activity !== 'undefined'%>
+<h1 class="text-center"><b>
+        <%if(activityExists){%>
+              Edit Activity
+        <%}else{%>
+            New Activity
+        <%}%>
+    </b></h1>
+<div  style="margin: 0 auto; width:80%;">
+    <form
+            <%if(activityExists){%>
+                action="/activities/admin/edit/<%=activity.idActivity%>"
+            <%}else{%>
+                action="/activities/admin/new"
+            <%}%>
+            method="POST"
+            enctype="multipart/form-data">
+        <div class="form-group row">
+            <label for="nameActivity" class="col-sm-2 col-form-label">Activity Name:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="nameActivity" type="text" name="name"
+                <%if(nameExists) { %>
+                   value="<%= name%>"
+                <%}else if (activityExists){%>
+                   value="<%= activity.name%>"
+                <%}%>
+            >
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="type" class="col-sm-2 col-form-label" >Type:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="type" type="text" name="type"
+                <%if(typeExists) { %>
+                   value="<%= type%>"
+                <%}else if (activityExists){%>
+                   value="<%= activity.type%>"
+                <%}%>
+            >
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="location" class="col-sm-2 col-form-label">Location:</label>
+            <div class="col-sm-10">
+            <textarea class="form-control" id="location" type="text" name="location"><%if(locationExists){%><%=location%><%}else if (activityExists){%><%= activity.location%><%}%></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="initial">Initial Date:</label>
+            <input type="date" id="initial" name="initialDate"
+                 <%if(initialDateExists) { %>
+                   value="<%= initialDate%>"
+                <%}else if (activityExists){%>
+                   value="<%= activity.initialDate%>"
+                <%}%>
+                    onchange="setMinToSelected()"
+            >
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="final">Final Date:</label>
+            <input type="date" id="final" name="finalDate"
+                <%if(finalDateExists) { %>
+                   value="<%= finalDate%>"
+                <%}else if (activityExists){%>
+                   value="<%= activity.finalDate%>"
+                <%}%>
+
+            >
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Description:</label>
+            <div class="col-sm-10">
+            <textarea class="form-control" id="description" type="text" name="description"><%if(descriptionExists){%><%=description%><%}else if (activityExists){%><%= activity.description%><%}%></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="duration" class="col-sm-2 col-form-label">Duration (HH:MM):</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="duration" type="text" name="duration"
+                <%if(durationExists) { %>
+                   value="<%= duration%>"
+                <%}else if (activityExists){%>
+                   value="<%= activity.duration%>"
+                <%}%>
+            >
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="pm" class="col-sm-2 col-form-label">Project Manager:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="pm" type="text" name="pmName"
+                <%if(pmNameExists) { %>
+                   value="<%= pmName%>"
+                <%}else if (activityExists){%>
+                   value="<%= activity.pmName%>"
+                <%}%>
+            >
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="pmnumber" class="col-sm-2 col-form-label">PM Phone Number:</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="pmnumber" type="text" name="pmPhoneNumber"
+                <%if(pmPhoneNumberExists) { %>
+                   value="<%= pmPhoneNumber%>"
+                <%}else if (activityExists){%>
+                   value="<%= activity.pmPhoneNumber%>"
+                <%}%>
+            >
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="cost" class="col-sm-2 col-form-label">Cost(USD):</label>
+            <div class="col-sm-10">
+            <input class="form-control" id="cost"  type="number" step="0.01" name="price" min="0.00"
+                <%if(priceExists) { %>
+                   value="<%= price%>"
+                <%}else if (activityExists){%>
+                   value="<%= activity.price%>"
+                <%}%>
+            >
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="avatar">
+                <%if(imageExists || activityExists){%>
+                    Edit image:
+                <%}else{%>
+                    Upload image:
+                <%}%>
+            </label>
+            <input class="form-control-file" type="file" id="image" name="avatar">
+        </div>
+        <%if(imageExists) { %>
+            <img src="<%=imagePath%>" alt="..." class="img-thumbnail">
+        <%}else if (activityExists){%>
+            <img src="<%=activity.imagePath%>" alt="..." class="img-thumbnail">
+        <%}%>
+        <div class="d-flex justify-content-center">
+            <button type="submit"  class="bg-warning mt-3 btn-lg">Save Activity</button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("initial").setAttribute('min', today);
+  document.getElementById("final").setAttribute('min', today);
+  function setMinToSelected() {
+    var value = document.getElementById("initial").value
+    console.log(value)
+    document.getElementById("final").setAttribute('min', value);
+  }
+</script>
+<!--Button-->

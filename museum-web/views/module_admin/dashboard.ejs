@@ -1,0 +1,34 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
+<!--Meter imágenes de cada sección-->
+<div class="d-flex justify-content-around">
+    <form action="/activities/admin" method="get">
+        <button class="btn-lg btn-primary button-panel" id="button_activities">
+            Activities
+        </button>
+    </form>
+    <form action="/artworks/admin" method="get">
+        <button class="btn-lg btn-primary button-panel" id="button_artworks">
+            Artworks
+        </button>
+    </form>
+    <form action="/authors/admin" method="get">
+        <button class="btn-lg btn-primary button-panel" id="button_authors">
+            Authors
+        </button>
+    </form>
+
+
+
+    <a href="/users">
+        <button class="btn-lg btn-primary button-panel" id="button_users">
+            Users
+        </button>
+    </a>
+    <a href="/purchases/admin">
+        <button class="btn-lg btn-primary button-panel" id="button_purchases">
+            Purchases
+        </button>
+    </a>
+</div>

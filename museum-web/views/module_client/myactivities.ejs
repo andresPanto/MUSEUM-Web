@@ -1,0 +1,37 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('shared/header.ejs')%>
+<div class=" d-flex justify-content-center">
+    <h2><b> MY ACTIVITIES </b></h2>
+</div>
+<!--Validar si es que se tiene actividades compradas-->
+<% if (typeof activities != 'undefined' && activities.length != 0) {%>
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Activity Name</th>
+            <th>Category</th>
+            <th>Tickets</th>
+            <th>Attendance Date</th>
+            <th>Total(USD)</th>
+            <th>More Info</th>
+        </tr>
+        <!--Iterar con un for-->
+        <% activities.forEach((activity) => {%>
+        <tr>
+            <td><%= activity.act_name %></td>
+            <td><%= activity.act_type %></td>
+            <td><%= activity.qty %></td>
+            <td><%= activity.att_date %></td>
+            <td>$ <%= activity.total %></td>
+            <td><a href="/activities/<%= activity.act_type.toLowerCase() %>/<%= activity.id_act %>">Go to activity</a></td>
+        </tr>
+        <% }); %>
+        <!--Fin for-->
+    </table>
+    <hr>
+</div>
+<% } else { %>
+    <div class="alert alert-info mt-2 mb-2 text-center container" role="alert">
+        You haven't bought anything yet!
+      </div>
+<% }%>

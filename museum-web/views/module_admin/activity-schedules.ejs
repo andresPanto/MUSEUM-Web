@@ -1,0 +1,59 @@
+<%- include ('../shared/general-html/head.ejs')%>
+<%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
+<h1 class="text-center"><b><%=activity.name%></b></h1>
+<br>
+<h2 class="text-center">Schedules</h2>
+<div class="col-md-12 text-center mb-2">
+    <form action="/schedules/admin/new/<%=activity.idActivity%>" method="get">
+        <button type="submit" class="ml-5 mb-3 btn btn-lg btn-success"><span class="glyphicon glyphicon-pencil"></span> Add Schedule</button>
+    </form>
+</div>
+<!--Schedule List-->
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Hour</th>
+            <th>Capacity</th>
+            <th>Edit</th>
+            <th>Status</th>
+        </tr>
+        <!--For para setear schedules-->
+        <%schedules.forEach((schedule)=> { %>
+            <%const isActive = schedule.status%>
+
+        <tr>
+            <td>
+                <%= schedule.schedule%>
+            </td>
+            <td>
+                <%= schedule.capacity%>
+            </td>
+            <td>
+                <form action="/schedules/admin/edit/<%=activity.idActivity%>/<%=schedule.idSchedule%>" method="get">
+                    <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+                </form>
+            </td>
+            <td>
+                <form action="/schedules/admin/status/<%=activity.idActivity%>/<%=schedule.idSchedule%>" method="get">
+                    <button type="submit"
+                    <%if(isActive){%>
+                            class="btn btn-danger"
+                    <%}else{%>
+                            class="btn btn-success"
+                            <%}%>
+                    >
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                        <%if(isActive){%>
+                            Disable
+                        <%}else{%>
+                            Enable
+                        <%}%>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <!--Fin for-->
+        <% })%>
+    </table>
+</div>
