@@ -189,7 +189,7 @@ export class ActivityController {
 
       const errors : ValidationError[] = await validate(newActivity);
       if(errors.length > 0){
-        const errorMessage = 'Failed to create Activity';
+        const errorMessage = 'Data not valid to create Activity';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         newActivity.imagePath = undefined;
@@ -423,7 +423,7 @@ export class ActivityController {
 
       const errors : ValidationError[] = await validate(newActivity);
       if(errors.length > 0){
-        const errorMessage = 'Failed to update Activity';
+        const errorMessage = 'Data not valid to update Activity';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         errors.forEach( err => {

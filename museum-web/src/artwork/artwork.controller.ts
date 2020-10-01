@@ -211,7 +211,7 @@ export class ArtworkController {
 
       const errors: ValidationError[] = await validate(newArtwork);
       if (errors.length > 0) {
-        const errorMessage = 'Failed to create Artwork';
+        const errorMessage = 'Data not valid to create Artwork';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         newArtwork.imagePath = undefined;
@@ -323,7 +323,7 @@ export class ArtworkController {
 
       const errors: ValidationError[] = await validate(newArtwork);
       if (errors.length > 0) {
-        const errorMessage = 'Failed to update Artwork';
+        const errorMessage = 'Data not valid to update Artwork';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         errors.forEach(err => {
