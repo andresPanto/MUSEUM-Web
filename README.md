@@ -5,7 +5,7 @@ Web application for managing a museum.
 Activities, Artworks and Authors are the centerpiece of the project.
 Purchases and Schedules are also taken into consideration.
 Modules for clients and admins were developed.
-Data for replicating the project is provided
+Data for replicating the project is provided.
 
 This project was developed using:
 
@@ -20,5 +20,5 @@ This project was developed using:
 - [X] Ajax
 
 
-Shoutout to Adrián Egüez (adrian.eguez.epn.edu.ec) for helping the development of the project. 
+Shoutout to Profe Adrián (adrian.eguez@epn.edu.ec) for helping in the development of this project. 
 
