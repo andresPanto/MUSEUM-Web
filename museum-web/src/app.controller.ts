@@ -90,7 +90,7 @@ export class AppController {
   async getTopPurchasedActivities(type: String, quantity: number) {
     let activities: Array<ActivityEntity> = [];
         try{
-          //Obtain id's of performances
+          //Obtain id's of activities
           activities = await this._activityService.getCategoryActivities(type);
             var idActivities = {};
               if(activities){

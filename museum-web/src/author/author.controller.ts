@@ -158,7 +158,7 @@ export class AuthorController {
       newAuthor.status = true;
       const errors : ValidationError[] = await validate(newAuthor);
       if(errors.length > 0){
-        const errorMessage = 'Failed to create Author';
+        const errorMessage = 'Data not valid to create Author';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         newAuthor.imagePath = undefined;
@@ -266,7 +266,7 @@ export class AuthorController {
       }
       const errors : ValidationError[] = await validate(newAuthor);
       if(errors.length > 0){
-        const errorMessage = 'Failed to update Author';
+        const errorMessage = 'Data not valid to update Author';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         errors.forEach( err => {

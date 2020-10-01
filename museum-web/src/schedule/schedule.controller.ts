@@ -242,7 +242,7 @@ export class ScheduleController {
       updateScheduleDTO.schedule  = `${hours}:${minutes}`;
       const errors : ValidationError[] = await validate(updateScheduleDTO);
       if(errors.length > 0){
-        const errorMessage = 'Failed to create Schedule';
+        const errorMessage = 'Data not valid to update Schedule';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         errors.forEach( err => {
@@ -309,7 +309,7 @@ export class ScheduleController {
       newSchedule.status = true;
       const errors : ValidationError[] = await validate(newSchedule);
       if(errors.length > 0){
-        const errorMessage = 'Failed to create Schedule';
+        const errorMessage = 'Data not valid to create Schedule';
         let queryParamsString = `?message=${errorMessage}`;
         console.log('Errors', errors);
         errors.forEach( err => {

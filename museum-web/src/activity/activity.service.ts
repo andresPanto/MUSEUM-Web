@@ -14,7 +14,8 @@ export class ActivityService {
   getCategoryActivities(type: String){
     const query: FindManyOptions<ActivityEntity> ={
       where:{
-        type:type
+        type:type,
+        status:true
       }
     }
     return this.activityRepository.find(query);
