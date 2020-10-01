@@ -8,7 +8,18 @@ import { ScheduleCreateDto } from './dto/schedule.create-dto';
 export class ScheduleController {
   constructor(private readonly schedulesService: ScheduleService) {
   }
- 
+  @Get('/:idActivity')
+  schedules(){
+    //Render activity-schedule.ejs
+  }
+  @Get('/:idActivity/new')
+  create(){
+    //Render schedule.ejs
+  }
+  @Get('/:idActivity/:idSchedule')
+  edit(){
+    //Render schedule.ejs
+  }
   @Get()
     mostrarTodos(){
 

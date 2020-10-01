@@ -17,4 +17,11 @@ export class UserRoleService {
   //     throw new InternalServerErrorException(e);
   //   }
   // }
+  saveClient(urentity: UserRoleEntity){
+    /*
+    return this._userRoleRepository.createQueryBuilder("user_role").
+    insert().into('user_role').values({"id_user":idClient,"id_role":1}).execute();
+    */
+   return this._userRoleRepository.save(urentity);
+  }
 }

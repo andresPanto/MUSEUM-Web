@@ -3,6 +3,9 @@ import { AuthorController } from './author.controller';
 import { AuthorService } from './author.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthorEntity } from './author.entity';
+import { ArtworkAuthorModule } from 'src/artwork-author/artwork-author.module';
+import { ArtworkModule } from 'src/artwork/artwork.module';
+import { ActivityModule } from 'src/activity/activity.module';
 
 @Module({
   imports: [
@@ -11,7 +14,10 @@ import { AuthorEntity } from './author.entity';
         AuthorEntity
         ],
       'default'
-    )
+    ),
+    ArtworkAuthorModule,
+    ArtworkModule,
+    ActivityModule
   ],
   controllers: [AuthorController],
   providers: [AuthorService],

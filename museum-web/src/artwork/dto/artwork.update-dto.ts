@@ -18,7 +18,7 @@ export class ArtworkUpdateDto{
   @MinLength(3)
   name: string;
 
-  @IsInt()
+  @IsString()
   @IsOptional()
   year: number;
 

@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository,  FindManyOptions, In } from 'typeorm';
 import { ArtworkEntity } from './artwork.entity';
 
 @Injectable()
@@ -17,4 +17,24 @@ export class ArtworkService {
       throw new InternalServerErrorException(e);
     }
   }
+  //Obtain all artworks from a given array of ids
+  getArtworks(ids: String[]){
+    const query: FindManyOptions<ArtworkEntity> = {
+      where:[
+        {
+          idArtwork:In(ids)
+          }
+        ]
+    } 
+    return this.artworkRepository.find(query);
+  }
+  //Obtain a certain artwork given an id
+  getArtwork(idArtwork: number){
+    return this.artworkRepository.findOne(idArtwork);
+  }
+  //Get all artworks stored in the database
+  getAllArtworks(){
+    return this.artworkRepository.find();
+  }
+  
 }

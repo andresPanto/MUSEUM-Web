@@ -1,21 +1,55 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException, Session } from '@nestjs/common';
+import { ActivityArtworkService } from 'src/activity-artwork/activity-artwork.service';
+import { ActivityService } from 'src/activity/activity.service';
 import { ArtworkService } from './artwork.service';
 
 @Controller('artworks')
 export class ArtworkController {
-  constructor(private readonly artworksService: ArtworkService) {
+  constructor(private readonly _artworksService: ArtworkService,
+    private readonly _activityArtworkService: ActivityArtworkService,
+    private readonly _activityService: ActivityService) {
   }
- 
-    @Get()
-    mostrarTodos(){
-
-    }
-    @Get('/:id')
-    mostrarUno(
-      @Param() parametrosDeRuta
+    @Get('/:idActivity')
+    async getActivityArtworks(
+      @Param() route,
+      @Res() res,
+      @Session() session
     ){
-
+      let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
+        if (!isNaN(route.idActivity)){
+          try{
+              //TODO: Refactorize this
+              const idActivity = route.idActivity;
+              let activity = await this._activityService.getActivity(Number(idActivity));
+              let registry = await this._activityArtworkService.getActivityArtworks(idActivity);          
+              let idsArtworks = []
+              registry.forEach(element => {
+                idsArtworks.push(element['artworkIdArtwork']);
+              });
+              let artworks = await this._artworksService.getArtworks(idsArtworks);
+              res.render('module_client/artworks',{username:username, activity: activity, artworksArray: artworks})
+          
+          }catch(e){
+            console.log("Error artwork: ",e);
+            throw new NotFoundException('Error while getting artworks.');
+          }
+        }else{
+          throw new NotFoundException('There are no artworks matching this activity.');
+        }
+        //Render artworks.ejs
     }
+    @Get() //Validar si es admin
+    mostrarTodos() {
+        //Render admin/artworks.ejs
+    }
+    @Get('new')
+    crearArtwork(){
+      //Render artwork.ejs
+    }
+
     @Post()
     crearUno(
       @Body() parametrosDeCuerpo
