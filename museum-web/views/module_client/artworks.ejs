@@ -19,6 +19,7 @@
 <div class="container mb-5">
           <!--Recorrer con un for de dos en dos -->
           <% artworksArray.forEach((artwork) => {%>
+            <% if (artwork.status) { %>
             <div class="row mt-4">
                 <div class="col-sm-12">
                     <div class="row">
@@ -39,7 +40,8 @@
                     </div>
                    
                 </div>
-            </div> 
+            </div>
+            <% } %> 
         <% }); %>
         <!--Fin For-->
 </div>

@@ -4,9 +4,9 @@ export const CONSTANTS = {
   DB: {
     name: "default",
     host: 'localhost',
-      port: 32769, // El puerto se debe cambiar según la base
-      username: 'museum-web-user', //usuario
-      password: 'laclaveesunfactorimportante12345', //pass
+      port: 3306, // El puerto se debe cambiar según la base
+      username: 'root', //usuario
+      password: '', //pass
       database: 'museum-web', // nombre BD
       entities: [ // Poner todas las entidades de la BD
         ...ENTITIES
