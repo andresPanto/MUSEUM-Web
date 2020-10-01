@@ -1,7 +1,7 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('header.ejs') %>
 <%- include ('./error_message.ejs')%>
-<h1 class="text-center"><b>New Artwork</b></h1>
+
 <!--Artwork form-->
 <!--Mandar este estilo al archivo de estilos-->
 <%const nameExists = typeof name !== 'undefined'%>
@@ -10,6 +10,15 @@
 <%const descriptionExists = typeof description !== 'undefined'%>
 <%const imageExists = typeof imagePath !== 'undefined'%>
 <%const artworkExists = typeof artwork !== 'undefined'%>
+
+<h1 class="text-center"><b>
+        <%if(artworkExists){%>
+            Edit Artwork
+        <%}else{%>
+            New Artwork
+        <%}%>
+    </b></h1>
+
 
 <div  style="margin: 0 auto; width:80%;">
     <form

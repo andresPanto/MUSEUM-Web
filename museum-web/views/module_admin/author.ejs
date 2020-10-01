@@ -1,7 +1,7 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('header.ejs') %>
 <%- include ('./error_message.ejs')%>
-<h1 class="text-center"><b>New Author</b></h1>
+
 <!--Author form-->
 <!--Mandar este estilo al archivo de estilos-->
 <%const fullNameExists = typeof fullName !== 'undefined'%>
@@ -9,6 +9,15 @@
 <%const descriptionExists = typeof description !== 'undefined'%>
 <%const imageExists = typeof imagePath !== 'undefined'%>
 <%const authorExists = typeof author !== 'undefined'%>
+
+<h1 class="text-center"><b>
+        <%if(authorExists){%>
+            Edit Author
+        <%}else{%>
+            New Author
+        <%}%>
+    </b></h1>
+
 <div  style="margin: 0 auto; width:80%;">
     <form
             <%if(authorExists){%>
