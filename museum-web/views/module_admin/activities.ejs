@@ -58,7 +58,10 @@
 
             </td>
             <td>
-                <button href="#" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> Artworks</button>
+                <form action="/activity-artworks/<%=activity.idActivity%>" method="get">
+                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> Artworks</button>
+                </form>
+
             </td>
             <td>
                 <form action="/activities/admin/status/<%= activity.idActivity%>" method="get">
