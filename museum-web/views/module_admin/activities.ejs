@@ -1,9 +1,13 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
 <h1 class="text-center"><b>Activities</b></h1>
 <br>
-<button href="#" class="ml-5 mb-3 btn btn-lg btn-success"><span class="glyphicon glyphicon-pencil"></span> Add Activity</button>
 
+
+<form action="/activities/admin/new" method="get">
+    <button type="submit" class="ml-5 mb-3 btn btn-lg btn-success"><span class="glyphicon glyphicon-pencil"></span> Add Activity</button>
+</form>
 <!--Activities list-->
 <div class="container">
     <table class="table table-striped table-bordered">
@@ -20,19 +24,66 @@
             <th>Disable</th>
         </tr>
         <!--Iterar con un for-->
+        <%activities.forEach((activity)=> { %>
+            <%const isActive = activity.status%>
         <tr>
-            <td>Performance 1</td>
-            <td>Perfomance</td>
-            <td>01-01-2020</td>
-            <td>02-01-2020</td>
-            <td>02:00</td>
-            <td>25.00</td>
-            <td><button href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-            <td><button href="#" class="btn btn-warning"><span class="glyphicon glyphicon-time"></span> Schedule</button></td>
-            <td><button href="#" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> Artworks</button></td>
-            <td><button href="#" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Disable</button></td>
+            <td>
+                <%= activity.name%>
+            </td>
+            <td>
+                <%= activity.type%>
+            </td>
+            <td>
+                <%= activity.initialDate%>
+            </td>
+            <td>
+                <%= activity.finalDate%>
+            </td>
+            <td>
+                <%= activity.duration%>
+            </td>
+            <td>
+                <%= activity.price%>
+            </td>
+            <td>
+                <form action="/activities/admin/edit/<%=activity.idActivity%>">
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                </form>
+
+            </td>
+            <td>
+                <form action="/schedules/admin/activity/<%=activity.idActivity%>" method="get">
+                    <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-time"></span> Schedule</button>
+                </form>
+
+            </td>
+            <td>
+                <form action="/activity-artworks/<%=activity.idActivity%>" method="get">
+                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> Artworks</button>
+                </form>
+
+            </td>
+            <td>
+                <form action="/activities/admin/status/<%= activity.idActivity%>" method="get">
+                    <button type="submit"
+                    <%if(isActive){%>
+                            class="btn btn-danger"
+                    <%}else{%>
+                            class="btn btn-success"
+                            <%}%>
+                    >
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                        <%if(isActive){%>
+                            Disable
+                        <%}else{%>
+                            Enable
+                        <%}%>
+                    </button>
+                </form>
+            </td>
         </tr>
         <!--Fin for-->
+        <% })%>
     </table>
     <hr>
 </div>

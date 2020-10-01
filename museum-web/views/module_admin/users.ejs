@@ -1,5 +1,6 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('header.ejs') %>
+<%- include ('./error_message.ejs')%>
 <h1 class="text-center"><b>Users</b></h1>
 <!--Users list-->
 <div class="container">
@@ -14,16 +15,59 @@
             <th>Disable</th>
         </tr>
         <!--Iterar con un for-->
+        <%users.forEach((user) =>{ %>
+        <%const isActive = user.status%>
+
         <tr>
-            <td>0000001</td>
-            <td>Client</td>
-            <td>Username 2</td>
-            <td>example@domain.com</td>
-            <td>+19838383838</td>
-            <td><button href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-            <td><button href="#" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Disable</button></td>
+            <td>
+                <%=user.idUser%>
+            </td>
+            <td>
+                Client
+            </td>
+            <td>
+                <%=user.username%>
+            </td>
+            <td>
+                <%=user.email%>
+            </td>
+            <td>
+                <%=user.phoneNumber%>
+            </td>
+            <td>
+                <form action="/users/admin/<%=user.idUser%>" method="get">
+                    <button type="submit"
+                            class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span>
+                        Edit
+                    </button>
+                </form>
+
+
+            </td>
+            <td>
+                <form action="/users/admin/status/<%=user.idUser%>" method="get">
+                    <button type="submit"
+                    <%if(isActive){%>
+                            class="btn btn-danger"
+                    <%}else{%>
+                            class="btn btn-success"
+                            <%}%>
+                    >
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                        <%if(isActive){%>
+                            Disable
+                        <%}else{%>
+                            Enable
+                        <%}%>
+                    </button>
+
+                </form>
+
+
+            </td>
         </tr>
         <!--Fin for-->
+        <% })%>
     </table>
     <hr>
 </div>

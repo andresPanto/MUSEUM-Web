@@ -17,7 +17,7 @@ export class AuthService {
   logOut(session, request){
     session.userId = undefined;
     session.role = undefined;
-    session.username = undefined;
+    session.username = undefined
     request.session.destroy()
   }
 

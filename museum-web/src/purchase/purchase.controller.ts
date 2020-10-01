@@ -1,11 +1,28 @@
 import { PurchaseService } from './purchase.service';
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query, Res, Session } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  Res,
+  Session,
+} from '@nestjs/common';
+import { AuthorCreateDto } from '../author/dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
 import { PurchaseCreateDto } from './dto/purchase.create-dto';
 import { ActivityService } from 'src/activity/activity.service';
 import { ScheduleService } from 'src/schedule/schedule.service';
 import { PurchaseEntity } from './purchase.entity';
 import { UserService } from 'src/user/user.service';
+import moment from 'moment';
+import { resolve } from 'path';
+import { AuthService } from '../auth/auth.service';
+
 
 
 @Controller('purchases')
@@ -13,8 +30,10 @@ export class PurchaseController {
   constructor(private readonly _purchaseService: PurchaseService,
     private readonly _activityService: ActivityService,
     private readonly _scheduleService: ScheduleService,
-    private readonly _userService: UserService) {
+    private readonly _userService: UserService,
+    private readonly _authService: AuthService) {
   }
+
   @Get()
   async myPurchases(
     @Res() res,
@@ -57,6 +76,9 @@ export class PurchaseController {
     @Param() route,
     @Query() query
   ){
+    if (route.idActivity == 'admin'){
+      this.purchaseAdmin(res, session, query)
+    }else{
     const estaLogeado = session.username;
     if(estaLogeado){
       const idActivity = route.idActivity;
@@ -77,9 +99,11 @@ export class PurchaseController {
     }else{
       return res.redirect('/?message=Please log in.');     
     }
+    }
       
     
   }
+
   @Post('/:idActivity')
   async purchase(
     @Res() res,
@@ -137,57 +161,66 @@ export class PurchaseController {
       return res.redirect('/purchases/'+route.idActivity+'?error=There was an error, try again later.');
     }
   }
-  @Get()
-    mostrarTodos(){
 
+  @Get('/admin/status/:idPurchase')
+  async changeStatus(
+    @Session() session,
+    @Res() res,
+    @Param() routePrams
+  ){
+    console.log('purchase status');
+    const isNotAdmin = !this._authService.isLogedInAs(session, 'admin');
+    const message = 'Failed to change purchase status';
+    if (isNotAdmin){
+      return res.redirect('/users/admin')
     }
-    @Get('/:id')
-    mostrarUno(
-      @Param() parametrosDeRuta
-    ){
-
-    }
-  /*@Post()
-  async crearUno(
-    @Body() parametrosDeCuerpo,
-  ) {
-    const newPurchase = new PurchaseCreateDto();
-    const attendanceDate = new Date(parametrosDeCuerpo.attendanceDate);
-    const purchaseTime = new Date(parametrosDeCuerpo.purchaseTime);
-    attendanceDate.setDate(attendanceDate.getDate() + 1);
-    purchaseTime.setHours(purchaseTime.getHours() + 5);
-    newPurchase.attendanceDate = attendanceDate;
-    newPurchase.purchaseTime = purchaseTime;
-    newPurchase.quantity = parametrosDeCuerpo.quantity;
-    newPurchase.total = parametrosDeCuerpo.total;
-    newPurchase.status = parametrosDeCuerpo.status;
+    let updatedPurchase;
 
     try {
-      const errors : ValidationError[] = await validate(newPurchase)
-      if(errors.length > 0){
-        console.log('Errors', errors);
-        throw new BadRequestException('Errors in new Purchase')
-      }else {
-        const savedPurchase = this.purchasesService.create(newPurchase);
-        return savedPurchase
-      }
+      const idPurchase = Number(routePrams.idPurchase);
+
+      const purchase: PurchaseEntity = await this._purchaseService.findOneByID(idPurchase);
+      purchase.status = !purchase.status;
+      updatedPurchase = await this._purchaseService.update(purchase)
     }catch (e) {
       console.log(e);
-      throw new BadRequestException('Errors validating input')
+      return res.redirect(`/purchases/admin?message=${message}`)
     }
-  }*/
-    @Put('/:id')
-    editarUno(
-      @Param() parametrosDeRuta,
-      @Body() parametrosDeCuerpo
-    ){
+      if (updatedPurchase){
+        return res.redirect(`/purchases/admin`)
+      }else{
+        return res.redirect(`/purchases/admin?message=${message}`)
+      }
+  }
 
-    }
-    @Delete('/:id')
-    eliminarUno(
-      @Param() parametrosDeRuta
-    ){
 
+
+  async purchaseAdmin(
+    @Res() res,
+    @Session() session,
+    @Query() queryParams,
+  ) {
+    const isNotAdmin = !this._authService.isLogedInAs(session, 'admin')
+    if(isNotAdmin){
+      res.redirect('/users/admin')
     }
+
+    let purchases;
+    console.log('Get purchases admin');
+    try {
+      purchases = await this._purchaseService.findAll();
+    } catch (e) {
+      console.log(e);
+      const message = 'Failure loading Purchases';
+      return res.redirect(`/admin?message=${message}`);
+    }
+    return res.render(
+      'module_admin/purchases',
+      {
+        purchases,
+        username: session.username,
+        message: queryParams.message
+      });
+  }
 
 }

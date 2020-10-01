@@ -19,7 +19,7 @@ export class ArtworkCreateDto{
 
   @IsString()
   @IsNotEmpty()
-  year: number;
+  year: string;
 
   @IsString()
   @IsNotEmpty()

@@ -41,7 +41,11 @@ export class ActivityArtworkController {
               }
             }
           }
-          res.render('module_admin/activity-artworks', {arrayArtworks: artworks, activity: activity, allArtworks: allArtworks});  
+          res.render('module_admin/activity-artworks', {
+            arrayArtworks: artworks,
+            activity: activity,
+            allArtworks: allArtworks,
+            username: session.username});
         }
         
       }

@@ -40,7 +40,9 @@ export class ArtworkAuthorsController {
               }
             }
           }
-          res.render('module_admin/artworks-authors', {arrayAuthors: authors, artwork: artwork, allAuthors: allAuthors});  
+          res.render('module_admin/artworks-authors', {
+          username: session.username,
+          arrayAuthors: authors, artwork: artwork, allAuthors: allAuthors});
         }
         
       }

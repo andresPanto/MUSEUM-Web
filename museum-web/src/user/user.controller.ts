@@ -18,6 +18,7 @@ export class UserController {
     private readonly _userRoleService: UserRoleService,
     private readonly _roleService: RoleService) {
   }
+
   @Get('signup')
   async index(
     @Res() res,
@@ -33,6 +34,7 @@ export class UserController {
     }
   }
 
+  // noinspection TypeScriptValidateTypes
   @Post('signup')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
@@ -192,6 +194,8 @@ export class UserController {
     }
     
   }
+
+  // noinspection TypeScriptValidateTypes
   @Post('me')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
@@ -298,7 +302,8 @@ export class UserController {
         
       }
   }
-  //----------------------------------------------------------ADMIN--------------------------------------------------
+
+  //----------------------------------------------------------ADMIN----------------------
   @Get('/admin')
   logInAdmin(
     @Res() res,
