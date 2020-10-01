@@ -22,7 +22,7 @@ export class PurchaseEntity {
     type: 'datetime',
     nullable: false
   })
-  purchaseTime: Date;
+  purchaseTime: String;
 
   @Column({
     name: 'quantity',
@@ -59,7 +59,7 @@ export class PurchaseEntity {
     type => ScheduleEntity,
     schedule => schedule.purchases
   )
-  schedule: UserEntity
+  schedule: ScheduleEntity
 
 
 

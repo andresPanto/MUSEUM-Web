@@ -4,72 +4,56 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-white">
       <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Category</a></li>
-      <li class="breadcrumb-item"><a href="#">Activity Name</a></li>
+      <li class="breadcrumb-item"><a href="/activities/<%= activity.type.toLowerCase() %>"><%= activity.type.charAt(0).toUpperCase() + activity.type.slice(1) %>s</a></li>
+      <li class="breadcrumb-item"><a href="/activities/<%= activity.type.toLowerCase() %>/<%= activity.idActivity%>"><%= activity.name %></a></li>
       <li class="breadcrumb-item active">Artworks</li>
     </ol>
 </nav>
 <!--Activity Main Info-->
 <div>
-    <h3 class="text-center">Category</h3>
-    <h3 class="text-center"><b>Activity Name</b></h3>
+    <h3 class="text-center"><%= activity.type.charAt(0).toUpperCase() + activity.type.slice(1) %>s</h3>
+    <h3 class="text-center"><b><%= activity.name.toUpperCase()%></b></h3>
     <h4 class="text-center">ARTWORKS</h4>
 </div>
 <!--Activity Artworks-->
 <div class="container mb-5">
-    <div class="row">
-      <div class ="col">
           <!--Recorrer con un for de dos en dos -->
-          <div class="artwork-item">
-            <div class="d-flex justify-content-between">
-                <h4><b>Artwork 1</b></h4> 
-                <a href="#" class="">See Authors</a>
-            </div>
-              <span>
-             <img width="260px" src=/images/performances/perf2.png class="float-left">
-              <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
-              </span>  
-       
-         </div>
-          <div class="artwork-item">
-            <div class="d-flex justify-content-between">
-                <h4><b>Artwork 1</b></h4> 
-                <a href="#" class="">See Authors</a>
-            </div>
-            <span>
-           <img width="260px" src=/images/performances/perf2.png class="float-left">
-            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
-            </span>
-        </div>
+          <% artworksArray.forEach((artwork) => {%>
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <div class="row">
+                            <div class="col-sm-10">
+                                <h4><b><%= artwork.name %></b></h4>
+                            </div>
+                            <div class="col-sm-2">
+                            <a href="/authors/<%= activity.idActivity %>/<%= artwork.idArtwork %>"> <button class="float-right btn btn-info">See Authors</button> </a>
+                            </div>  
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <img class="img-responsive" width="260px" src="<%= artwork.imagePath %>">
+                        </div>
+                        <div class="col-sm-10 pl-5 d-flex align-self-center">
+                            <p class="pl-5 text-justify "><%= artwork.description %></p>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div> 
+        <% }); %>
         <!--Fin For-->
-        <div class="artwork-item">
-            <div class="d-flex justify-content-between">
-                <h4><b>Artwork 1</b></h4> 
-                <a href="#" class="">See Authors</a>
-            </div>
-            <span>
-            <img width="260px" src=/images/performances/perf2.png class="float-left">
-            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
-            </span>
-        </div>
-        <div class="artwork-item">
-            <div class="d-flex justify-content-between">
-                <h4><b>Artwork 1</b></h4> 
-                <a href="#" class="">See Authors</a>
-            </div>
-            <span>
-            <img width="260px" src=/images/performances/perf2.png class="float-left">
-            <p class="p-2 text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni cumque consequuntur harum cum quod odio commodi repudiandae ratione suscipit! Illum maiores quae debitis cum ipsa sint labore exercitationem earum amet necessitatibus, ratione recusandae. Ea reiciendis et veritatis dolorem repellat eligendi velit tenetur temporibus! Minus eius voluptatibus atque sapiente quia pariatur nesciunt repellat veritatis cupiditate placeat delectus quod fuga non, veniam harum accusamus iure quo dolorem magni, earum tempore libero deserunt distinctio nemo! Exercitationem asperiores necessitatibus neque rem odio aliquid ab!</p>
-            </span>
-        </div>
-      </div> 
-    
-    </div>
 </div>
 
 
 <div class="container text-center">
-    <button class="bg-warning mt-3 btn-lg">Buy your ticket</button>
+<% const logged_in = typeof username != 'undefined' %>
+    <% if (logged_in) {%>
+    <a href="/purchases/<%= activity.idActivity %>">
+        <button class="bg-warning mt-3 btn-lg" >Buy your ticket</button>
+    </a>
+    <% } else {%>
+        <button class="bg-warning mt-3 btn-lg" data-toggle="modal" data-target="#modalLoginForm">Buy your ticket</button>
+    <% }%>
 </div>
 
 

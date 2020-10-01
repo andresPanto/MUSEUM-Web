@@ -36,7 +36,6 @@ import { AuthModule } from './auth/auth.module';
     PurchaseModule,
     ScheduleModule,
     ActivityModule,
-    ActivityArtworkModule,
     ArtworkAuthorModule,
     AuthModule,
     //UserRoleModule,

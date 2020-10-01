@@ -11,6 +11,8 @@ import {
   Session,
   UploadedFile,
   UseInterceptors,
+  NotFoundException,
+  InternalServerErrorException
 } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 import { AuthService } from '../auth/auth.service';
@@ -33,20 +35,45 @@ export class ActivityController {
               private readonly _authService: AuthService) {
   }
 
-  @Get('/:type')
-  categoryActivities(
-    @Session() session,
-    @Res() res,
-    @Query() queryParams,
-    @Param() routeParams,
-  ) {
-    //Render template category.ejs
-    if (routeParams.type == 'admin') {
-      this.adminActivities(session, res, queryParams);
-    } else {
-      // Client side
-    }
 
+@Get('/:type')
+  async categoryActivities(
+    @Res() res,
+    @Param() route,
+    @Query() query,
+    @Session() session
+  ){
+      if (routeParams.type == 'admin') {
+      this.adminActivities(session, res, queryParams);
+    }else{
+       let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
+      const search = query.q;  
+      try{
+        if (typeof search != 'undefined'){
+          let activities = await this._activityService.searchActivities(search,route.type);
+          if(activities && activities.length>=1){
+            res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, username:username});
+          }else{
+            res.render('module_client/category.ejs', {category: route.type, username: username });
+          }
+        }else{
+          let activities = await this._activityService.getCategoryActivities(route.type);
+          if(activities && activities.length>=1){
+            res.render('module_client/category.ejs', {category: route.type, activitiesArray: activities, username:username});
+          }else{
+            throw new NotFoundException('There are no activities matching this category.');
+          }
+        }
+        
+      }catch(e){
+        console.log("Error:",e);
+        throw new NotFoundException('This page is not available.');
+      } 
+    }
+        
   }
 
   @Get('/admin/new')
@@ -80,6 +107,30 @@ export class ActivityController {
 
       }
     )
+  }
+  
+  @Get('/:type/:idActivity')
+  async getActivity(
+    @Res() res,
+    @Param() route,
+    @Session() session
+  ){
+    try{
+      let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
+      const idActivity = route.idActivity;
+      let activity = await this._activityService.getActivity(idActivity);
+      if (activity){
+        res.render('module_client/activity.ejs',{username:username, activity: activity});
+      }else{
+        throw new NotFoundException('Activity not found.');
+      }
+    }catch(e){
+        console.log("Error:",e);
+        throw new NotFoundException('This page is not available.');
+      }
   }
 
   // noinspection TypeScriptValidateTypes

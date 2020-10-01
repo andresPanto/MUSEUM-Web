@@ -1,24 +1,14 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Delete,
-  Get, Header, HttpCode, NestInterceptor,
-  Param,
-  Post,
-  Put,
-  Query,
-  Res,
-  Session, UploadedFile, UseInterceptors,
-} from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException, Session, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { AuthorService } from './author.service';
-import { AuthorInteface } from './author.inteface';
 import { AuthorCreateDto } from './dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
 import { AuthService } from '../auth/auth.service';
 import { diskStorage } from 'multer';
 import { AuthorEntity } from './author.entity';
 import { AuthorUpdateDto } from './dto/author.update-dto';
+import { ArtworkAuthorService } from 'src/artwork-author/artwork-author.service';
+import { ActivityService } from 'src/activity/activity.service';
+import { ArtworkService } from 'src/artwork/artwork.service';
 
 //import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
 const fs = require('fs')
@@ -28,26 +18,49 @@ import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer
 
 @Controller('authors')
 export class AuthorController {
-  constructor(private readonly _AuthorService: AuthorService,
-              private readonly _authService: AuthService) {
+  constructor(private readonly _authorService: AuthorService,
+    private readonly _artworkAuthorService: ArtworkAuthorService,
+    private readonly _activityService: ActivityService,
+    private readonly _artworkService: ArtworkService,
+    private readonly _authService: AuthService) {
   }
-
-
-
-  @Get('/:idArtwork')
-  getAuthors(
-
-    @Session() session,
+  @Get('/:idActivity/:idArtwork')
+  async getAuthors(
+    @Param() route,
     @Res() res,
-    @Param() routeParams,
-    @Query() queryParams
+    @Session() session
   ){
-    //Render authors.ejs
-    if(routeParams.idArtwork == 'admin'){
+      if(routeParams.idArtwork == 'admin'){
       this.adminAuthors(res, session, queryParams)
     }else{
-      //Cualquier vuelta del client
+    let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
+    const idArtwork = route.idArtwork;
+    const idActivity = route.idActivity;
+    if(!isNaN(idArtwork) && !isNaN(idActivity)){
+        try{
+          const idActivity = route.idActivity;
+              let activity = await this._activityService.getActivity(Number(idActivity));
+              let registry = await this._artworkAuthorService.getArtworkAuthors(Number(idArtwork));  
+              let artwork = await this._artworkService.getArtwork(Number(idArtwork));     
+              let idsAuthors = []
+              registry.forEach(element => {
+                idsAuthors.push(element['authorIdAuthor']);
+              });
+              let authors = await this._authorService.getAuthors(idsAuthors);
+              res.render('module_client/authors',{username:username, activity: activity, artwork: artwork, authorsArray: authors})
+          
+        } catch(e){
+          console.log("Error artwork: ",e);
+          throw new NotFoundException('Error while getting authors.');
+        }
+    }else{
+      throw new NotFoundException('Invalid artwork.');
     }
+    }
+
 
   }
 

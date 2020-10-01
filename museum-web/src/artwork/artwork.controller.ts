@@ -1,17 +1,7 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Query,
-  Res,
-  Session,
-  UploadedFile,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException, Session, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { ActivityArtworkService } from 'src/activity-artwork/activity-artwork.service';
+import { ActivityService } from 'src/activity/activity.service';
+  
 import { ArtworkService } from './artwork.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -29,15 +19,17 @@ var path = require('path');
 
 @Controller('artworks')
 export class ArtworkController {
-  constructor(private readonly artworksService: ArtworkService,
-              private readonly _authService: AuthService) {
+  constructor(private readonly _artworksService: ArtworkService,
+    private readonly _activityArtworkService: ActivityArtworkService,
+    private readonly _activityService: ActivityService,
+    private readonly _authService: AuthService) {
   }
 
   @Get('/:idActivity')
   mostrardeactivity(
-    @Session() session,
-    @Res() res,
-    @Param() routeParams,
+    @Param() route,
+      @Res() res,
+      @Session() session
     @Query() queryParams,
   ) {
     console.log('get Admin', routeParams.idActivity);
@@ -47,6 +39,32 @@ export class ArtworkController {
       this.adminArtworks(res, session, queryParams);
     } else {
       // la parte del cliente
+   
+      let username;
+        if(typeof session.username != 'undefined'){
+          username = session.username
+        }
+        if (!isNaN(route.idActivity)){
+          try{
+              //TODO: Refactorize this
+              const idActivity = route.idActivity;
+              let activity = await this._activityService.getActivity(Number(idActivity));
+              let registry = await this._activityArtworkService.getActivityArtworks(idActivity);          
+              let idsArtworks = []
+              registry.forEach(element => {
+                idsArtworks.push(element['artworkIdArtwork']);
+              });
+              let artworks = await this._artworksService.getArtworks(idsArtworks);
+              res.render('module_client/artworks',{username:username, activity: activity, artworksArray: artworks})
+          
+          }catch(e){
+            console.log("Error artwork: ",e);
+            throw new NotFoundException('Error while getting artworks.');
+          }
+        }else{
+          throw new NotFoundException('There are no artworks matching this activity.');
+        }
+        //Render artworks.ejs
     }
 
   }
@@ -68,6 +86,7 @@ export class ArtworkController {
       console.log(e);
       return res.redirect(`/artworks/admin?message=${errorMessage}`);
     }
+
     if (artworks) {
       return res.render(
         'module_admin/artworks',
@@ -81,7 +100,7 @@ export class ArtworkController {
       return res.redirect(`/artworks/admin?message=${errorMessage}`);
     }
   }
-
+  
   @Get('/admin/status/:id')
   async changeStatus(
     @Session() session,

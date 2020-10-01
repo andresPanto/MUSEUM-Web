@@ -1,5 +1,17 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('shared/header.ejs')%>
+
+<% if (typeof message != 'undefined'){%>
+    <div class="alert alert-info mt-2 mb-2 text-center container" role="alert">
+        <%= message %>
+      </div>
+<% } %>
+
+<% if (typeof error != 'undefined'){%>
+    <div class="alert alert-danger mt-2 mb-2 text-center container" role="alert">
+        <%= error %>
+      </div>
+<% } %>
 <!--Carousel-->
 <!-- Sacar de la base para mostrar-->
 <div class="w-75" style="margin: 0 auto;">
@@ -7,13 +19,13 @@
         <!--Carousel images-->
         <div class="carousel-inner">
           <div class="carousel-item active ">
-            <img class="d-block w-100" src="/images/carousel/img1.png" alt="First slide">
+            <img class="d-block w-100" height="500px" src="/images/carousel/img1.png" alt="First slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="/images/carousel/img2.png" alt="Second slide">
+            <img class="d-block w-100" height="500px" src="/images/carousel/img2.png" alt="Second slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="/images/carousel/img3.png" alt="Third slide">
+            <img class="d-block w-100" height="500px" src="/images/carousel/img3.png" alt="Third slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -32,40 +44,20 @@
           <h3 class="mb-4 mt-4"><strong>Top Performances</strong></h3>
           <div class="row">
                 <!--Recorrer lista de top performances-->
+                <% performancesArray.forEach((performance) =>{%>
             <div class ="col-sm">
                 <div class="perf-item">
-                    <a href="/performances?view=idperformance1>"><img width="260px" src="images/performances/perf1.png"></a>
+                    <a href="/activities/performance/<%= performance.idActivity %>"><img width="260px" src="<%= performance.imagePath %>"></a>
                     <div>
-                        <a href="/performances?view=idperformance1">PERFORMANCE 1</a>
+                        <a href="/activities/performance/<%= performance.idActivity %>"><%= performance.name %></a>
                     </div>
                     <div>
-                        <a href="/performances?view=idperformance1">14 JUN - 18 JUN</a>
+                        Duration: <%=performance.duration%>
                     </div>
                 </div>
             </div>
+                <% });%>
                 <!--Fin recorrido-->
-                <div class="col-sm">
-                    <div class="perf-item">
-                        <a href="/performances?view=idperformance2"><img width="260px" src="images/performances/perf1.png"></a>
-                        <div>
-                            <a href="/performances?view=idperformance2">PERFORMANCE 2</a>
-                        </div>
-                        <div>
-                            <a href="/performances?view=idperformance2">14 JUN - 18 JUN</a>
-                        </div>
-                    </div>
-                </div>
-                <div class ="col-sm">
-                    <div class="perf-item">
-                        <a href="/performances?view=idperformance3"><img width="260px" src="images/performances/perf1.png"></a>
-                        <div>
-                            <a href="/performances?view=idperformance3">PERFORMANCE 3</a>
-                        </div>
-                        <div>
-                            <a href="/performances?view=idperformance3">14 JUN - 18 JUN</a>
-                        </div>
-                    </div>
-                </div>
           </div>
     </div>
 </div>
@@ -75,40 +67,20 @@
           <h3 class="mb-4"><strong>Top Exhibitions</strong></h3>
           <div class="row">
                 <!--Recorrer lista de top exhibitions-->
+                <% exhibitionsArray.forEach((exhibition) =>{%>
             <div class ="col-sm">
                 <div class="exh-item">
-                    <a href="/exhibitions?view=idexhibition1"><img width="260px" src="images/exhibitions/exh1.png"></a>
+                    <a href="/activities/exhibition/<%= exhibition.idActivity %>"><img width="260px" src="<%= exhibition.imagePath %>"></a>
                     <div>
-                        <a href="/exhibitions?view=idexhibition1">EXHIBITION 1</a>
+                        <a href="/activities/exhibition/<%= exhibition.idActivity %>"><%= exhibition.name %></a>
                     </div>
                     <div>
-                        <a href="/exhibitions?view=idexhibition1">12 JUN - 12 JUL</a>
+                        Duration: <%=exhibition.duration%>
                     </div>
                 </div>
             </div>
+            <% });%>
                 <!--Fin recorrido-->
-                <div class="col-sm">
-                    <div class="exh-item">
-                        <a href="/exhibitions?view=idexhibition2"><img width="260px" src="images/exhibitions/exh1.png"></a>
-                        <div>
-                            <a href="/exhibitions?view=idexhibition2">EXHIBITION 2</a>
-                        </div>
-                        <div>
-                            <a href="/exhibitions?view=exhibition2">12 JUN - 12 JUL</a>
-                        </div>
-                    </div>
-                </div>
-                <div class ="col-sm">
-                    <div class="exh-item">
-                        <a href="/exhibitions?view=idexhibition3"><img width="260px" src="images/exhibitions/exh1.png"></a>
-                        <div>
-                            <a href="/exhibitions?view=idexhibition3">EXHIBITION 3</a>
-                        </div>
-                        <div>
-                            <a href="/exhibitions?view=idexhibition3">12 JUN - 12 JUL</a>
-                        </div>
-                    </div>
-                </div>
           </div>
     </div>
 </div>
@@ -118,40 +90,20 @@
           <h3 class="mb-4"><strong>Top Films</strong></h3>
           <div class="row">
                 <!--Recorrer lista de top films-->
+                <% filmsArray.forEach((film) =>{%>
             <div class ="col-sm">
                 <div class="film-item">
-                    <a href="/films?view=idfilm1"><img width="200px" src="images/films/film1.png"></a>
+                    <a href="/activities/film/<%= film.idActivity %>"><img width="260px" src="<%= film.imagePath %>"></a>
                     <div>
-                        <a href="/films?view=idfilm1">STALKER, A. TARKOVSKI</a>
+                        <a href="/activities/film/<%= film.idActivity %>"><%= film.name %></a>
                     </div>
                     <div>
-                        <a href="/films?view=idfilm1">12 JUN - 12 JUL</a>
+                        Duration: <%= film.duration %>
                     </div>
                 </div>
             </div>
+            <% });%>
                 <!--Fin recorrido-->
-                <div class="col-sm">
-                    <div class="film-item">
-                        <a href="/films?view=idfilm2"><img width="200px" src="images/films/film1.png"></a>
-                        <div>
-                            <a href="/films?view=idfilm2">STALKER, A. TARKOVSKI</a>
-                        </div>
-                        <div>
-                            <a href="/films?view=idfilm2">12 JUN - 12 JUL</a>
-                        </div>
-                    </div>
-                </div>
-                <div class ="col-sm">
-                    <div class="film-item">
-                        <a href="/films?view=idfilm3"><img width="200px" src="images/films/film1.png"></a>
-                        <div>
-                            <a href="/films?view=idfilm3">STALKER, A. TARKOVSKI</a>
-                        </div>
-                        <div>
-                            <a href="/films?view=idfilm3">12 JUN - 12 JUL</a>
-                        </div>
-                    </div>
-                </div>
           </div>
     </div>
 </div>
@@ -161,28 +113,21 @@
     <div class="container mb-5">
           <h3 class="mb-4"><strong>Visit Us</strong></h3>
           <div class="row">
-            <div class ="col-sm">
+              <!--Inicio for-->
+              <% toursArray.forEach((tour) =>{%>
+            <div class ="col-sm-6">
                 <div class="visit-item">
-                    <a href="/tours?view=guided1"><img width="400px" src="images/tours/tour1.png"></a>
+                    <a href="/activities/tour/<%= tour.idActivity %>"><img width="400px" src="<%= tour.imagePath %>"></a>
                     <div>
-                        <a href="/tours?view=guided1">GUIDED TOUR</a>
+                        <a href="/activities/tour/<%= tour.idActivity %>"><%= tour.name %></a>
                     </div>
                     <div>
-                        <a href="/tours?view=guided1">EVERY DAY</a>
+                        EVERY DAY
                     </div>
                 </div>
                 </div>
-                <div class="col-sm">
-                    <div class="visit-item">
-                        <a href="/tours?view=guided2"><img width="400px" src="images/tours/tour1.png"></a>
-                        <div>
-                            <a href="/tours?view=guided2">UNGUIDED TOUR</a>
-                        </div>
-                        <div>
-                            <a href="/tours?view=guided2">EVERY DAY</a>
-                        </div>
-                    </div>
-                </div>
+                <% });%>
+            <!--Fin for-->
           </div>
     </div>
 </div>

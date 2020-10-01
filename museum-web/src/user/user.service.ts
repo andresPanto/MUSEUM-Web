@@ -7,6 +7,18 @@ import { FindManyOptions, Repository } from 'typeorm';
 export class UserService {
   constructor(@InjectRepository(UserEntity) private readonly _userRepository: Repository<UserEntity>) {
   }
+  async findUSerByCredentials(username: string, password: string) {
+    let findOptions: FindManyOptions<UserEntity>;
+    findOptions = {
+      relations: ['userRoles', 'userRoles.role'],
+      where: {
+        username,
+        password,
+      },
+    };
+    const userFound = await this._userRepository.findOne(findOptions);
+    return userFound;
+  }
 
   async findUSerByCredentials(username: string, password: string) {
     let findOptions: FindManyOptions<UserEntity>;
@@ -32,6 +44,9 @@ export class UserService {
     return users;
   }
 
+  
+
+
   async findOneByID(id: number) {
 
     let findOptions: FindManyOptions<UserEntity>;
@@ -41,7 +56,6 @@ export class UserService {
       },
     };
     const userFound = await this._userRepository.findOne(findOptions);
-    console.log(userFound);
     return userFound;
   }
 
@@ -52,5 +66,13 @@ export class UserService {
     return updatedUser;
   }
 
+  getLastInsertedId(){
+    return this._userRepository.createQueryBuilder("user").
+    select("MAX(id_user)").
+    getRawOne();
+  }
+  createUser(newUser: UserEntity){
+    return this._userRepository.save(newUser);
+  }
 
 }
