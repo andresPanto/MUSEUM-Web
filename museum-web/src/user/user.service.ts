@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './user.entity';
-import { Repository, FindManyOptions } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
@@ -20,6 +20,7 @@ export class UserService {
     return userFound;
   }
 
+
   async findAllClients() {
     const users = await this._userRepository
       .createQueryBuilder('user')
@@ -30,6 +31,9 @@ export class UserService {
     console.log(users);
     return users;
   }
+
+  
+
 
   async findOneByID(id: number) {
 

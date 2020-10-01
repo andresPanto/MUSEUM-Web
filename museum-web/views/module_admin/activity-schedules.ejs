@@ -1,10 +1,13 @@
 <%- include ('../shared/general-html/head.ejs')%>
 <%- include ('header.ejs') %>
-<h1 class="text-center"><b>Activity Name</b></h1>
+<%- include ('./error_message.ejs')%>
+<h1 class="text-center"><b><%=activity.name%></b></h1>
 <br>
 <h2 class="text-center">Schedules</h2>
 <div class="col-md-12 text-center mb-2">
-<button href="#" class="btn btn-success"><span class="glyphicon glyphicon-time"></span> Add New Schedule</button>
+    <form action="/schedules/admin/new/<%=activity.idActivity%>" method="get">
+        <button type="submit" class="ml-5 mb-3 btn btn-lg btn-success"><span class="glyphicon glyphicon-pencil"></span> Add Schedule</button>
+    </form>
 </div>
 <!--Schedule List-->
 <div class="container">
@@ -16,12 +19,41 @@
             <th>Disable</th>    
         </tr>
         <!--For para setear schedules-->
+        <%schedules.forEach((schedule)=> { %>
+            <%const isActive = schedule.status%>
+
         <tr>
-            <td>13:00-15:00</td>
-            <td>40</td>
-            <td><button href="#" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Edit</button></td>
-            <td><button href="#" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span> Disable</button></td>
+            <td>
+                <%= schedule.schedule%>
+            </td>
+            <td>
+                <%= schedule.capacity%>
+            </td>
+            <td>
+                <form action="/schedules/admin/edit/<%=activity.idActivity%>/<%=schedule.idSchedule%>" method="get">
+                    <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+                </form>
+            </td>
+            <td>
+                <form action="/schedules/admin/status/<%=activity.idActivity%>/<%=schedule.idSchedule%>" method="get">
+                    <button type="submit"
+                    <%if(isActive){%>
+                            class="btn btn-danger"
+                    <%}else{%>
+                            class="btn btn-success"
+                            <%}%>
+                    >
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                        <%if(isActive){%>
+                            Disable
+                        <%}else{%>
+                            Enable
+                        <%}%>
+                    </button>
+                </form>
+            </td>
         </tr>
         <!--Fin for-->
+        <% })%>
     </table>
 </div>

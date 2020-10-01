@@ -6,9 +6,11 @@ import { AuthorEntity } from './author.entity';
 import { ArtworkAuthorModule } from 'src/artwork-author/artwork-author.module';
 import { ArtworkModule } from 'src/artwork/artwork.module';
 import { ActivityModule } from 'src/activity/activity.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     TypeOrmModule.forFeature(
       [
         AuthorEntity

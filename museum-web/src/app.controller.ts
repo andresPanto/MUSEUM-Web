@@ -1,17 +1,21 @@
-import { Controller, Get, Res, Param, InternalServerErrorException, Query, Session } from '@nestjs/common';
+import { Controller, Get, Res, Param, InternalServerErrorException, Query, Session, Req } from '@nestjs/common';
 import { ActivityEntity } from './activity/activity.entity';
 import { ActivityService } from './activity/activity.service';
 import { AppService } from './app.service';
 import { PurchaseService } from './purchase/purchase.service';
 import { ScheduleEntity } from './schedule/schedule.entity';
 import { ScheduleService } from './schedule/schedule.service';
+import { AuthService } from './auth/auth.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService,
               private readonly _activityService: ActivityService,
               private readonly _scheduleService: ScheduleService,
-              private readonly _purchaseService: PurchaseService) {}
+              private readonly _purchaseService: PurchaseService,
+              private readonly _authService: AuthService
+              ) {}
+              
 
 
   @Get('/')
@@ -49,6 +53,35 @@ export class AppController {
           throw new InternalServerErrorException('Error getting main activities.');
         }
         
+
+  }
+
+  @Get('/admin')
+  showDashboard(
+    @Session() session,
+    @Res() res,
+    @Query() queryParams
+  ){
+    const message = queryParams.message;
+    const isLogedIn = this._authService.isLogedInAs(session, 'admin');
+    if(!isLogedIn){
+     return  res.redirect('/users/admin')
+    }
+    return res.render('module_admin/dashboard',
+      {
+        username: session.username,
+        message
+      })
+  }
+
+  @Get('/admin/logout')
+  logOutAdmin(
+    @Session() session,
+    @Res() res,
+    @Req() req
+  ){
+    this._authService.logOut(session, req);
+    return res.redirect('/users/admin')
 
   }
   

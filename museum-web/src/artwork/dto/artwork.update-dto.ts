@@ -20,7 +20,8 @@ export class ArtworkUpdateDto{
 
   @IsString()
   @IsOptional()
-  year: number;
+  @IsNotEmpty()
+  year: string;
 
   @IsString()
   @IsOptional()
