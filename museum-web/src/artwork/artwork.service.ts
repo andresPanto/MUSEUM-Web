@@ -32,6 +32,9 @@ export class ArtworkService {
   getArtwork(idArtwork: number){
     return this.artworkRepository.findOne(idArtwork);
   }
-   
+  //Get all artworks stored in the database
+  getAllArtworks(){
+    return this.artworkRepository.find();
+  }
   
 }

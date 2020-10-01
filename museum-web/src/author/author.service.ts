@@ -31,4 +31,11 @@ export class AuthorService {
     } 
     return this.authorRepository.find(query);
   }
+  //Get all authors stored in the database
+  getAllAuthors(){
+    return this.authorRepository.find();
+  }
+  getAuthor(idAuthor: number){
+    return this.authorRepository.findOne(idAuthor);
+  }
 }
