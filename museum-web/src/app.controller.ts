@@ -1,4 +1,4 @@
-import { Controller, Get, Res, Param, InternalServerErrorException, Query, Session } from '@nestjs/common';
+import { Controller, Get, Res, Param, InternalServerErrorException, Query, Session, Req } from '@nestjs/common';
 import { ActivityEntity } from './activity/activity.entity';
 import { ActivityService } from './activity/activity.service';
 import { AppService } from './app.service';

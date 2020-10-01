@@ -1,4 +1,19 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException, Session, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Res,
+  NotFoundException,
+  Session,
+  UploadedFile,
+  UseInterceptors,
+  Query,
+} from '@nestjs/common';
 import { AuthorService } from './author.service';
 import { AuthorCreateDto } from './dto/author.create-dto';
 import { validate, ValidationError } from 'class-validator';
@@ -28,9 +43,10 @@ export class AuthorController {
   async getAuthors(
     @Param() route,
     @Res() res,
-    @Session() session
+    @Session() session,
+    @Query() queryParams
   ){
-      if(routeParams.idArtwork == 'admin'){
+    if(route.idActivity == 'admin'){
       this.adminAuthors(res, session, queryParams)
     }else{
     let username;
@@ -65,9 +81,19 @@ export class AuthorController {
   }
 
 
+  @Get('/admin')
+  async getAuthorsAdmin(
+    @Param() route,
+    @Res() res,
+    @Session() session,
+    @Query() queryParams
+  ) {
+    this.adminAuthors(res, session, queryParams)
+  }
 
 
-  @Get('/admin/new')
+
+  @Get('/new')
   async newAuthor(
     @Session() session,
     @Res() res,
@@ -145,18 +171,18 @@ export class AuthorController {
             queryParamsString = queryParamsString + `&${key}=${newAuthor[key]}`
           }
         });
-        return res.redirect('/authors/admin/new' + queryParamsString)
+        return res.redirect('/authors/new' + queryParamsString)
       }else {
-        createdAuthor = await this._AuthorService.create(newAuthor);
+        createdAuthor = await this._authorService.create(newAuthor);
       }
 
     }catch (e) {
-      return res.redirect(`/author/admin/new?message=${errorMessage}`)
+      return res.redirect(`/author/new?message=${errorMessage}`)
     }
     if (createdAuthor){
       return res.redirect('/authors/admin')
     }else{
-      return res.redirect(`/authors/admin/new?message=${errorMessage}`)
+      return res.redirect(`/authors/new?message=${errorMessage}`)
     }
 
   }
@@ -176,7 +202,7 @@ export class AuthorController {
     let author;
     try{
       const idAuthor = Number(routeParams.id);
-      author = await this._AuthorService.findOneByID(idAuthor)
+      author = await this._authorService.findOneByID(idAuthor)
     }catch (e) {
       console.log(e);
       return res.redirect(`/authors/admin?message=${errorMessage}`)
@@ -261,9 +287,9 @@ export class AuthorController {
           author.country = newAuthor.country;
           author.description = newAuthor.description;
           author.imagePath = newAuthor.imagePath;
-        const previuosAuthor = await this._AuthorService.findOneByID(author.idAuthor)
+        const previuosAuthor = await this._authorService.findOneByID(author.idAuthor)
         prevoiusImage = previuosAuthor.imagePath;
-        updatedAuthor = await this._AuthorService.update(author);
+        updatedAuthor = await this._authorService.update(author);
       }
 
     }catch (e) {
@@ -305,7 +331,7 @@ export class AuthorController {
     }
     let authors;
     try {
-      authors = await this._AuthorService.findAll()
+      authors = await this._authorService.findAll()
     }catch (e) {
       console.log(e);
       return res.redirect(`/authors/admin?message=${errorMessage}`)
@@ -339,9 +365,9 @@ export class AuthorController {
     let updatedAuthor;
     try {
       const idAuthor = Number(routePrams.id);
-      const author: AuthorEntity = await this._AuthorService.findOneByID(idAuthor);
+      const author: AuthorEntity = await this._authorService.findOneByID(idAuthor);
       author.status = !author.status;
-      updatedAuthor = await this._AuthorService.update(author)
+      updatedAuthor = await this._authorService.update(author)
     }catch (e) {
       console.log(e);
       return res.redirect(`/authors/admin?message=${message}`)
@@ -353,54 +379,5 @@ export class AuthorController {
     }
   }
   
-  @Get('/:id') //Validar si es admin, renderizar admin/author.ejs with loaded data
-  mostrarUno(
-    @Param() parametrosDeRuta,
-  ) {
 
-  }
-  @Get('new') //Validar si es admin
-  createAuthor(){
-      //Render author.ejs
-  }
-
-  @Post()
-  async crearUno(
-    @Body() parametrosDeCuerpo,
-  ) {
-    const newAuthor = new AuthorCreateDto();
-    newAuthor.fullName = parametrosDeCuerpo.fullName;
-    newAuthor.country = parametrosDeCuerpo.country;
-    newAuthor.description = parametrosDeCuerpo.description;
-    newAuthor.imagePath = parametrosDeCuerpo.imagePath;
-    newAuthor.status = parametrosDeCuerpo.status;
-
-    try {
-      const errors : ValidationError[] = await validate(newAuthor)
-      if(errors.length > 0){
-        console.log('Errors', errors);
-        throw new BadRequestException('Errors in new Author')
-      }else {
-        return 'No errors'
-      }
-    }catch (e) {
-        console.log(e);
-      throw new BadRequestException('Errors validating input')
-    }
-  }
-
-  @Put('/:id')
-  editarUno(
-    @Param() parametrosDeRuta,
-    @Body() parametrosDeCuerpo,
-  ) {
-
-  }
-
-  @Delete('/:id')
-  eliminarUno(
-    @Param() parametrosDeRuta,
-  ) {
-
-  }
 }

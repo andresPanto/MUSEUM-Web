@@ -20,18 +20,6 @@ export class UserService {
     return userFound;
   }
 
-  async findUSerByCredentials(username: string, password: string) {
-    let findOptions: FindManyOptions<UserEntity>;
-    findOptions = {
-      relations: ['userRoles', 'userRoles.role'],
-      where: {
-        username,
-        password,
-      },
-    };
-    const userFound = await this._userRepository.findOne(findOptions);
-    return userFound;
-  }
 
   async findAllClients() {
     const users = await this._userRepository

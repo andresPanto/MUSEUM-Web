@@ -34,6 +34,7 @@ export class UserController {
     }
   }
 
+  // noinspection TypeScriptValidateTypes
   @Post('signup')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
@@ -194,6 +195,7 @@ export class UserController {
     
   }
 
+  // noinspection TypeScriptValidateTypes
   @Post('me')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
@@ -328,7 +330,7 @@ export class UserController {
     console.log(username, password);
     let userInfo;
     try {
-      userInfo = await this.usersService.findUSerByCredentials(username, password);
+      userInfo = await this._usersService.findUSerByCredentials(username, password);
 
     } catch (e) {
       console.log(e);
@@ -364,7 +366,7 @@ export class UserController {
     let users;
     const message = 'Failed to load Users';
     try {
-        users = await this.usersService.findAllClients()
+        users = await this._usersService.findAllClients()
     }catch (e) {
       console.log(e);
 
@@ -397,7 +399,7 @@ export class UserController {
     let user;
     try{
       const id = Number(routeParams.id);
-      user = await this.usersService.findOneByID(id)
+      user = await this._usersService.findOneByID(id)
     }catch (e) {
       console.log(e);
       return res.redirect(`/users?message=${message}`)
@@ -432,9 +434,9 @@ export class UserController {
     let updatedUser;
     try {
       const idUser = Number(routePrams.id);
-      const user: UserEntity = await this.usersService.findOneByID(idUser);
+      const user: UserEntity = await this._usersService.findOneByID(idUser);
       user.status = !user.status;
-      updatedUser = await this.usersService.update(user)
+      updatedUser = await this._usersService.update(user)
     }catch (e) {
       console.log(e);
       return res.redirect(`/users?message=${message}`)

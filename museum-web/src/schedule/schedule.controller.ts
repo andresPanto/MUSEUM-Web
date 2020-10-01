@@ -103,13 +103,13 @@ export class ScheduleController {
       updatedSchedule = await this.schedulesService.update(schedule)
     }catch (e) {
       console.log(e);
-      return res.redirect(`/schedules/admin?message=${message}`)
+      return res.redirect(`/schedules/admin/activity?message=${message}`)
     }
     if (idActivity){
       if (updatedSchedule){
-        return res.redirect(`/schedules/admin/${idActivity}`)
+        return res.redirect(`/schedules/admin/activity/${idActivity}`)
       }else{
-        return res.redirect(`/schedules/admin/${idActivity}?message=${message}`)
+        return res.redirect(`/schedules/admin/activity/${idActivity}?message=${message}`)
       }
     }else{
       return res.redirect('/activities/admin?message=Activity Not Found')

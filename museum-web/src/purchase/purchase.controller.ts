@@ -70,14 +70,13 @@ export class PurchaseController {
   }
 
   @Get('/:idActivity')
-    //Render purchase.ejs
   async getPurchase(
     @Res() res,
     @Session() session,
     @Param() route,
     @Query() query
   ){
-    if (routeParams.idActivity == 'admin'){
+    if (route.idActivity == 'admin'){
       this.purchaseAdmin(res, session, query)
     }else{
     const estaLogeado = session.username;
@@ -180,9 +179,9 @@ export class PurchaseController {
     try {
       const idPurchase = Number(routePrams.idPurchase);
 
-      const purchase: PurchaseEntity = await this.purchasesService.findOneByID(idPurchase);
+      const purchase: PurchaseEntity = await this._purchaseService.findOneByID(idPurchase);
       purchase.status = !purchase.status;
-      updatedPurchase = await this.purchasesService.update(purchase)
+      updatedPurchase = await this._purchaseService.update(purchase)
     }catch (e) {
       console.log(e);
       return res.redirect(`/purchases/admin?message=${message}`)
@@ -209,7 +208,7 @@ export class PurchaseController {
     let purchases;
     console.log('Get purchases admin');
     try {
-      purchases = await this.purchasesService.findAll();
+      purchases = await this._purchaseService.findAll();
     } catch (e) {
       console.log(e);
       const message = 'Failure loading Purchases';
@@ -222,59 +221,6 @@ export class PurchaseController {
         username: session.username,
         message: queryParams.message
       });
-  }
-
-
-  @Get('/:id')
-  mostrarUno(
-    @Param() parametrosDeRuta,
-  ) {
-
-  }
-
-  @Post()
-  async crearUno(
-    @Body() parametrosDeCuerpo,
-  ) {
-    const newPurchase = new PurchaseCreateDto();
-    const attendanceDate = new Date(parametrosDeCuerpo.attendanceDate);
-    const purchaseTime = new Date(parametrosDeCuerpo.purchaseTime);
-    attendanceDate.setDate(attendanceDate.getDate() + 1);
-    purchaseTime.setHours(purchaseTime.getHours() + 5);
-    newPurchase.attendanceDate = attendanceDate;
-    newPurchase.purchaseTime = purchaseTime;
-    newPurchase.quantity = parametrosDeCuerpo.quantity;
-    newPurchase.total = parametrosDeCuerpo.total;
-    newPurchase.status = parametrosDeCuerpo.status;
-
-    try {
-      const errors: ValidationError[] = await validate(newPurchase);
-      if (errors.length > 0) {
-        console.log('Errors', errors);
-        throw new BadRequestException('Errors in new Purchase');
-      } else {
-        const savedPurchase = this.purchasesService.create(newPurchase);
-        return savedPurchase;
-      }
-    } catch (e) {
-      console.log(e);
-      throw new BadRequestException('Errors validating input');
-    }
-  }
-
-  @Put('/:id')
-  editarUno(
-    @Param() parametrosDeRuta,
-    @Body() parametrosDeCuerpo,
-  ) {
-
-  }
-
-  @Delete('/:id')
-  eliminarUno(
-    @Param() parametrosDeRuta,
-  ) {
-
   }
 
 }

@@ -1,4 +1,18 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Res, NotFoundException, Session, UseInterceptors, UploadedFile } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Res,
+  NotFoundException,
+  Session,
+  UseInterceptors,
+  UploadedFile,
+  Query,
+} from '@nestjs/common';
 import { ActivityArtworkService } from 'src/activity-artwork/activity-artwork.service';
 import { ActivityService } from 'src/activity/activity.service';
   
@@ -26,15 +40,15 @@ export class ArtworkController {
   }
 
   @Get('/:idActivity')
-  mostrardeactivity(
+  async mostrardeactivity(
     @Param() route,
       @Res() res,
-      @Session() session
+      @Session() session,
     @Query() queryParams,
   ) {
-    console.log('get Admin', routeParams.idActivity);
+
     //Render artworks.ejs
-    if (routeParams.idActivity === 'admin') {
+    if (route.idActivity === 'admin') {
       console.log('Params es admin');
       this.adminArtworks(res, session, queryParams);
     } else {
@@ -81,7 +95,7 @@ export class ArtworkController {
     }
     let artworks;
     try {
-      artworks = await this.artworksService.findAll();
+      artworks = await this._artworksService.findAll();
     } catch (e) {
       console.log(e);
       return res.redirect(`/artworks/admin?message=${errorMessage}`);
@@ -116,9 +130,9 @@ export class ArtworkController {
     let updatedArtwork;
     try {
       const idArtwork = Number(routePrams.id);
-      const artwork: ArtworkEntity = await this.artworksService.findOneByID(idArtwork);
+      const artwork: ArtworkEntity = await this._artworksService.findOneByID(idArtwork);
       artwork.status = !artwork.status;
-      updatedArtwork = await this.artworksService.update(artwork);
+      updatedArtwork = await this._artworksService.update(artwork);
     } catch (e) {
       console.log(e);
       return res.redirect(`/artworks/admin?message=${message}`);
@@ -212,7 +226,7 @@ export class ArtworkController {
         });
         return res.redirect('/artworks/admin/new' + queryParamsString);
       } else {
-        createdArtwork = await this.artworksService.create(newArtwork);
+        createdArtwork = await this._artworksService.create(newArtwork);
       }
 
     } catch (e) {
@@ -241,7 +255,7 @@ export class ArtworkController {
     let artwork;
     try {
       const idArtwork = Number(routeParams.id);
-      artwork = await this.artworksService.findOneByID(idArtwork);
+      artwork = await this._artworksService.findOneByID(idArtwork);
     } catch (e) {
       console.log(e);
       return res.redirect(`/artworks/admin?message=${errorMessage}`);
@@ -331,9 +345,9 @@ export class ArtworkController {
         artwork.year = newArtwork.year;
         artwork.description = newArtwork.description;
         artwork.imagePath = newArtwork.imagePath;
-        const previuosArtwork = await this.artworksService.findOneByID(artwork.idArtwork);
+        const previuosArtwork = await this._artworksService.findOneByID(artwork.idArtwork);
         prevoiusImage = previuosArtwork.imagePath;
-        updatedArtwork = await this.artworksService.update(artwork);
+        updatedArtwork = await this._artworksService.update(artwork);
       }
 
     } catch (e) {

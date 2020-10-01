@@ -43,8 +43,8 @@ export class ActivityController {
     @Query() query,
     @Session() session
   ){
-      if (routeParams.type == 'admin') {
-      this.adminActivities(session, res, queryParams);
+      if (route.type == 'admin') {
+      this.adminActivities(session, res, query);
     }else{
        let username;
         if(typeof session.username != 'undefined'){
